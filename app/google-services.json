@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "489449155904",
+    "project_id": "doing-651bf",
+    "storage_bucket": "doing-651bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489449155904:android:09f0ed14d0f4dfa4de9ea5",
+        "android_client_info": {
+          "package_name": "kr.hs.mirim.doing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489449155904-vmp8gfnvk826bsspdfvjf9g63opslrun.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.hs.mirim.doing",
+            "certificate_hash": "74b55e31456d37c7947474d4917c07c4dd543061"
+          }
+        },
+        {
+          "client_id": "489449155904-6qmpr1t4tveqjlf82uiuqo9ehkh5ahnc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBo_W4VJsuET-X4_KzUzgsIXiSDZZz7w50"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489449155904-6qmpr1t4tveqjlf82uiuqo9ehkh5ahnc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
