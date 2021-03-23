@@ -16,12 +16,19 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.User;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
 
 public class Signin extends AppCompatActivity {
     private FirebaseUser currentUser = null;
     private FirebaseAuth mAuth = null;
     private String user_email = null;
     private String user_id = null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,8 @@ public class Signin extends AppCompatActivity {
         if(currentUser != null){
             user_email = currentUser.getEmail();
         }
+
+        UpdateKakaoLoginUi();
 
         //로그인 버튼 이벤트
         Button loginbtn = (Button)findViewById(R.id.login_btn);
@@ -91,6 +100,19 @@ public class Signin extends AppCompatActivity {
             user_id = currentUser.getUid();
             gotoHome();
         }
+    }
+    private void UpdateKakaoLoginUi(){
+        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+            @Override
+            public Unit invoke(User user, Throwable throwable) {
+                if(user != null){
+                    //자동로그인이 되어있다면
+                }else{
+                    //자동로그인이 되어있지 않다면
+                }
+                return null;
+            }
+        });
     }
 
     private void gotoHome(){

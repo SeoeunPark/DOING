@@ -3,6 +3,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+
     }
     dependencies {
         //firebase 권장설정
@@ -18,6 +19,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
     }
 }
 
