@@ -4,24 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-
-public class Signup extends AppCompatActivity {
-
+public class SignupName extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-
-
-
-
-
-
-
+        setContentView(R.layout.activity_signup_name);
     }
-
 }

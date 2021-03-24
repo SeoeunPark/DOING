@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Signin extends AppCompatActivity {
     private FirebaseUser currentUser = null;
@@ -94,22 +96,22 @@ public class Signin extends AppCompatActivity {
     }
 
     private void gotoHome(){
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        db.collection("User").document(user_id.toString()).get().addOnCompleteListener(this, new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if(task.isSuccessful()){
-//
-//                    Toast.makeText(LoginActivity.this,"환영합니다",Toast.LENGTH_SHORT).show();
-//
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("User").document(user_id.toString()).get().addOnCompleteListener(this, new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+
+                    Toast.makeText(Signin.this,"환영합니다",Toast.LENGTH_SHORT).show();
+
 //                    Intent goHome = new Intent(getApplicationContext(), HomeActivity.class);
 //                    startActivity(goHome);
 //                    finish();
-//                }else {
-//                    String error = task.getException().getMessage();
-//                    Toast.makeText(LoginActivity.this,"error :"+error,Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+                }else {
+                    String error = task.getException().getMessage();
+                    Toast.makeText(Signin.this,"error :"+error,Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
