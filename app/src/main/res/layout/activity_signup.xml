@@ -10,11 +10,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="2">
+
         <LinearLayout
+            android:id="@+id/go_to_email"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/colorAccent">
+            android:background="@color/colorAccent"
+            android:orientation="horizontal">
 
         </LinearLayout>
 
