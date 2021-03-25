@@ -34,10 +34,10 @@ public class SignupName extends AppCompatActivity {
     private String dup_id = null;
     private String input_id = null;
 
-    private EditText userName = findViewById(R.id.name);
-    private EditText userCode = findViewById(R.id.userCode);
-    private Button gotoHome = findViewById(R.id.go_to_name);
-    private Button btn_dup = findViewById(R.id.duplicate);
+    private EditText userName;
+    private EditText userCode;
+    private Button gotoHome;
+    private Button btn_dup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +47,11 @@ public class SignupName extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         user_id = user.getUid();
         user_email = user.getEmail();
+
+        userName = findViewById(R.id.name_space);
+        userCode = findViewById(R.id.userCode);
+        gotoHome = findViewById(R.id.go_to_home);
+        btn_dup = findViewById(R.id.duplicate);
 
         gotoHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +114,7 @@ public class SignupName extends AppCompatActivity {
 
     //중복 제거
     private void dupCheck(){
+        userCode = findViewById(R.id.userCode);
         input_id = userCode.getText().toString();
         if(!TextUtils.isEmpty(input_id)){
             FirebaseFirestore db = FirebaseFirestore.getInstance();

@@ -11,9 +11,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".SignupEmail"></activity>
         <activity android:name=".SignupName" />
-        <activity android:name=".Signin" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".Signup" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Signin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
