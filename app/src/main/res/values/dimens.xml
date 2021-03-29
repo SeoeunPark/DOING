@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="nickname">28dp</dimen>
+    <dimen name="main_default">21dp</dimen>
+</resources>

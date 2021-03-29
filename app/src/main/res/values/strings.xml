@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">DOING</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nickname">김인옥</string>
+    <string name="nim">님은</string>
+    <string name="I_doing">xml 짜는 중</string>
+    <string name="onoff_direct">쪽지 허용 여부</string>
 </resources>
