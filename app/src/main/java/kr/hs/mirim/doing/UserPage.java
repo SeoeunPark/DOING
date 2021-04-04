@@ -1,5 +1,8 @@
 package kr.hs.mirim.doing;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,58 +10,66 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Switch;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UserPage#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class UserPage extends Fragment {
+    private ImageView profile;
+    private TextView nickname;
+    private TextView nickname_nim;
+    private TextView I_doing;
+    private Switch text_onoff_direct;
+    private ImageButton edit_pofile;
+    private String title;
+    private int page;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public UserPage() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment UserPage.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static UserPage newInstance(String param1, String param2) {
+    //인디케이터 만들기
+    // newInstance constructor for creating fragment with arguments
+    public static UserPage newInstance(int page, String title) {
         UserPage fragment = new UserPage();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt("someInt", page);
+        args.putString("someTitle", title);
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        page = getArguments().getInt("someInt",0);
+        title = getArguments().getString("someTitle");
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_page, container, false);
+        ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_user_page, container, false);
+        profile =   (ImageView)rootView.findViewById(R.id.profile_circle);
+        nickname = (TextView)rootView.findViewById(R.id.nickname);
+        nickname_nim = (TextView)rootView.findViewById(R.id.nickname_nim);
+        I_doing = (TextView)rootView.findViewById(R.id.I_doing);
+        text_onoff_direct = (Switch) rootView.findViewById(R.id.switch_onoff_direct);
+        edit_pofile = (ImageButton) rootView.findViewById(R.id.edit_pofile);
+
+        //프로필수정 화면으로 이동
+        edit_pofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goHome = new Intent(view.getContext(), EditUserPage.class);
+                startActivity(goHome);
+            }
+        });
+
+
+        return rootView;
     }
+
+    public UserPage() {
+    }
+
 }
+
