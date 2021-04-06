@@ -51,7 +51,5 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.0'
     //indicator
     implementation 'me.relex:circleindicator:1.2.2'
-    androidTestImplementation 'org.junit.jupiter:junit-jupiter'
-    androidTestImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
