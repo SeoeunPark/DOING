@@ -56,9 +56,9 @@ public class Signin extends AppCompatActivity {
                                     user_email = currentUser.getEmail();
                                     Toast.makeText(Signin.this,"환영합니다 :)",Toast.LENGTH_SHORT).show();
                                     //홈으로 이동
-//                                Intent goHome = new Intent(getApplicationContext(), HomeActivity.class);
-//                                startActivity(goHome);
-//                                    finish();
+                                    Intent goHome = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(goHome);
+                                    finish();
                                 }else {
                                     Toast.makeText(Signin.this,"메일 링크를 확인해주세요",Toast.LENGTH_SHORT).show();
                                 }
@@ -108,12 +108,10 @@ public class Signin extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()){
-
                     Toast.makeText(Signin.this,"환영합니다",Toast.LENGTH_SHORT).show();
-
-//                    Intent goHome = new Intent(getApplicationContext(), HomeActivity.class);
-//                    startActivity(goHome);
-//                    finish();
+                    Intent goHome = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(goHome);
+                    finish();
                 }else {
                     String error = task.getException().getMessage();
                     Toast.makeText(Signin.this,"error :"+error,Toast.LENGTH_SHORT).show();
