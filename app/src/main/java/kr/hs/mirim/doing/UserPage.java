@@ -42,8 +42,6 @@ public class UserPage extends Fragment {
         page = getArguments().getInt("someInt",0);
         title = getArguments().getString("someTitle");
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
