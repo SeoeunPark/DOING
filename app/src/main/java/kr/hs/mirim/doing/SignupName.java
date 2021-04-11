@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -88,19 +89,25 @@ public class SignupName extends AppCompatActivity {
 
         ArrayList friends = new ArrayList();
         HashMap<String, Object> userMap = new HashMap<>();
-        userMap.put("about","");
-        userMap.put("condition",0);
-        userMap.put("email",user_email);
-        userMap.put("friends_list", friends);
-        userMap.put("ing","");
-        userMap.put("level",0);
+        HashMap<String, Object> userMap2 = new HashMap<>();
+
         userMap.put("name",name);
+        userMap.put("email",user_email);
         userMap.put("user_code", userCode);
+
+        userMap2.put("name",name);
+        userMap2.put("about","");
+        userMap2.put("condition",0);
+        userMap2.put("ing","");
+        userMap2.put("level",0);
 
         db.collection("User").document(user_id).set(userMap).addOnCompleteListener(this, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
+                    FirebaseDatabase.getInstance().getReference().child("users").child(user_id).setValue(userMap2);
+                    FirebaseDatabase.getInstance().getReference().child("my_friends").child(user_id).setValue(user_id);
+
                     Toast.makeText(SignupName.this,"환영~",Toast.LENGTH_SHORT).show();
                     Intent goLogin = new Intent(getApplicationContext(), Signin.class);
                     startActivity(goLogin);

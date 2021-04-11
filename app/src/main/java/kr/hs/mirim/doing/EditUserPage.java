@@ -26,6 +26,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
@@ -58,6 +60,8 @@ public class EditUserPage extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("message");
 
         edit_profile = (ImageView) findViewById(R.id.edit_profile_circle); // 프로필 상태
         edit_nickname_nim = (EditText) findViewById(R.id.edit_nickname_nim); // 님은
@@ -70,6 +74,9 @@ public class EditUserPage extends AppCompatActivity {
         edit_level = (EditText) findViewById(R.id.edit_level); //1,2,3
         edit_nickname = (TextView) findViewById(R.id.edit_nickname); // 이름
 
+
+
+        reference.setValue("Hello, World!");
 
         //이름수정
         edit_nickname.setOnClickListener(new View.OnClickListener() {
