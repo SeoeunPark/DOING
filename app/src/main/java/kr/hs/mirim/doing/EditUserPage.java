@@ -45,6 +45,7 @@ public class EditUserPage extends AppCompatActivity {
     private Switch edit_onoff_direct;
     private Button edit_save;
 
+
     private String user_about = ""; //about
     private String user_id=""; //id
     private String user_email = ""; //이메일
@@ -147,6 +148,7 @@ public class EditUserPage extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
                         Intent main = new Intent(getApplicationContext(), MainActivity.class);
+
                         startActivity(main);
                     }else {
                         String error = task.getException().getMessage();
