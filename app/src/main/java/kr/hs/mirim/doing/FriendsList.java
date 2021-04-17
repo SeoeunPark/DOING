@@ -39,6 +39,10 @@ public class FriendsList extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        page = getArguments().getInt("someInt",0);
+        title = getArguments().getString("someTitle");
+
+
     }
 
     @Override
@@ -72,7 +76,7 @@ public class FriendsList extends Fragment {
                                         //없는 코드이기 때문에 친구 추가 가능
                                         //
 
-                                        
+
                                         Toast.makeText(getActivity(),"추가되었습니다.",Toast.LENGTH_SHORT).show();
                                     }
                                 }
