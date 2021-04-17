@@ -1,9 +1,11 @@
 package kr.hs.mirim.doing;
 
+import android.content.Intent;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.InputType;
@@ -12,19 +14,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
 
 public class FriendsList extends Fragment {
     private String title;
     private int page;
+    private Button logout;
+    private FirebaseAuth auth;
     private Button add_friend;
-    private String input_id = null;
-    private String dup_id = null;
+    private String user_id = null;
 
     //인디케이터 만들기
     // newInstance constructor for creating fragment with arguments
@@ -51,6 +65,10 @@ public class FriendsList extends Fragment {
         ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_friends_list, container, false);
         add_friend = (Button)rootView.findViewById(R.id.Add_friend);
 
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        user_id = user.getUid();
+
         add_friend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,12 +88,19 @@ public class FriendsList extends Fragment {
                                 @Override
                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                     if (queryDocumentSnapshots.isEmpty()) {
-                                        dup_id = input_id;
                                         Toast.makeText(getActivity(),"없는 코드입니다.",Toast.LENGTH_SHORT).show();
                                     }else{
                                         //없는 코드이기 때문에 친구 추가 가능
-                                        //
 
+                                        db.collection("User").whereEqualTo("user_code",username).get().addOnCompleteListener( tasks ->{
+                                            for(QueryDocumentSnapshot document : tasks.getResult()){
+                                                HashMap<String, String> my_friends = new HashMap<>();
+                                                my_friends.put(username, document.getId());
+                                                FirebaseDatabase.getInstance().getReference().child("my_friends").child(user_id).push().setValue(my_friends);
+
+                                                Toast.makeText(getActivity(),"추가되었습니다.",Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
 
                                         Toast.makeText(getActivity(),"추가되었습니다.",Toast.LENGTH_SHORT).show();
                                     }
@@ -95,6 +120,17 @@ public class FriendsList extends Fragment {
             }
         });
 
+        // Inflate the layout for this fragment
+        auth = FirebaseAuth.getInstance();
+        logout = (Button)rootView.findViewById(R.id.logout_btn);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth.getInstance().signOut();
+                startActivity(new Intent(getActivity(), Signin.class));
+                getActivity().finish();
+            }
+        });
         return rootView;
     }
 }

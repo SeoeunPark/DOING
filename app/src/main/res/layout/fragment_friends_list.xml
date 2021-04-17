@@ -3,18 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FriendsList">
+    tools:context=".FriendsList"
+    android:orientation="horizontal">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="친구리스트화면입니다." />
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="친구리스트화면입니다." />
 
-    <Button
-        android:id="@+id/Add_friend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="친구 추가" />
+        <Button
+            android:id="@+id/logout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout" />
+
+        <Button
+            android:id="@+id/Add_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="친구 추가" />
+
+
+    </LinearLayout>
 
 </FrameLayout>
