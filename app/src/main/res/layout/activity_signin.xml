@@ -20,7 +20,7 @@
     <ImageView
         android:id="@+id/logo_img"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginTop="120dp"
         android:src="@drawable/img_logoxxxhdpi"
         android:contentDescription="@string/logo_img"
