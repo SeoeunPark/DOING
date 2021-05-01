@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -77,7 +78,7 @@ public class Signin extends AppCompatActivity {
         });
 
         //회원가입
-        Button go_signup = (Button)findViewById(R.id.goto_signup);
+        TextView go_signup = (TextView) findViewById(R.id.goto_signup);
         go_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

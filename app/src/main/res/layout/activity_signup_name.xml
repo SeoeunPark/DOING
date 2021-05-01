@@ -1,42 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignupName"
-    android:orientation="vertical">
+    android:background="@color/white"
+    tools:context=".SignupName">
 
-    <EditText
-        android:id="@+id/name_space"
-        android:hint="이름"
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/progressbar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintTop_toTopOf="parent"
-         />
-    <EditText
-        android:id="@+id/userCode"
-        android:hint="사용자 고유코드"
+        android:layout_height="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_signup"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@+id/name_space"/>
-    <Button
-        android:id="@+id/go_to_home"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintTop_toBottomOf="@+id/userCode"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
-    <Button
-        android:id="@+id/duplicate"
-        android:layout_width="wrap_content"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/signup"
+        android:textColor="@color/colorMain"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/progressbar" />
+
+    <LinearLayout
+        android:id="@+id/signup_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="중복확인"
-        app:layout_constraintTop_toBottomOf="@+id/go_to_home"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/virtual_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_signup"
+        app:layout_constraintVertical_bias="0.25">
+
+        <EditText
+            android:id="@+id/name_space"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/login_edittext_style"
+            android:hint="@string/name"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:paddingStart="20dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray"
+            android:textSize="12sp"
+            tools:ignore="RtlSymmetry" />
+
+        <RelativeLayout
+            android:id="@+id/duplicate_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/userCode"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/login_edittext_style"
+                android:hint="@string/user_code"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:paddingStart="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="12sp"
+                tools:ignore="RtlSymmetry" />
+
+            <Button
+                android:id="@+id/duplicate"
+                android:layout_width="100dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/login_edittext_style"
+                android:text="@string/duplicate"
+                android:textColor="@color/colorMain"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/go_to_home"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/login_button_style"
+            android:text="@string/signup"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/virtual_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

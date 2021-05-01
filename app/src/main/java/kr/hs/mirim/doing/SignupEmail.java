@@ -67,13 +67,13 @@ public class SignupEmail extends AppCompatActivity {
                             });
 
                         }else{
-                            Toast.makeText(SignupEmail.this,"비밀번호를 다시 확인해주세요!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignupEmail.this,"비밀번호를 다시 확인해주세요",Toast.LENGTH_SHORT).show();
                         }
                     }else{
-                        Toast.makeText(SignupEmail.this,"비밀번호가 너무 짧아요!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupEmail.this,"비밀번호가 너무 짧아요",Toast.LENGTH_SHORT).show();
                     }
                 }else{
-                    Toast.makeText(SignupEmail.this,"모두 입력해주세요!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupEmail.this,"모두 입력해주세요",Toast.LENGTH_SHORT).show();
                 }
             }
         });
