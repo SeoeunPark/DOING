@@ -44,8 +44,8 @@
         <EditText
             android:id="@+id/signin_email"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@drawable/login_edittext_style"
+            android:layout_height="50dp"
+            android:background="@drawable/login_edittext_style_shadow"
             android:hint="@string/email"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
@@ -58,9 +58,9 @@
         <EditText
             android:id="@+id/signin_pass"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="50dp"
             android:layout_marginTop="15dp"
-            android:background="@drawable/login_edittext_style"
+            android:background="@drawable/login_edittext_style_shadow"
             android:hint="@string/password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
