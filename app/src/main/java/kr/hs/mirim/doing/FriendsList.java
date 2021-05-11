@@ -162,6 +162,7 @@ public class FriendsList extends Fragment {
                 dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        alfriend=0;
                         String username = inputname.getText().toString();
                         if (!TextUtils.isEmpty(username)) {
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -182,15 +183,18 @@ public class FriendsList extends Fragment {
                                                     public void onDataChange(DataSnapshot dataSnapshot2) {
                                                         for (DataSnapshot snapshot2 : dataSnapshot2.getChildren()) {// 반복문으로 데이터 List를 추출해냄
                                                             String key2 = (String) snapshot2.child("code").getValue();
-                                                            if(document.getId().equals(key2)){
-                                                                Toast.makeText(getActivity(), "이미 등록된 친구입니다.", Toast.LENGTH_SHORT).show();
-                                                                alfriend=1;
+                                                            if(alfriend!=2) {
+                                                                if (document.getId().equals(key2)) {
+                                                                    Toast.makeText(getActivity(), "이미 등록된 친구입니다.", Toast.LENGTH_SHORT).show();
+                                                                    alfriend = 1;
+                                                                }
                                                             }
                                                         }
                                                         if(alfriend==0) {
                                                             my_friends.put("code", document.getId());
                                                             FirebaseDatabase.getInstance().getReference().child("my_friends").child(user_id).push().setValue(my_friends);
                                                             Toast.makeText(getActivity(), "추가되었습니다.", Toast.LENGTH_SHORT).show();
+                                                            alfriend=2;
                                                         }
                                                     }
 
@@ -199,10 +203,6 @@ public class FriendsList extends Fragment {
 
                                                     }
                                                 });
-
-//                                                    my_friends.put("code", document.getId());
-//                                                    FirebaseDatabase.getInstance().getReference().child("my_friends").child(user_id).push().setValue(my_friends);
-//                                                    Toast.makeText(getActivity(), "추가되었습니다.", Toast.LENGTH_SHORT).show();
 
                                             }
                                         });
