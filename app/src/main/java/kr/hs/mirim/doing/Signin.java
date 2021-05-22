@@ -52,14 +52,15 @@ public class Signin extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                currentUser = mAuth.getCurrentUser();
+                                user_email = currentUser.getEmail();
                                 if(currentUser != null && currentUser.isEmailVerified()){
-                                    currentUser = mAuth.getCurrentUser();
-                                    user_email = currentUser.getEmail();
                                     Toast.makeText(Signin.this,"환영합니다 :)",Toast.LENGTH_SHORT).show();
+
                                     //홈으로 이동
-//                                Intent goHome = new Intent(getApplicationContext(), HomeActivity.class);
-//                                startActivity(goHome);
-//                                    finish();
+                                    Intent goHome = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(goHome);
+                                    finish();
                                 }else {
                                     Toast.makeText(Signin.this,"메일 링크를 확인해주세요",Toast.LENGTH_SHORT).show();
                                 }
@@ -95,7 +96,7 @@ public class Signin extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
 
         //자동로그인
-        if(currentUser != null){
+        if(currentUser != null && currentUser.isEmailVerified()){
             currentUser = mAuth.getCurrentUser();
             user_email=currentUser.getEmail();
             user_id = currentUser.getUid();
@@ -106,15 +107,13 @@ public class Signin extends AppCompatActivity {
     private void gotoHome(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("User").document(user_id.toString()).get().addOnCompleteListener(this, new OnCompleteListener<DocumentSnapshot>() {
-            @Override
+                @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()){
-
                     Toast.makeText(Signin.this,"환영합니다",Toast.LENGTH_SHORT).show();
-
-//                    Intent goHome = new Intent(getApplicationContext(), HomeActivity.class);
-//                    startActivity(goHome);
-//                    finish();
+                    Intent goHome = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(goHome);
+                    finish();
                 }else {
                     String error = task.getException().getMessage();
                     Toast.makeText(Signin.this,"error :"+error,Toast.LENGTH_SHORT).show();
