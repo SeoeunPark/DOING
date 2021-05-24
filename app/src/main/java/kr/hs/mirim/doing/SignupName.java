@@ -105,6 +105,7 @@ public class SignupName extends AppCompatActivity {
         userMap2.put("condition",0);
         userMap2.put("ing","");
         userMap2.put("level",0);
+        userMap2.put("postOnOff",true);
 
         my_friends.put(userCode, user_id);
 

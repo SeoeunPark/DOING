@@ -142,7 +142,6 @@ public class EditUserPage extends AppCompatActivity {
             userMap.put("ing",edit_I_doing.getText().toString());
             userMap.put("level",1);
             userMap.put("name",edit_nickname.getText().toString());
-
             db.collection("User").document(user_id).set(userMap, SetOptions.merge()).addOnCompleteListener(this, new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
