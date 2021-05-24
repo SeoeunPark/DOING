@@ -55,7 +55,6 @@
                 android:id="@+id/nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/nickname"
                 android:textSize="@dimen/nickname"
                 tools:ignore="SpUsage" />
 
@@ -63,7 +62,6 @@
                 android:id="@+id/nickname_nim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/nim"
                 android:textSize="@dimen/main_default"
                 tools:ignore="SpUsage" />
         </LinearLayout>
@@ -83,7 +81,6 @@
                 android:id="@+id/I_doing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/I_doing"
                 android:textSize="@dimen/nickname"
                 tools:ignore="SpUsage" />
         </LinearLayout>
@@ -103,7 +100,6 @@
                 android:id="@+id/text_onoff_direct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/onoff_direct"
                 android:textSize="@dimen/main_default"
                 tools:ignore="SpUsage" />
 

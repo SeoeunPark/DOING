@@ -16,4 +16,7 @@
     <string name="name">이름</string>
     <string name="user_code">사용자 고유코드</string>
 
+    <string name="user_name">사용자 이름</string>
+    <string name="user_ing">하는 중</string>
+    <string name="user_about">한 줄 소개</string>
 </resources>

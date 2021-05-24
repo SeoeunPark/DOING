@@ -70,7 +70,6 @@
             android:id="@+id/edit_I_doing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/I_doing"
             android:textSize="@dimen/nickname"
             tools:ignore="SpUsage" />
         <EditText
@@ -104,7 +103,6 @@
             android:id="@+id/text_onoff_direct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/onoff_direct"
             android:textSize="@dimen/main_default"
             tools:ignore="SpUsage" />
 
