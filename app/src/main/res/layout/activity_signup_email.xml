@@ -55,7 +55,8 @@
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
             android:textSize="12sp"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry"
+            android:paddingLeft="20dp" />
 
         <EditText
             android:id="@+id/pass"
@@ -70,7 +71,8 @@
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
             android:textSize="12sp"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry"
+            android:paddingLeft="20dp" />
 
         <EditText
             android:id="@+id/repass"
@@ -85,7 +87,8 @@
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
             android:textSize="12sp"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry"
+            android:paddingLeft="20dp" />
 
         <Button
             android:id="@+id/go_to_name"

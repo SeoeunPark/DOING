@@ -55,7 +55,8 @@
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
             android:textSize="12sp"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry"
+            android:paddingLeft="20dp" />
 
         <RelativeLayout
             android:id="@+id/duplicate_layout"
@@ -76,7 +77,8 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
                 android:textSize="12sp"
-                tools:ignore="RtlSymmetry" />
+                tools:ignore="RtlSymmetry"
+                android:paddingLeft="20dp" />
 
             <Button
                 android:id="@+id/duplicate"
@@ -86,7 +88,8 @@
                 android:background="@drawable/login_edittext_style"
                 android:text="@string/duplicate"
                 android:textColor="@color/colorMain"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_alignParentRight="true" />
 
         </RelativeLayout>
 

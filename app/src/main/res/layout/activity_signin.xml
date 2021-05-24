@@ -53,7 +53,8 @@
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
             android:textSize="12sp"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry"
+            android:paddingLeft="20dp" />
 
         <EditText
             android:id="@+id/signin_pass"
@@ -68,7 +69,8 @@
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
             android:textSize="12sp"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry"
+            android:paddingLeft="20dp" />
 
         <Button
             android:id="@+id/login_btn"
