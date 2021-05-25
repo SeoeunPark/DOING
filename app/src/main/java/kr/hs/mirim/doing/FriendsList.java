@@ -51,7 +51,7 @@ import java.util.Map;
 public class FriendsList extends Fragment {
     private String title;
     private int page;
-    private Button logout;
+    private TextView logout;
     private FirebaseAuth auth;
     private TextView add_friend;
     private String user_id = null;
@@ -143,7 +143,7 @@ public class FriendsList extends Fragment {
 //                Log.e("Fraglike", String.valueOf(databaseError.toException())); // 에러문 출력
 //            }
 //        });
-        
+
 
         databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
@@ -260,18 +260,17 @@ public class FriendsList extends Fragment {
             }
         });
 
-        //로그아웃 위치 옮길게..
         // Inflate the layout for this fragment
-//        auth = FirebaseAuth.getInstance();
-//        logout = (Button) rootView.findViewById(R.id.logout_btn);
-//        logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                auth.getInstance().signOut();
-//                startActivity(new Intent(getActivity(), Signin.class));
-//                getActivity().finish();
-//            }
-//        });
+        auth = FirebaseAuth.getInstance();
+        logout = (TextView) rootView.findViewById(R.id.logout_btn);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                auth.getInstance().signOut();
+                startActivity(new Intent(getActivity(), Signin.class));
+                getActivity().finish();
+            }
+        });
         return rootView;
     }
 }
