@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.constraintlayout.solver.widgets.Helper;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +27,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -91,7 +92,7 @@ public class FriendsList extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_friends_list, container, false);
         add_friend = (TextView) rootView.findViewById(R.id.Add_friend);
-        //searchView = rootView.findViewById(R.id.searchView);
+        searchView = rootView.findViewById(R.id.searchView);
         //recyclerview
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true); // 리사이클러뷰 기존성능 강화
@@ -106,44 +107,6 @@ public class FriendsList extends Fragment {
         database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
         databaseReference1 = database.getReference("my_friends").child(user_id); // DB 테이블 연결
         databaseReference2 = database.getReference("users"); // DB 테이블 연결
-
-        //version1
-//        databaseReference2.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
-//                arrayList.clear(); // 기존 배열리스트가 존재하지않게 초기화
-//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {// 반복문으로 데이터 List를 추출해냄
-//                    String key = snapshot.getKey();
-//                    databaseReference1.addListenerForSingleValueEvent(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(DataSnapshot dataSnapshot2) {
-//                            for (DataSnapshot snapshot2 : dataSnapshot2.getChildren()) {// 반복문으로 데이터 List를 추출해냄
-//                                String key2 = (String) snapshot2.child("code").getValue();
-//                                if (key.equals(key2)) {
-//                                    MyFriendList MyFriendList = snapshot.getValue(MyFriendList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
-//                                    arrayList.add(MyFriendList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준다
-//                                }
-//                                continue;
-//                            }
-//                            adapter.notifyDataSetChanged();
-//                        }
-//                        @Override
-//                        public void onCancelled(DatabaseError databaseError) {
-//                        }
-//                    });
-//                    }
-//                adapter = new FriendAdapter(arrayList, getContext());
-//                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//                // 디비를 가져오던중 에러 발생 시
-//                Log.e("Fraglike", String.valueOf(databaseError.toException())); // 에러문 출력
-//            }
-//        });
-
 
         databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
@@ -185,6 +148,22 @@ public class FriendsList extends Fragment {
                 Log.e("Fraglike", String.valueOf(databaseError.toException())); // 에러문 출력
             }
         });
+
+
+        if (searchView != null) {
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    search(newText);
+                    return true;
+                }
+            });
+        }
 
 
         //친구 추가하기
@@ -273,4 +252,15 @@ public class FriendsList extends Fragment {
         });
         return rootView;
     }
+
+    private void search(String str) {
+            ArrayList<MyFriendList> myList = new ArrayList<>();
+            for (MyFriendList object : arrayList) {
+                if (object.getName().toLowerCase().contains(str.toLowerCase())) {
+                    myList.add(object);
+                }
+            }
+            FriendAdapter adapterClass = new FriendAdapter(myList, getContext());
+            recyclerView.setAdapter(adapterClass); // 리사이클러뷰에 어댑터 연결
+        }
 }
