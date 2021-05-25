@@ -143,7 +143,7 @@ public class FriendsList extends Fragment {
 //                Log.e("Fraglike", String.valueOf(databaseError.toException())); // 에러문 출력
 //            }
 //        });
-        
+
 
         databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
