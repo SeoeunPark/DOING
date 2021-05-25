@@ -51,9 +51,9 @@ import java.util.Map;
 public class FriendsList extends Fragment {
     private String title;
     private int page;
-    private Button logout;
+    private TextView logout;
     private FirebaseAuth auth;
-    private Button add_friend;
+    private TextView add_friend;
     private String user_id = null;
 
     private SearchView searchView;
@@ -90,7 +90,7 @@ public class FriendsList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_friends_list, container, false);
-        add_friend = (Button) rootView.findViewById(R.id.Add_friend);
+        add_friend = (TextView) rootView.findViewById(R.id.Add_friend);
         //searchView = rootView.findViewById(R.id.searchView);
         //recyclerview
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
@@ -262,7 +262,7 @@ public class FriendsList extends Fragment {
 
         // Inflate the layout for this fragment
         auth = FirebaseAuth.getInstance();
-        logout = (Button) rootView.findViewById(R.id.logout_btn);
+        logout = (TextView) rootView.findViewById(R.id.logout_btn);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
