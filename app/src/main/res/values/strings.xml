@@ -19,4 +19,7 @@
     <string name="user_name">사용자 이름</string>
     <string name="user_ing">하는 중</string>
     <string name="user_about">한 줄 소개</string>
+
+    <string name="add_friends">친구 추가</string>
+    <string name="plus">+</string>
 </resources>
