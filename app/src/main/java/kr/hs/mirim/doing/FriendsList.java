@@ -213,8 +213,6 @@ public class FriendsList extends Fragment {
                                         //없는 코드이기 때문에 친구 추가 가능
                                         db.collection("User").whereEqualTo("user_code", username).get().addOnCompleteListener(tasks -> {
                                             for (QueryDocumentSnapshot document : tasks.getResult()) {
-                                                HashMap<String, String> my_friends = new HashMap<>();
-
                                                 //등록된 친구인지 아닌지 판별
                                                 databaseReference1.addValueEventListener(new ValueEventListener() {
                                                     @Override
@@ -229,8 +227,7 @@ public class FriendsList extends Fragment {
                                                             }
                                                         }
                                                         if (alfriend == 0) {
-                                                            my_friends.put("code", document.getId());
-                                                            FirebaseDatabase.getInstance().getReference().child("my_friends").child(user_id).push().setValue(my_friends);
+                                                            AddNewFriend(document.getId());
                                                             Toast.makeText(getActivity(), "추가되었습니다.", Toast.LENGTH_SHORT).show();
                                                             alfriend = 2;
                                                         }
@@ -272,5 +269,11 @@ public class FriendsList extends Fragment {
             }
         });
         return rootView;
+    }
+
+    protected void AddNewFriend(String friendUid){
+        Map<String, Object> AddFriend = new HashMap<>();
+        AddFriend.put(friendUid, friendUid);
+        databaseReference1.updateChildren(AddFriend);
     }
 }
