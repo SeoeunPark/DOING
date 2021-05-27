@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".EditUserPage" />
-        <activity android:name=".PostList"></activity>
-        <activity android:name=".sendPost" />
+        android:theme="@style/AppTheme">
+        <activity android:name=".sendPost"></activity>
         <activity android:name=".SignupEmail" />
         <activity android:name=".SignupName" />
         <activity android:name=".MainActivity" />

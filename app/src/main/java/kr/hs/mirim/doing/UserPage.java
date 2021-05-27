@@ -55,7 +55,6 @@ public class UserPage extends Fragment {
         edit_pofile = (ImageButton) rootView.findViewById(R.id.edit_pofile);
         send_post = (ImageButton) rootView.findViewById(R.id.direct);
 
-
         //프로필수정 화면으로 이동
         edit_pofile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +71,6 @@ public class UserPage extends Fragment {
                 startActivity(goHome);
             }
         });
-
 
         return rootView;
     }
