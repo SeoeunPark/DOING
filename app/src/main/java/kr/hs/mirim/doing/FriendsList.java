@@ -27,7 +27,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -102,8 +101,9 @@ public class FriendsList extends Fragment {
         arrayList = new ArrayList<>(); // User 객체를 담을 어레이 리스트 (어댑터쪽으로)
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
-        user_id = user.getUid();
-
+        if(user.getUid() != null) {
+            user_id = user.getUid();
+        }
 
         database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
         databaseReference1 = database.getReference("my_friends").child(user_id); // DB 테이블 연결

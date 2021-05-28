@@ -15,37 +15,10 @@
             android:layout_height="wrap_content"
             android:text="TO. "/>
 
-        <HorizontalScrollView
+        <Spinner
+            android:id="@+id/spinner"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <Button
-                    android:id="@+id/custom_message1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
-                <Button
-                    android:id="@+id/custom_message2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
-                <Button
-                    android:id="@+id/custom_message3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
-                <Button
-                    android:id="@+id/custom_message4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
-                <Button
-                    android:id="@+id/custom_message5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
-
-
-        </HorizontalScrollView>
+            android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/sendContents"
             android:hint="쪽지 입력란"
