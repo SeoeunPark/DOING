@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--depth를 4개 이상 만들지 말것-->
+<!--라벨이 보이지 않게 하는 속성
+<!-app:labelVisibilityMode="unlabeled"-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="10"
+        android:orientation="vertical">
+        <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vpPager"
+        android:layout_width="match_parent"
+        android:layout_weight="9"
+        android:layout_height="match_parent"/>
+        <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:ci_drawable="@drawable/black_radius"
+        android:layout_weight="1"
+        app:ci_height="7dp"
+        app:ci_margin="4dp"
+        app:ci_width="7dp" />
+    </LinearLayout>
+</RelativeLayout>
