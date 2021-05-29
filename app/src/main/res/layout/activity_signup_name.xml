@@ -21,21 +21,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="@dimen/side_margin"
+        android:layout_marginRight="@dimen/side_margin"
         android:text="@string/signup"
         android:textColor="@color/colorMain"
-        android:textSize="24sp"
+        android:textSize="@dimen/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/progressbar" />
+        app:layout_constraintTop_toTopOf="@id/progressbar"
+        tools:ignore="SpUsage" />
 
     <LinearLayout
         android:id="@+id/signup_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="@dimen/side_margin"
+        android:layout_marginRight="@dimen/side_margin"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/virtual_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,12 +52,12 @@
             android:hint="@string/name"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
-            android:paddingStart="20dp"
+            android:paddingStart="@dimen/padding"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
-            android:textSize="12sp"
-            tools:ignore="RtlSymmetry"
-            android:paddingLeft="20dp" />
+            android:textSize="@dimen/hint"
+            tools:ignore="RtlSymmetry,SpUsage"
+            android:paddingLeft="@dimen/padding600" />
 
         <RelativeLayout
             android:id="@+id/duplicate_layout"
@@ -73,23 +74,24 @@
                 android:hint="@string/user_code"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:paddingStart="20dp"
+                android:paddingStart="@dimen/padding"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
-                android:textSize="12sp"
-                tools:ignore="RtlSymmetry"
-                android:paddingLeft="20dp" />
+                android:textSize="@dimen/hint"
+                tools:ignore="RtlSymmetry,SpUsage"
+                android:paddingLeft="@dimen/padding" />
 
             <Button
                 android:id="@+id/duplicate"
                 android:layout_width="100dp"
                 android:layout_height="48dp"
                 android:layout_alignParentEnd="true"
-                android:background="@drawable/login_edittext_style"
+                android:background="@drawable/login_edittext_style_shadow"
                 android:text="@string/duplicate"
                 android:textColor="@color/colorMain"
-                android:textSize="16sp"
-                android:layout_alignParentRight="true" />
+                android:textSize="@dimen/button"
+                android:layout_alignParentRight="true"
+                tools:ignore="SpUsage" />
 
         </RelativeLayout>
 
@@ -101,7 +103,8 @@
             android:background="@drawable/login_button_style"
             android:text="@string/signup"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/button"
+            tools:ignore="SpUsage" />
 
     </LinearLayout>
 

@@ -21,21 +21,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="@dimen/side_margin"
+        android:layout_marginRight="@dimen/side_margin"
         android:text="@string/signup"
         android:textColor="@color/colorMain"
-        android:textSize="24sp"
+        android:textSize="@dimen/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/progressbar" />
+        app:layout_constraintTop_toTopOf="@id/progressbar"
+        tools:ignore="SpUsage" />
 
     <LinearLayout
         android:id="@+id/signup_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="@dimen/side_margin"
+        android:layout_marginRight="@dimen/side_margin"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/virtual_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,12 +52,12 @@
             android:hint="@string/email"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
-            android:paddingStart="20dp"
+            android:paddingStart="@dimen/padding"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
-            android:textSize="12sp"
-            tools:ignore="RtlSymmetry"
-            android:paddingLeft="20dp" />
+            android:textSize="@dimen/hint"
+            tools:ignore="RtlSymmetry,SpUsage"
+            android:paddingLeft="@dimen/padding" />
 
         <EditText
             android:id="@+id/pass"
@@ -67,12 +68,12 @@
             android:hint="@string/pass_with_notice"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:paddingStart="20dp"
+            android:paddingStart="@dimen/padding"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
-            android:textSize="12sp"
-            tools:ignore="RtlSymmetry"
-            android:paddingLeft="20dp" />
+            android:textSize="@dimen/hint"
+            tools:ignore="RtlSymmetry,SpUsage"
+            android:paddingLeft="@dimen/padding" />
 
         <EditText
             android:id="@+id/repass"
@@ -83,12 +84,12 @@
             android:hint="@string/re_password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:paddingStart="20dp"
+            android:paddingStart="@dimen/padding"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
-            android:textSize="12sp"
-            tools:ignore="RtlSymmetry"
-            android:paddingLeft="20dp" />
+            android:textSize="@dimen/hint"
+            tools:ignore="RtlSymmetry,SpUsage"
+            android:paddingLeft="@dimen/padding" />
 
         <Button
             android:id="@+id/go_to_name"
@@ -98,7 +99,8 @@
             android:background="@drawable/login_button_style"
             android:text="@string/next"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/button"
+            tools:ignore="SpUsage" />
 
     </LinearLayout>
 

@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:layout_marginTop="120dp"
-        android:src="@drawable/img_logoxxxhdpi"
+        android:src="@drawable/img_logoxhdpi"
         android:contentDescription="@string/logo_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,8 +32,8 @@
         android:id="@+id/login_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="@dimen/side_margin"
+        android:layout_marginRight="@dimen/side_margin"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/virtual_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,12 +49,12 @@
             android:hint="@string/email"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
-            android:paddingStart="20dp"
+            android:paddingStart="@dimen/padding"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
-            android:textSize="12sp"
-            tools:ignore="RtlSymmetry"
-            android:paddingLeft="20dp" />
+            android:textSize="@dimen/hint"
+            tools:ignore="RtlSymmetry,SpUsage"
+            android:paddingLeft="@dimen/padding" />
 
         <EditText
             android:id="@+id/signin_pass"
@@ -65,12 +65,12 @@
             android:hint="@string/password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:paddingStart="20dp"
+            android:paddingStart="@dimen/padding"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
-            android:textSize="12sp"
-            tools:ignore="RtlSymmetry"
-            android:paddingLeft="20dp" />
+            android:textSize="@dimen/hint"
+            tools:ignore="RtlSymmetry,SpUsage"
+            android:paddingLeft="@dimen/padding" />
 
         <Button
             android:id="@+id/login_btn"
@@ -80,7 +80,8 @@
             android:background="@drawable/login_button_style"
             android:text="@string/login"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="@dimen/button"
+            tools:ignore="SpUsage" />
 
         <TextView
             android:id="@+id/goto_signup"
@@ -90,7 +91,8 @@
             android:layout_marginTop="10dp"
             android:text="@string/signup"
             android:textColor="@color/gray"
-            android:textSize="12sp" />
+            android:textSize="@dimen/text_btn"
+            tools:ignore="SpUsage" />
     </LinearLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
