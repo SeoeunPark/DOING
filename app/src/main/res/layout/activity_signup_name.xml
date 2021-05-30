@@ -84,7 +84,7 @@
             <Button
                 android:id="@+id/duplicate"
                 android:layout_width="100dp"
-                android:layout_height="48dp"
+                android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
                 android:background="@drawable/login_edittext_style_shadow"
                 android:text="@string/duplicate"

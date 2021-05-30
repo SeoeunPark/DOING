@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:queryHint="검색어를 입력하세요."
-            android:layout_margin="16dp"
+            android:layout_margin="@dimen/side_margin"
             android:background="@drawable/login_edittext_style"
             app:iconifiedByDefault="false"/>
 
@@ -35,8 +35,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Logout"
+                android:textSize="@dimen/text_btn"
                 android:layout_gravity="left"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="@dimen/side_margin"
                 tools:ignore="RtlHardcoded" />
 
             <View
@@ -57,8 +58,9 @@
                     android:text="@string/add_friends"
                     android:textColor="@color/colorMain"
                     android:layout_gravity="right"
-                    android:layout_marginRight="10dp"
-                    tools:ignore="RtlHardcoded" />
+                    android:layout_marginRight="@dimen/side_margin"
+                    android:textSize="@dimen/text_btn"
+                    tools:ignore="RtlHardcoded,SpUsage" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
