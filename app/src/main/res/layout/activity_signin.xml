@@ -20,9 +20,9 @@
     <ImageView
         android:id="@+id/logo_img"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_marginTop="120dp"
-        android:src="@drawable/img_logoxhdpi"
+        android:layout_height="100dp"
+        android:layout_marginTop="220dp"
+        android:src="@drawable/img_logomdpi"
         android:contentDescription="@string/logo_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,8 +32,8 @@
         android:id="@+id/login_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/side_margin"
-        android:layout_marginRight="@dimen/side_margin"
+        android:layout_marginLeft="@dimen/side_margin600"
+        android:layout_marginRight="@dimen/side_margin600"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/virtual_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,43 +44,43 @@
         <EditText
             android:id="@+id/signin_email"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="80dp"
             android:background="@drawable/login_edittext_style_shadow"
             android:hint="@string/email"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
-            android:paddingStart="@dimen/padding"
+            android:paddingStart="@dimen/padding600"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
-            android:textSize="@dimen/hint"
+            android:textSize="@dimen/hint600"
             tools:ignore="RtlSymmetry,SpUsage"
-            android:paddingLeft="@dimen/padding" />
+            android:paddingLeft="@dimen/padding600" />
 
         <EditText
             android:id="@+id/signin_pass"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="80dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/login_edittext_style_shadow"
             android:hint="@string/password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:paddingStart="@dimen/padding"
+            android:paddingStart="@dimen/padding600"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
-            android:textSize="@dimen/hint"
+            android:textSize="@dimen/hint600"
             tools:ignore="RtlSymmetry,SpUsage"
-            android:paddingLeft="@dimen/padding" />
+            android:paddingLeft="@dimen/padding600" />
 
         <Button
             android:id="@+id/login_btn"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="80dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/login_button_style"
             android:text="@string/login"
             android:textColor="@color/white"
-            android:textSize="@dimen/button"
+            android:textSize="@dimen/button600"
             tools:ignore="SpUsage" />
 
         <TextView
@@ -88,10 +88,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="40dp"
             android:text="@string/signup"
             android:textColor="@color/gray"
-            android:textSize="@dimen/text_btn"
+            android:textSize="@dimen/text_btn600"
             tools:ignore="SpUsage" />
     </LinearLayout>
 

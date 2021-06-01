@@ -20,12 +20,12 @@
         android:id="@+id/text_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:layout_marginLeft="@dimen/side_margin"
-        android:layout_marginRight="@dimen/side_margin"
+        android:layout_marginTop="220dp"
+        android:layout_marginLeft="@dimen/side_margin600"
+        android:layout_marginRight="@dimen/side_margin600"
         android:text="@string/signup"
         android:textColor="@color/colorMain"
-        android:textSize="@dimen/title"
+        android:textSize="@dimen/title600"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/progressbar"
@@ -35,8 +35,8 @@
         android:id="@+id/signup_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/side_margin"
-        android:layout_marginRight="@dimen/side_margin"
+        android:layout_marginLeft="@dimen/side_margin600"
+        android:layout_marginRight="@dimen/side_margin600"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/virtual_button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,60 +47,59 @@
         <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="80dp"
             android:background="@drawable/login_edittext_style_shadow"
             android:hint="@string/email"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
-            android:paddingStart="@dimen/padding"
+            android:paddingStart="@dimen/padding600"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
-            android:textSize="@dimen/hint"
+            android:textSize="@dimen/hint600"
             tools:ignore="RtlSymmetry,SpUsage"
-            android:paddingLeft="@dimen/padding" />
+            android:paddingLeft="@dimen/padding600" />
 
         <EditText
             android:id="@+id/pass"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="80dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/login_edittext_style_shadow"
             android:hint="@string/pass_with_notice"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:paddingStart="@dimen/padding"
+            android:paddingStart="@dimen/padding600"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
-            android:textSize="@dimen/hint"
+            android:textSize="@dimen/hint600"
             tools:ignore="RtlSymmetry,SpUsage"
-            android:paddingLeft="@dimen/padding" />
+            android:paddingLeft="@dimen/padding600" />
 
         <EditText
             android:id="@+id/repass"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="80dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/login_edittext_style_shadow"
             android:hint="@string/re_password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:paddingStart="@dimen/padding"
+            android:paddingStart="@dimen/padding600"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
-            android:textSize="@dimen/hint"
+            android:textSize="@dimen/hint600"
             tools:ignore="RtlSymmetry,SpUsage"
-            android:paddingLeft="@dimen/padding" />
+            android:paddingLeft="@dimen/padding600" />
 
         <Button
             android:id="@+id/go_to_name"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="80dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/login_button_style"
             android:text="@string/next"
             android:textColor="@color/white"
-            android:textSize="@dimen/button"
-            tools:ignore="SpUsage" />
+            android:textSize="@dimen/button600" />
 
     </LinearLayout>
 
