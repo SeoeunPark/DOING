@@ -255,13 +255,13 @@ public class FriendsList extends Fragment {
     }
 
     private void search(String str) {
-            ArrayList<MyFriendList> myList = new ArrayList<>();
-            for (MyFriendList object : arrayList) {
-                if (object.getName().toLowerCase().contains(str.toLowerCase())) {
-                    myList.add(object);
-                }
+        ArrayList<MyFriendList> myList = new ArrayList<>();
+        for (MyFriendList object : arrayList) {
+            if (object.getName().toLowerCase().contains(str.toLowerCase())) {
+                myList.add(object);
             }
-            FriendAdapter adapterClass = new FriendAdapter(myList, getContext());
-            recyclerView.setAdapter(adapterClass); // 리사이클러뷰에 어댑터 연결
         }
+        FriendAdapter adapterClass = new FriendAdapter(myList, getContext());
+        recyclerView.setAdapter(adapterClass); // 리사이클러뷰에 어댑터 연결
+    }
 }
