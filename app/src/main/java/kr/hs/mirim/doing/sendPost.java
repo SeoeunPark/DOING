@@ -2,6 +2,7 @@ package kr.hs.mirim.doing;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -84,6 +85,8 @@ public class sendPost extends AppCompatActivity {
             if (task.isSuccessful()) {
                 finish();
                 Toast.makeText(sendPost.this, "쪽지를 전송했습니다", Toast.LENGTH_SHORT).show();
+                Intent gotoPostList = new Intent(getApplicationContext(), PostList.class);
+                startActivity(gotoPostList);
                 return;
             }else{
                 String error = task.getException().getMessage();

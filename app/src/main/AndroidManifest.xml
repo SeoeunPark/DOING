@@ -12,6 +12,7 @@
         <activity android:name=".EditUserPage" />
         android:theme="@style/AppTheme">
         <activity android:name=".sendPost"></activity>
+        <activity android:name=".PostList"/>
         <activity android:name=".SignupEmail" />
         <activity android:name=".SignupName" />
         <activity android:name=".MainActivity" />
