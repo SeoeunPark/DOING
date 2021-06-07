@@ -6,6 +6,7 @@ public class MyFriendList {
     private String ing;
     private int level;
     private String name;
+    private transient String key;
 
     public String getAbout() {
         return about;

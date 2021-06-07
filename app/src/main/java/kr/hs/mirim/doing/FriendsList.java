@@ -114,7 +114,7 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         databaseReference2 = database.getReference("users"); // DB 테이블 연결
 
 
-        //이건 잘 실행되는 것
+        //아라야 여기가 문제야!!
         databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot2) {
@@ -149,135 +149,15 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                 }
                 adapter = new FriendAdapter(arrayList, getContext());
                 recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-
             }
+
+            
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e("Fraglike", String.valueOf(databaseError.toException())); // 에러문 출력
             }
         });
-
-
-
-//        databaseReference1.addChildEventListener(new ChildEventListener() {
-//
-//            @Override
-//                public void onChildAdded(DataSnapshot dataSnapshot2, String s) {
-//                //for (DataSnapshot snapshot2 : dataSnapshot2.getChildren()) {// 반복문으로 데이터 List를 추출해냄
-//                    String key2 = (String) dataSnapshot2.child("code").getValue();
-//                    //여기도 onchild로 바꾸기
-//
-//                    databaseReference2.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                            // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
-////                            if (key2.length() > 0) {
-////                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {// 반복문으로 데이터 List를 추출해냄
-////                                    String key = snapshot.getKey();
-////                                    if (key.equals(key2)) {
-////                                        MyFriendList MyFriendList = snapshot.getValue(MyFriendList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
-////                                        arrayList.add(MyFriendList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준다
-////                                    }
-////                                }
-//////                                adapter.notifyDataSetChanged();
-////                            }
-////                            if(key2.length()==0){
-////                                Toast.makeText(getActivity(), "왜 안되냐", Toast.LENGTH_SHORT).show();
-////                                adapter.notifyDataSetChanged();
-////                                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-////                            }
-//                            //key2="";
-//                        }
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError databaseError) {
-//                            // 디비를 가져오던중 에러 발생 시
-//                            Log.e("Fraglike", String.valueOf(databaseError.toException())); // 에러문 출력
-//                        }
-//
-//                    });
-//                new FriendAdapter(arrayList, getContext());
-//                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot2, String s) {
-//                for (DataSnapshot snapshot2 : dataSnapshot2.getChildren()) {// 반복문으로 데이터 List를 추출해냄
-//                    key2 = (String) snapshot2.child("code").getValue();
-//                    //여기도 onchild로 바꾸기
-//
-//                    databaseReference2.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                            // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
-//                            if (key2.length() > 0) {
-//                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {// 반복문으로 데이터 List를 추출해냄
-//                                    String key = snapshot.getKey();
-//                                    if (key.equals(key2)) {
-//                                        MyFriendList MyFriendList = snapshot.getValue(MyFriendList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
-//                                        arrayList.add(MyFriendList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준다
-//                                    }
-//                                }
-//                                adapter.notifyDataSetChanged();
-//                            }
-//                        }
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError databaseError) {
-//                            // 디비를 가져오던중 에러 발생 시
-//                            Log.e("Fraglike", String.valueOf(databaseError.toException())); // 에러문 출력
-//                        }
-//
-//                    });
-//
-//
-//                }
-//                adapter = new FriendAdapter(arrayList, getContext());
-//                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//                Log.d("MainActivity", "ChildEventListener - onChildRemoved : " + dataSnapshot.getKey());
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//                Log.d("MainActivity", "ChildEventListener - onChildMoved" + s);
-//            }
-//
-//
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.d("MainActivity", "ChildEventListener - onCancelled" + databaseError.getMessage());
-//            }
-//
-//        });
-
-
-
-        //                    databaseReference2.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                            // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
-//                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {// 반복문으로 데이터 List를 추출해냄
-//                                String key = snapshot.getKey();
-//                                if (key.equals(key2)) {
-//                                    MyFriendList MyFriendList = snapshot.getValue(MyFriendList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
-//                                    arrayList.add(MyFriendList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준다
-//                                }
-//                            }
-//                            adapter.notifyDataSetChanged();
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError databaseError) {
-//                            // 디비를 가져오던중 에러 발생 시
-//                            Log.e("Fraglike", String.valueOf(databaseError.toException())); // 에러문 출력
-//                        }
-//
-//                    });
-
 
 
         if (searchView != null) {
@@ -342,7 +222,6 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                                                             alfriend = 2;
                                                         }
                                                     }
-
                                                     @Override
                                                     public void onCancelled(DatabaseError databaseError) {
                                                     }
