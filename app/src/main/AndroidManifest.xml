@@ -11,6 +11,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".EditUserPage" />
         <activity android:name=".sendPost" />
+        <activity android:name=".PostList"/>
         <activity android:name=".SignupEmail" />
         <activity android:name=".SignupName" />
         <activity android:name=".MainActivity" />
