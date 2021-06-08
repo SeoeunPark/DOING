@@ -19,6 +19,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:drawable/ic_menu_send" />
+        <Button
+            android:id="@+id/message"
+            android:layout_width="50dp"
+            android:layout_marginLeft="100dp"
+            android:layout_height="50dp"
+            android:background="#898989"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="리스트 버튼"/>
         <ImageButton
             android:id="@+id/edit_pofile"
             android:layout_width="50dp"

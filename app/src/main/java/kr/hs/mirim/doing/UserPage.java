@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ public class UserPage extends Fragment {
     private Switch text_onoff_direct;
     private ImageButton edit_pofile;
     private ImageButton send_post;
+    private Button message;
     private String title;
     private int page;
 
@@ -54,6 +56,7 @@ public class UserPage extends Fragment {
         text_onoff_direct = (Switch) rootView.findViewById(R.id.switch_onoff_direct);
         edit_pofile = (ImageButton) rootView.findViewById(R.id.edit_pofile);
         send_post = (ImageButton) rootView.findViewById(R.id.direct);
+        message = (Button)rootView.findViewById(R.id.message);
 
         //프로필수정 화면으로 이동
         edit_pofile.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +74,14 @@ public class UserPage extends Fragment {
                 startActivity(goHome);
             }
         });
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goHome = new Intent(view.getContext(), ShowMessage.class);
+                startActivity(goHome);
+            }
+        });
+
 
         return rootView;
     }

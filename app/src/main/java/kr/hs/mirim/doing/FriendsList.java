@@ -151,7 +151,7 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                 recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
             }
 
-            
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
