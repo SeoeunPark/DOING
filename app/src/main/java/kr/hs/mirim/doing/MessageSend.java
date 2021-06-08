@@ -2,11 +2,27 @@ package kr.hs.mirim.doing;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +30,8 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class MessageSend extends Fragment {
+    private FirebaseUser currentUser;
+    private FirebaseAuth auth;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,10 +73,45 @@ public class MessageSend extends Fragment {
         }
     }
 
+    //내가 모르는 fragment 생명주기에 의해 화면을 껐다가 다시켜야지만 데이터가 생겨남
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message_send, container, false);
+        View v = inflater.inflate(R.layout.fragment_message_send, container, false);
+
+        ListView slistview = (ListView) v.findViewById(R.id.sendPost);
+        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+        HashMap<String, String> item = new HashMap<String, String>();
+
+        FirebaseFirestore fs = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String current_uid = FirebaseAuth.getInstance().getUid();
+
+        fs.collection("Post").whereEqualTo("sender", current_uid).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (!task.getResult().isEmpty()) { // 일치값이 있을경우
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        fs.collection("User").document((String) document.getData().get("receiver")).get().addOnCompleteListener(docu -> {
+                            item.put("receiver", "받는 사람" +(String)  docu.getResult().get("name"));
+                            item.put("title", "제목 : "+(String) document.getData().get("gist"));
+                        });
+                        list.add(item);
+                        item.clear();
+                    }
+                    SimpleAdapter adapter = new SimpleAdapter(getActivity(), list, android.R.layout.simple_list_item_2, new String[]{"receiver", "title"}, new int[] {android.R.id.text1, android.R.id.text2});
+                    slistview.setAdapter(adapter);
+                }else{ //일치값이 없을경우
+                    Toast.makeText(getActivity(),"뭐냐 쪽지 없음", Toast.LENGTH_SHORT).show();
+                }
+                SimpleAdapter adapter = new SimpleAdapter(getActivity(), list, android.R.layout.simple_list_item_2, new String[]{"receiver", "title"}, new int[] {android.R.id.text1, android.R.id.text2});
+                slistview.setAdapter(adapter);
+
+            }
+        });
+        return v;
     }
+
+
 }

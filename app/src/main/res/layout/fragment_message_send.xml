@@ -6,9 +6,10 @@
     tools:context=".MessageSend">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="send페이지" />
+        android:id="@+id/sendPost"/>
 
 </FrameLayout>

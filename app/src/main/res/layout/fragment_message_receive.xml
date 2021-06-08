@@ -6,9 +6,9 @@
     tools:context=".MessageReceive">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="receive페이지" />
+        android:id="@+id/receivePost"/>
 
 </FrameLayout>

@@ -23,7 +23,7 @@ public class ShowMessage extends AppCompatActivity {
         tabs.addTab(tabs.newTab().setText("받은 쪽지"));
         tabs.addTab(tabs.newTab().setText("보낸 쪽지"));
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, MessageSend).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.contatiner, MessageRecieve).commit();
 
         tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
