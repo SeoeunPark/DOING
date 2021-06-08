@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +17,20 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.protobuf.StringValue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomViewHolder> {
         private static OnItemClickListener listener;
@@ -31,6 +39,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         private Context context;
         private FirebaseAuth auth;
         private String user_id = null;
+        private DatabaseReference dbr;
         //어댑터에서 액티비티 액션을 가져올 때 context가 필요한데 어댑터에는 context가 없다.
         //선택한 액티비티에 대한 context를 가져올 때 필요하다.
 
@@ -49,13 +58,30 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         user_id = user.getUid();
+        dbr = FirebaseDatabase.getInstance().getReference("my_friends").child(user_id);
         Button dia_user_delete = (Button)myDialog.findViewById(R.id.dia_user_delete);
 
-        //아라야 삭제버튼 눌렀을 때 삭제되는 거 넣어주랍!!
+
+
+        //아라야 삭제버튼 눌렀을 때 삭제되는 거 넣어주랍!! -> 응!!
         dia_user_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();Toast.makeText(context, "삭제 버튼 실행됨", Toast.LENGTH_SHORT).show();
+
+                dbr.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        if(task.isSuccessful()){
+                            HashMap<String, String> friends = new HashMap<>();
+                            friends = (HashMap<String, String>) task.getResult().getValue();
+                            friends.remove(String.valueOf(arrayList.get(holder.getAdapterPosition()).getUid()));
+                            dbr.setValue(friends);
+                        }else {
+                            Log.e("firebase", "Error getting data", task.getException());
+                        }
+                    }
+                });
+                Toast.makeText(context, "삭제 버튼 실행됨", Toast.LENGTH_SHORT).show();
                 
             }
         });
@@ -150,7 +176,5 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
     public interface OnItemClickListener {
         void onItemClick(MyFriendList MyFriendList);
     }
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
-    }
+    public void setOnItemClickListener(OnItemClickListener listener) { this.listener = listener;    }
 }

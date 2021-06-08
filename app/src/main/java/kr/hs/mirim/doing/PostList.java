@@ -44,7 +44,7 @@ public class PostList extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (!task.getResult().isEmpty()) { // 일치값이 있을경우
-                    for (QueryDocumentSnapshot document : task.getResult()) {
+                    for (QueryDocumentSnapshot  document : task.getResult()) {
                         fs.collection("User").document(current_uid).get().addOnCompleteListener( docu -> {
                             item.put("sender", (String) docu.getResult().get("name"));
                             Log.d("tst",(String) docu.getResult().get("name") );
