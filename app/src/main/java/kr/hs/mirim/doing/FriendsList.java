@@ -49,10 +49,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FriendsList extends Fragment {
+import kr.hs.mirim.doing.FriendAdapter;
+import kr.hs.mirim.doing.MyFriendList;
+import kr.hs.mirim.doing.R;
+import kr.hs.mirim.doing.Signin;
+
+public class FriendsList extends Fragment implements View.OnClickListener{
     private String title;
     private int page;
     private TextView logout;
+    private String key2;
     private FirebaseAuth auth;
     private TextView add_friend;
     private String user_id = null;
@@ -103,31 +109,34 @@ public class FriendsList extends Fragment {
         FirebaseUser user = auth.getCurrentUser();
         user_id = user.getUid();
 
-
         database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
         databaseReference1 = database.getReference("my_friends").child(user_id); // DB 테이블 연결
         databaseReference2 = database.getReference("users"); // DB 테이블 연결
 
+
+        //아라야 여기가 문제야!!
         databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot2) {
                 arrayList.clear();
+                Toast.makeText(getActivity(), "이건 바깥 디비 실행", Toast.LENGTH_SHORT).show();
                 for (DataSnapshot snapshot2 : dataSnapshot2.getChildren()) {// 반복문으로 데이터 List를 추출해냄
                     String key2 = (String) snapshot2.child("code").getValue();
                     databaseReference2.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Toast.makeText(getActivity(), "이건 안쪽 디비 실행", Toast.LENGTH_SHORT).show();
                             // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {// 반복문으로 데이터 List를 추출해냄
                                 String key = snapshot.getKey();
-                                if (key.equals(key2)) {
-                                    MyFriendList MyFriendList = snapshot.getValue(MyFriendList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
-                                    arrayList.add(MyFriendList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준다
+                                if(key2.length()>0) {
+                                    if (key.equals(key2)) {
+                                        MyFriendList MyFriendList = snapshot.getValue(MyFriendList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
+                                        arrayList.add(MyFriendList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준다
+                                    }
                                 }
-
                             }
                             adapter.notifyDataSetChanged();
-
                         }
 
                         @Override
@@ -140,8 +149,9 @@ public class FriendsList extends Fragment {
                 }
                 adapter = new FriendAdapter(arrayList, getContext());
                 recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-
             }
+
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -164,7 +174,6 @@ public class FriendsList extends Fragment {
                 }
             });
         }
-
 
         //친구 추가하기
         add_friend.setOnClickListener(new View.OnClickListener() {
@@ -193,7 +202,6 @@ public class FriendsList extends Fragment {
                                         db.collection("User").whereEqualTo("user_code", username).get().addOnCompleteListener(tasks -> {
                                             for (QueryDocumentSnapshot document : tasks.getResult()) {
                                                 HashMap<String, String> my_friends = new HashMap<>();
-
                                                 //등록된 친구인지 아닌지 판별
                                                 databaseReference1.addValueEventListener(new ValueEventListener() {
                                                     @Override
@@ -214,7 +222,6 @@ public class FriendsList extends Fragment {
                                                             alfriend = 2;
                                                         }
                                                     }
-
                                                     @Override
                                                     public void onCancelled(DatabaseError databaseError) {
                                                     }
@@ -224,7 +231,6 @@ public class FriendsList extends Fragment {
                                     }
                                 }
                             });
-
                         }
                     }
                 });
@@ -254,13 +260,18 @@ public class FriendsList extends Fragment {
     }
 
     private void search(String str) {
-            ArrayList<MyFriendList> myList = new ArrayList<>();
-            for (MyFriendList object : arrayList) {
-                if (object.getName().toLowerCase().contains(str.toLowerCase())) {
-                    myList.add(object);
-                }
+        ArrayList<MyFriendList> myList = new ArrayList<>();
+        for (MyFriendList object : arrayList) {
+            if (object.getName().toLowerCase().contains(str.toLowerCase())) {
+                myList.add(object);
             }
-            FriendAdapter adapterClass = new FriendAdapter(myList, getContext());
-            recyclerView.setAdapter(adapterClass); // 리사이클러뷰에 어댑터 연결
         }
+        FriendAdapter adapterClass = new FriendAdapter(myList, getContext());
+        recyclerView.setAdapter(adapterClass); // 리사이클러뷰에 어댑터 연결
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
 }

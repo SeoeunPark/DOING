@@ -22,11 +22,11 @@
         <me.relex.circleindicator.CircleIndicator
         android:id="@+id/indicator"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        app:ci_drawable="@drawable/black_radius"
+        android:layout_height="70dp"
+        app:ci_drawable="@drawable/orange_radius"
         android:layout_weight="1"
-        app:ci_height="7dp"
+        app:ci_height="14dp"
         app:ci_margin="4dp"
-        app:ci_width="7dp" />
+        app:ci_width="14dp" />
     </LinearLayout>
 </RelativeLayout>
