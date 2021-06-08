@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -67,22 +68,18 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         dia_user_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                dbr.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                dbr.orderByChild("code").equalTo(String.valueOf(arrayList.get(holder.getAdapterPosition()).getUid())).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                        if(task.isSuccessful()){
-                            HashMap<String, String> friends = new HashMap<>();
-                            friends = (HashMap<String, String>) task.getResult().getValue();
-                            friends.remove(String.valueOf(arrayList.get(holder.getAdapterPosition()).getUid()));
-                            dbr.setValue(friends);
-                        }else {
-                            Log.e("firebase", "Error getting data", task.getException());
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot dss: snapshot.getChildren()) {
+                            dss.getRef().removeValue();
+                            Toast.makeText(context, "삭제 버튼 실행됨", Toast.LENGTH_SHORT).show();
                         }
                     }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
                 });
-                Toast.makeText(context, "삭제 버튼 실행됨", Toast.LENGTH_SHORT).show();
-                
             }
         });
 
@@ -176,5 +173,5 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
     public interface OnItemClickListener {
         void onItemClick(MyFriendList MyFriendList);
     }
-    public void setOnItemClickListener(OnItemClickListener listener) { this.listener = listener;    }
+    public void setOnItemClickListener(OnItemClickListener listener) { this.listener = listener;  }
 }

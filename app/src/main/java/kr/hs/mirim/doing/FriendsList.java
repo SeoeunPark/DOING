@@ -120,12 +120,12 @@ public class FriendsList extends Fragment implements View.OnClickListener{
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 arrayList.clear();
                 for(DataSnapshot snapshot2 : snapshot.getChildren()){
-                    databaseReference2.child((String) snapshot2.getValue()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    databaseReference2.child((String) snapshot2.child("code").getValue()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                             if (task.isSuccessful()) {
                                 MyFriendList MyFriendList = task.getResult().getValue(MyFriendList.class);
-                                MyFriendList.setUid((String) snapshot2.getValue());
+                                MyFriendList.setUid((String) snapshot2.child("code").getValue());
                                 arrayList.add(MyFriendList);
                                 adapter = new FriendAdapter(arrayList, getContext());
                                 adapter.notifyDataSetChanged();
@@ -230,15 +230,17 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                                                 @Override
                                                 public void onDataChange(DataSnapshot dataSnapshot2) {
                                                     boolean isExist = true;
+                                                    HashMap<String, String> my_friends = new HashMap<>();
                                                     for (DataSnapshot snapshot2 : dataSnapshot2.getChildren()) {// 반복문으로 데이터 List를 추출해냄
-                                                        if (document.getId().equals((String) snapshot2.getValue())) {
+                                                        if (document.getId().equals((String) snapshot2.child("code").getValue())) {
                                                             Toast.makeText(getActivity(), "이미 등록된 친구입니다.", Toast.LENGTH_SHORT).show();
                                                             isExist = false;
                                                             break;
                                                         }
                                                     }
                                                     if (isExist) {
-                                                        AddNewFriend(document.getId());
+                                                        my_friends.put("code", document.getId());
+                                                        FirebaseDatabase.getInstance().getReference().child("my_friends").child(user_id).push().setValue(my_friends);
                                                         Toast.makeText(getActivity(), "추가되었습니다.", Toast.LENGTH_SHORT).show();
                                                     }
                                                 }
@@ -289,12 +291,12 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         FriendAdapter adapterClass = new FriendAdapter(myList, getContext());
         recyclerView.setAdapter(adapterClass); // 리사이클러뷰에 어댑터 연결
     }
-
-    protected void AddNewFriend(String friendUid){
-        Map<String, Object> AddFriend = new HashMap<>();
-        AddFriend.put(friendUid, friendUid);
-        databaseReference1.updateChildren(AddFriend);
-    }
+//
+//    protected void AddNewFriend(String friendUid){
+//        Map<String, Object> AddFriend = new HashMap<>();
+//        AddFriend.put(friendUid, friendUid);
+//        databaseReference1.updateChildren(AddFriend);
+//    }
 
     @Override
     public void onClick(View view) {
