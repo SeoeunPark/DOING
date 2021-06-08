@@ -67,6 +67,7 @@ public class MessageSend extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("생명주기 테스트 입니다.", "onCreate");
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -77,6 +78,7 @@ public class MessageSend extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("생명주기 테스트 입니다.", "onCreateView");
         View v = inflater.inflate(R.layout.fragment_message_send, container, false);
 
         ListView slistview = (ListView) v.findViewById(R.id.sendPost);
@@ -96,6 +98,7 @@ public class MessageSend extends Fragment {
                         fs.collection("User").document((String) document.getData().get("receiver")).get().addOnCompleteListener(docu -> {
                             item.put("receiver", "받는 사람" +(String)  docu.getResult().get("name"));
                             item.put("title", "제목 : "+(String) document.getData().get("gist"));
+                            Log.d("생명주기 테스트 입니다.", "onCreateView-onComplete");
                         });
                         list.add(item);
                         item.clear();
@@ -113,5 +116,27 @@ public class MessageSend extends Fragment {
         return v;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("생명주기 테스트 입니다.", "onStart");
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("생명주기 테스트 입니다.", "onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("생명주기 테스트 입니다.", "onPause");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("생명주기 테스트 입니다.", "onDestroy");
+    }
 }
