@@ -3,7 +3,7 @@
     <!-- sw600 -->
     <dimen name="side_margin600">40dp</dimen>
     <dimen name="padding600">30dp</dimen>
-    <dimen name="title600">42dp</dimen>
+    <dimen name="title600">44dp</dimen>
     <dimen name="hint600">20dp</dimen>
     <dimen name="button600">24dp</dimen>
     <dimen name="text_btn600">20dp</dimen>

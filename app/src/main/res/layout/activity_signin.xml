@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_marginTop="220dp"
-        android:src="@drawable/img_logomdpi"
+        android:src="@drawable/logo"
         android:contentDescription="@string/logo_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

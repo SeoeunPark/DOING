@@ -1,119 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".UserPage">
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/side_margin600"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="@dimen/side_margin600"
+        android:background="@color/white"
         tools:context=".MainActivity">
 
-        <ImageButton
-            android:id="@+id/direct"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="#FFFFFF"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_send" />
-        <ImageButton
-            android:id="@+id/edit_pofile"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="#FFFFFF"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_edit" />
-
-        //멀써야좋을까여 일단... 취향대로.. 쓰셈...
         <ImageView
-            android:id="@+id/profile_circle"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:background="@drawable/main_circle"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/direct"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.20" />
+            app:srcCompat="@drawable/direct_icon"
+            tools:srcCompat="@drawable/direct_icon"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/edit_pofile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/user_icon"
+            tools:srcCompat="@drawable/user_icon"
+            tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:id="@+id/linear_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:gravity="center_horizontal"
+            android:layout_marginTop="150dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_circle">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/nickname"
+                android:textColor="@color/black"
+                android:text="이름"
+                android:textSize="36dp"
+                android:textStyle="bold"
                 tools:ignore="SpUsage" />
 
             <TextView
                 android:id="@+id/nickname_nim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/main_default"
+                android:textColor="@color/black"
+                android:text="@string/nim"
+                android:textSize="36dp"
                 tools:ignore="SpUsage" />
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/now_doing"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center_horizontal"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/profile_circle"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linear_nickname">
+            app:layout_constraintTop_toBottomOf="@+id/linear_nickname"
+            app:layout_constraintVertical_bias="0.05">
 
             <TextView
                 android:id="@+id/I_doing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/nickname"
+                android:textColor="@color/black"
+                android:text="@string/default_doing"
+                android:textSize="@dimen/side_margin600"
+                android:textStyle="bold"
                 tools:ignore="SpUsage" />
+
+            <ImageView
+                android:id="@+id/edit_doing"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/edit_icon" />
+
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/onoff_direct"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
+        <ImageView
+            android:id="@+id/profile_circle"
+            android:layout_width="380dp"
+            android:layout_height="380dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/now_doing">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.40"
+            app:srcCompat="@drawable/emotion1" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="@dimen/side_margin"
+            app:srcCompat="@drawable/busy_1"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_circle"
+            app:layout_constraintEnd_toEndOf="@+id/profile_circle"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/profile_circle"
+            app:layout_constraintTop_toTopOf="@+id/profile_circle"
+            app:layout_constraintVertical_bias="1.0" />
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/busy"
+            android:textColor="@color/black"
+            android:textSize="@dimen/title"
+            app:layout_constraintBottom_toTopOf="@+id/busy"
+            app:layout_constraintTop_toBottomOf="@+id/profile_circle"
+            app:layout_constraintVertical_bias="0.9"
+            tools:layout_editor_absoluteX="0dp"
+            tools:ignore="SpUsage" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_edittext_style_shadow"
+            android:padding="@dimen/m_text600"
+            android:gravity="center_horizontal"
+            android:text="@string/default_doing"
+            android:textColor="@color/black"
+            android:textSize="@dimen/l_text600"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/profile_circle"
+            app:layout_constraintVertical_bias="0.3"
+            tools:layout_editor_absoluteX="60dp"
+            tools:ignore="MissingConstraints,SpUsage" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/busy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="192dp"
+            android:stepSize="1"
+            android:value="1.0"
+            android:valueFrom="0"
+            android:valueTo="2"
+            app:haloColor="@color/colorControlHighlight"
+            app:labelBehavior="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:thumbColor="@color/white"
+            app:thumbRadius="@dimen/l_text"
+            app:tickColor="@color/white"
+            app:trackColorActive="@color/colorPrimary"
+            app:trackColorInactive="@color/w_gray"
+            app:trackHeight="25dp"
+            tools:ignore="MissingConstraints" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/busy"
+            app:layout_constraintVertical_bias="0.152">
 
             <TextView
-                android:id="@+id/text_onoff_direct"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/main_default"
+                android:text="@string/busy_1"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/m_text600"
                 tools:ignore="SpUsage" />
 
-            <Switch
-                android:id="@+id/switch_onoff_direct"
+            <View
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginTop="5dp"
-                tools:layout_editor_absoluteX="166dp"
-                tools:layout_editor_absoluteY="538dp"
-                tools:ignore="UseSwitchCompatOrMaterialXml" />
+                android:layout_height="wrap_content"
+                android:text="@string/busy_2"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/m_text600"
+                tools:ignore="SpUsage" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/busy_3"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/m_text600"
+                tools:ignore="SpUsage" />
+
         </LinearLayout>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
