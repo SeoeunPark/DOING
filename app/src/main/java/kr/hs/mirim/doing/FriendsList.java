@@ -268,6 +268,7 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         auth = FirebaseAuth.getInstance();
         logout = (TextView) rootView.findViewById(R.id.logout_btn);
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -28,7 +28,7 @@
         android:layout_height="48dp"
         android:layout_weight="1"
         android:background="#99ffffff"
-        app:ci_drawable="@drawable/black_radius"
+        app:ci_drawable="@drawable/orange_radius"
         app:ci_height="8dp"
         app:ci_margin="6dp"
         app:ci_width="8dp"

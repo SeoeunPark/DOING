@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="400dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center">
+
     <LinearLayout
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#cacaca"
+        android:background="@drawable/friend_dialog_background"
         android:orientation="vertical"
         android:gravity="center_horizontal">
+
         <TextView
             android:id="@+id/dia_user_name"
             android:layout_width="wrap_content"
@@ -18,51 +21,76 @@
             android:text="사용자 이름"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="24sp"
-            android:layout_marginTop="90dp"/>
+            android:textSize="@dimen/l_text600"
+            android:layout_marginTop="80dp"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:id="@+id/dia_user_doing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="뭐뭐하는중"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/l_text600"
+            android:layout_marginTop="@dimen/side_margin"
+            tools:ignore="SpUsage" />
+
         <TextView
             android:id="@+id/dia_user_about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="@dimen/m_text600"
             android:text="내 한줄 소개 "
             android:textColor="@color/white"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginTop="@dimen/side_margin"
+            android:layout_marginBottom="@dimen/padding600"
+            tools:ignore="SpUsage" />
+
         <Button
             android:id="@+id/dia_user_message"
-            android:padding="20dp"
+            android:padding="@dimen/padding600"
             android:layout_width="match_parent"
             android:textAlignment="textStart"
-            android:drawablePadding="20dp"
-            android:drawableLeft="@drawable/message"
+            android:textSize="@dimen/button600"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:layout_marginTop="10dp"
             android:layout_gravity="start"
-            android:text="메세지 보내기"/>
+            android:text="메세지 보내기"
+            tools:ignore="SpUsage" />
+
         <Button
             android:id="@+id/dia_user_delete"
-            android:padding="20dp"
+            android:padding="@dimen/padding600"
             android:textAlignment="textStart"
-            android:drawablePadding="20dp"
-            android:drawableLeft="@drawable/delete"
+            android:textSize="@dimen/button600"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:layout_gravity="start"
-            android:text="친구 삭제 "/>
+            android:textColor="#ff0000"
+            android:text="친구 삭제 "
+            tools:ignore="SpUsage" />
 
     </LinearLayout>
 
     <ImageView
         android:id="@+id/dia_user_img"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/emotion1"
-        android:padding="10dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"/>
+        android:src="@drawable/emotion1" />
 
+    <ImageView
+        android:id="@+id/dia_busy_img"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:layout_alignEnd="@+id/dia_user_img"
+        android:layout_alignRight="@+id/dia_user_img"
+        android:layout_alignBottom="@+id/dia_user_img"
+        android:src="@drawable/busy_1" />
 
 </RelativeLayout>

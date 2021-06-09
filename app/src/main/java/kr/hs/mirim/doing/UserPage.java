@@ -55,7 +55,6 @@ public class UserPage extends Fragment {
         I_doing = (TextView)rootView.findViewById(R.id.I_doing);
         edit_pofile = (ImageView) rootView.findViewById(R.id.edit_pofile);
         send_post = (ImageView) rootView.findViewById(R.id.direct);
-        text_onoff_direct = (Switch) rootView.findViewById(R.id.switch_onoff_direct);
         message = (Button)rootView.findViewById(R.id.message);
 
         //프로필수정 화면으로 이동

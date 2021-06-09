@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,6 +91,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
             public void onClick(View view) {
                 ImageView dia_user_img = (ImageView)myDialog.findViewById(R.id.dia_user_img);
                 TextView dia_user_name = (TextView)myDialog.findViewById(R.id.dia_user_name);
+                TextView dia_user_doing = (TextView)myDialog.findViewById(R.id.dia_user_doing);
                 TextView dia_user_about = (TextView)myDialog.findViewById(R.id.dia_user_about);
                 int dia_condition_num = arrayList.get(holder.getAdapterPosition()).getCondition();
                 if(dia_condition_num==1){
@@ -108,10 +111,12 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
                 }else{
                     dia_user_img.setImageResource(R.drawable.emotion8);
                 }
+                dia_user_doing.setText(arrayList.get(holder.getAdapterPosition()).getIng());
                 dia_user_name.setText(arrayList.get(holder.getAdapterPosition()).getName());
                 dia_user_about.setText(arrayList.get(holder.getAdapterPosition()).getAbout());
                 //삭제 버튼 클릭 시
                 myDialog.show();
+                myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             }
         });
 
