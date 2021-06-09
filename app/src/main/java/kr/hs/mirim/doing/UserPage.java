@@ -22,9 +22,9 @@ public class UserPage extends Fragment {
     private TextView nickname;
     private TextView nickname_nim;
     private TextView I_doing;
+    private ImageView edit_pofile;
+    private ImageView send_post;
     private Switch text_onoff_direct;
-    private ImageButton edit_pofile;
-    private ImageButton send_post;
     private Button message;
     private String title;
     private int page;
@@ -53,9 +53,9 @@ public class UserPage extends Fragment {
         nickname = (TextView)rootView.findViewById(R.id.nickname);
         nickname_nim = (TextView)rootView.findViewById(R.id.nickname_nim);
         I_doing = (TextView)rootView.findViewById(R.id.I_doing);
+        edit_pofile = (ImageView) rootView.findViewById(R.id.edit_pofile);
+        send_post = (ImageView) rootView.findViewById(R.id.direct);
         text_onoff_direct = (Switch) rootView.findViewById(R.id.switch_onoff_direct);
-        edit_pofile = (ImageButton) rootView.findViewById(R.id.edit_pofile);
-        send_post = (ImageButton) rootView.findViewById(R.id.direct);
         message = (Button)rootView.findViewById(R.id.message);
 
         //프로필수정 화면으로 이동
