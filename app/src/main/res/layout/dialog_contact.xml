@@ -7,9 +7,9 @@
     android:layout_gravity="center">
 
     <LinearLayout
-        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
         android:background="@drawable/friend_dialog_background"
         android:orientation="vertical"
         android:gravity="center_horizontal">
@@ -18,60 +18,56 @@
             android:id="@+id/dia_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
             android:text="사용자 이름"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="@dimen/l_text600"
-            android:layout_marginTop="80dp"
-            tools:ignore="SpUsage" />
+            android:textSize="26sp" />
 
         <TextView
             android:id="@+id/dia_user_doing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="뭐뭐하는중"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="@dimen/l_text600"
-            android:layout_marginTop="@dimen/side_margin"
-            tools:ignore="SpUsage" />
+            android:layout_marginTop="5dp"
+            android:text="@string/default_doing"
+            android:textColor="@color/black"
+            android:textSize="26sp" />
 
         <TextView
             android:id="@+id/dia_user_about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/m_text600"
-            android:text="내 한줄 소개 "
-            android:textColor="@color/white"
-            android:layout_marginTop="@dimen/side_margin"
-            android:layout_marginBottom="@dimen/padding600"
-            tools:ignore="SpUsage" />
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:text="한줄소개"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/dia_user_message"
-            android:padding="@dimen/padding600"
             android:layout_width="match_parent"
-            android:textAlignment="textStart"
-            android:textSize="@dimen/button600"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:layout_marginTop="10dp"
-            android:layout_gravity="start"
-            android:text="메세지 보내기"
-            tools:ignore="SpUsage" />
+            android:layout_margin="2dp"
+            android:background="@color/colorMain"
+            android:text="쪽지 보내기"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="@dimen/padding" />
 
         <Button
             android:id="@+id/dia_user_delete"
-            android:padding="@dimen/padding600"
-            android:textAlignment="textStart"
-            android:textSize="@dimen/button600"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:layout_gravity="start"
-            android:textColor="#ff0000"
-            android:text="친구 삭제 "
-            tools:ignore="SpUsage" />
+            android:layout_margin="2dp"
+            android:background="@color/colorMain"
+            android:layout_gravity="center_horizontal"
+            android:text="친구 삭제"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:padding="@dimen/padding" />
 
     </LinearLayout>
 
@@ -79,9 +75,10 @@
         android:id="@+id/dia_user_img"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_alignParentTop="true"
+        android:padding="5dp"
+        android:src="@drawable/emotion1"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/emotion1" />
+        android:layout_alignParentTop="true" />
 
     <ImageView
         android:id="@+id/dia_busy_img"
