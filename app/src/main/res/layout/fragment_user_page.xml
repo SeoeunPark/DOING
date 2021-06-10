@@ -135,25 +135,29 @@
 
         <com.hitomi.cmlibrary.CircleMenu
             android:id="@+id/profile_circle"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_centerInParent="true"
+            android:scaleX="3.5"
+            android:scaleY="3.5"
             app:layout_constraintVertical_bias="0.40" />
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="20dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="0dp"
             app:srcCompat="@drawable/busy_1"
             app:layout_constraintBottom_toBottomOf="@+id/profile_circle"
             app:layout_constraintEnd_toEndOf="@+id/profile_circle"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintStart_toStartOf="@+id/profile_circle"
             app:layout_constraintTop_toTopOf="@+id/profile_circle"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.9" />
 
         <TextView
             android:layout_width="match_parent"
