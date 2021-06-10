@@ -27,7 +27,8 @@
     <string name="esc">취소</string>
 
     <string name="nim"> 님은</string>
-    <string name="default_doing">지금모해를 시작하는 중...</string>
+    <string name="default_doing">지금모해를 시작하는</string>
+    <string name="ing">중...</string>
 
     <string name="busy">바쁨도</string>
     <string name="busy_1">여유로움</string>
