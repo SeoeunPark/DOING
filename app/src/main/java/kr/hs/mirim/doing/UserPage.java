@@ -1,21 +1,16 @@
 package kr.hs.mirim.doing;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 public class UserPage extends Fragment {
     private ImageView profile;
@@ -49,7 +44,7 @@ public class UserPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_user_page, container, false);
-        profile =   (ImageView)rootView.findViewById(R.id.profile_circle);
+//        profile =   (ImageView)rootView.findViewById(R.id.profile_circle);
         nickname = (TextView)rootView.findViewById(R.id.nickname);
         nickname_nim = (TextView)rootView.findViewById(R.id.nickname_nim);
         I_doing = (TextView)rootView.findViewById(R.id.I_doing);

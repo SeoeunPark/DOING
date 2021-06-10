@@ -87,7 +87,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
         <!-- 확인용 -->
         <TextView
             android:id="@+id/user_about"

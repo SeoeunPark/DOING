@@ -4,14 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserPage">
-
-    <ImageView
-        android:layout_width="1200dp"
-        android:layout_height="800dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="-420dp"
-        android:src="@drawable/main_circle" />
+    tools:context=".UserPage"
+    android:background="@drawable/main">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
