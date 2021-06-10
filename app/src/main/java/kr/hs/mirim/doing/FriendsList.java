@@ -101,39 +101,18 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         drUser = database.getReference("users"); // 유저db
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        //현재 유저의 친구리스트에 있는 유저 uid 뽑음
-        drMF.addValueEventListener(new ValueEventListener() {
+
+        drUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                arrayList.clear();
-                adapter = new FriendAdapter(arrayList, getContext());
-                adapter.notifyDataSetChanged();
-                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-                for(DataSnapshot dss : snapshot.getChildren()){
-                    if(!dss.getKey().equals("id")){
-                        drUser.child((String) dss.child("code").getValue()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                MyFriendList MyFriendList = task.getResult().getValue(MyFriendList.class);
-                                MyFriendList.setUid((String) snapshot.child("code").getValue());
-                                arrayList.add(MyFriendList);
-                                adapter = new FriendAdapter(arrayList, getContext());
-                                adapter.notifyDataSetChanged();
-                                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-                            }
-                        });
-
-
-                    }
-                }
+                friendUpdate();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("firebase", "Error getting data", error.toException());
             }
         });
-
-        //유저의 친구리스트가 추가/삭제 되었을때 -> 리스트 업데이트(마지막 유저 남아있도록)
 
 //        databaseReference2.addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -381,5 +360,37 @@ public class FriendsList extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
+    }
+
+    private void friendUpdate(){
+        //현재 유저의 친구리스트에 있는 유저 uid 뽑음
+        drMF.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                arrayList.clear();
+                adapter = new FriendAdapter(arrayList, getContext());
+                adapter.notifyDataSetChanged();
+                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
+                for(DataSnapshot dss : snapshot.getChildren()){
+                    if(!dss.getKey().equals("id")){
+                        drUser.child((String) dss.child("code").getValue()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                MyFriendList MyFriendList = task.getResult().getValue(MyFriendList.class);
+                                MyFriendList.setUid((String) dss.child("code").getValue());
+                                arrayList.add(MyFriendList);
+                                adapter = new FriendAdapter(arrayList, getContext());
+                                adapter.notifyDataSetChanged();
+                                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
+                            }
+                        });
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("firebase", "Error getting data", error.toException());
+            }
+        });
     }
 }

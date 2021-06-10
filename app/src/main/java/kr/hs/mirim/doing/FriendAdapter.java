@@ -71,6 +71,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         dia_user_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("와 갑자기 안돼",arrayList.get(holder.getAdapterPosition()).getUid());
                 dbr.orderByChild("code").equalTo(String.valueOf(arrayList.get(holder.getAdapterPosition()).getUid())).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                     @Override
                     public void onSuccess(DataSnapshot dataSnapshot) {
