@@ -4,9 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".UserPage">
 
+    <ImageView
+        android:layout_width="1200dp"
+        android:layout_height="800dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-420dp"
+        android:src="@drawable/main_circle" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,13 +19,12 @@
         android:layout_marginLeft="@dimen/side_margin600"
         android:layout_marginTop="10dp"
         android:layout_marginRight="@dimen/side_margin600"
-        android:background="@color/white"
         tools:context=".MainActivity">
 
         <ImageView
             android:id="@+id/direct"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/direct_icon"
@@ -38,8 +42,8 @@
 
         <ImageView
             android:id="@+id/edit_pofile"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/user_icon"
@@ -61,20 +65,18 @@
                 android:id="@+id/nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:text="이름"
-                android:textSize="36dp"
-                android:textStyle="bold"
-                tools:ignore="SpUsage" />
+                android:textSize="32sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/nickname_nim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:text="@string/nim"
-                android:textSize="36dp"
-                tools:ignore="SpUsage" />
+                android:textSize="32sp" />
 
         </LinearLayout>
 
@@ -90,16 +92,26 @@
             app:layout_constraintTop_toBottomOf="@+id/linear_nickname"
             app:layout_constraintVertical_bias="0.05">
 
-            <TextView
+            <EditText
                 android:id="@+id/I_doing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:text="@string/default_doing"
-                android:textSize="@dimen/side_margin600"
-                android:textStyle="bold"
-                tools:ignore="SpUsage" />
+                android:textSize="36sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ing"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/white"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                tools:ignore="RtlHardcoded" />
+
+            <!-- 이거 저장버튼으로 써 -->
             <ImageView
                 android:id="@+id/edit_doing"
                 android:layout_width="50dp"
@@ -108,29 +120,59 @@
 
         </LinearLayout>
 
+        <!--
         <ImageView
             android:id="@+id/profile_circle"
-            android:layout_width="380dp"
-            android:layout_height="380dp"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.40"
             app:srcCompat="@drawable/emotion1" />
+        -->
+
+        <com.hitomi.cmlibrary.CircleMenu
+            android:id="@+id/profile_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_centerInParent="true"
+            android:scaleX="3.5"
+            android:scaleY="3.5"
+            app:layout_constraintVertical_bias="0.40" />
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_margin="@dimen/side_margin"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="0dp"
             app:srcCompat="@drawable/busy_1"
             app:layout_constraintBottom_toBottomOf="@+id/profile_circle"
             app:layout_constraintEnd_toEndOf="@+id/profile_circle"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintStart_toStartOf="@+id/profile_circle"
             app:layout_constraintTop_toTopOf="@+id/profile_circle"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.9" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_edittext_style_shadow"
+            android:padding="20dp"
+            android:gravity="center_horizontal"
+            android:text="상태메세지"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/profile_circle"
+            app:layout_constraintVertical_bias="0.3"
+            tools:layout_editor_absoluteX="60dp"
+            tools:ignore="MissingConstraints,SpUsage" />
 
         <TextView
             android:id="@+id/textView"
@@ -138,27 +180,12 @@
             android:layout_height="wrap_content"
             android:text="@string/busy"
             android:textColor="@color/black"
-            android:textSize="@dimen/title"
+            android:textSize="28sp"
             app:layout_constraintBottom_toTopOf="@+id/busy"
             app:layout_constraintTop_toBottomOf="@+id/profile_circle"
             app:layout_constraintVertical_bias="0.9"
             tools:layout_editor_absoluteX="0dp"
             tools:ignore="SpUsage" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/login_edittext_style_shadow"
-            android:padding="@dimen/m_text600"
-            android:gravity="center_horizontal"
-            android:text="@string/default_doing"
-            android:textColor="@color/black"
-            android:textSize="@dimen/l_text600"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/profile_circle"
-            app:layout_constraintVertical_bias="0.3"
-            tools:layout_editor_absoluteX="60dp"
-            tools:ignore="MissingConstraints,SpUsage" />
 
         <com.google.android.material.slider.Slider
             android:id="@+id/busy"
@@ -199,7 +226,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/busy_1"
                 android:textColor="@color/gray"
-                android:textSize="@dimen/m_text600"
+                android:textSize="@dimen/s_text600"
                 tools:ignore="SpUsage" />
 
             <View
@@ -212,7 +239,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/busy_2"
                 android:textColor="@color/gray"
-                android:textSize="@dimen/m_text600"
+                android:textSize="@dimen/s_text600"
                 tools:ignore="SpUsage" />
 
             <View
@@ -225,7 +252,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/busy_3"
                 android:textColor="@color/gray"
-                android:textSize="@dimen/m_text600"
+                android:textSize="@dimen/s_text600"
                 tools:ignore="SpUsage" />
 
         </LinearLayout>
