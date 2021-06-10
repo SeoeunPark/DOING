@@ -114,92 +114,6 @@ public class FriendsList extends Fragment implements View.OnClickListener{
             }
         });
 
-//        databaseReference2.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-////                arrayList.clear();
-//                for(DataSnapshot snapshot2 : snapshot.getChildren()){
-//                    databaseReference2.child((String) snapshot2.child("code").getValue()).addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//                            Log.e("firebase", "Error getting data", error.toException());
-//                        }
-//                    });
-//                    databaseReference2.child((String) snapshot2.child("code").getValue()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                            if (task.isSuccessful()) {
-//                                MyFriendList MyFriendList = task.getResult().getValue(MyFriendList.class);
-//                                MyFriendList.setUid((String) snapshot2.child("code").getValue());
-//                                arrayList.add(MyFriendList);
-//                                adapter = new FriendAdapter(arrayList, getContext());
-//                                adapter.notifyDataSetChanged();
-//                                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-//                            }
-//                            else {
-//
-//                            }
-//                        }
-//                    });
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Log.e("Fraglike", String.valueOf(error.toException())); // 에러문 출력
-//            }
-//        });
-
-        //아라야 여기가 문제야!! -> 알겠어!!
-//        databaseReference1.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot2) {
-//                arrayList.clear();
-//                Toast.makeText(getActivity(), "이건 바깥 디비 실행", Toast.LENGTH_SHORT).show();
-//                for (DataSnapshot snapshot2 : dataSnapshot2.getChildren()) {// 반복문으로 데이터 List를 추출해냄
-//                    String key2 = (String) snapshot2.child("code").getValue();
-//                    databaseReference2.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                            Toast.makeText(getActivity(), "이건 안쪽 디비 실행", Toast.LENGTH_SHORT).show();
-//                            // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
-//                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {// 반복문으로 데이터 List를 추출해냄
-//                                String key = snapshot.getKey();
-//                                if(key2.length()>0) {
-//                                    if (key.equals(key2)) {
-//                                        MyFriendList MyFriendList = snapshot.getValue(MyFriendList.class); // 만들어뒀던 User 객체에 데이터를 담는다.
-//                                        arrayList.add(MyFriendList); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준다
-//                                    }
-//                                }
-//                            }
-//                            adapter.notifyDataSetChanged();
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError databaseError) {
-//                            // 디비를 가져오던중 에러 발생 시
-//                            Log.e("Fraglike", String.valueOf(databaseError.toException())); // 에러문 출력
-//                        }
-//
-//                    });
-//                }
-//                adapter = new FriendAdapter(arrayList, getContext());
-//                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-//            }
-//
-//
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.e("Fraglike", String.valueOf(databaseError.toException())); // 에러문 출력
-//            }
-//        });
-
-
         if (searchView != null) {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
@@ -252,43 +166,6 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                                 }
                             });
                         }else { Toast.makeText(getActivity(), "코드를 입력해주세요.", Toast.LENGTH_SHORT).show();}
-
-//                        alfriend = 0;
-//                        String username = inputname.getText().toString();
-//                        if (!TextUtils.isEmpty(username)) {
-//                            FirebaseFirestore db = FirebaseFirestore.getInstance();
-//                            db.collection("User").whereEqualTo("user_code", username).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                                    if (!task.getResult().isEmpty()) { // 일치값이 있을경우
-//                                        for (QueryDocumentSnapshot document : task.getResult()) {
-//                                            databaseReference1.addValueEventListener(new ValueEventListener() {
-//                                                @Override
-//                                                public void onDataChange(DataSnapshot dataSnapshot2) {
-//                                                    boolean isExist = true;
-//                                                    HashMap<String, String> my_friends = new HashMap<>();
-//                                                    for (DataSnapshot snapshot2 : dataSnapshot2.getChildren()) {// 반복문으로 데이터 List를 추출해냄
-//                                                        if (document.getId().equals((String) snapshot2.child("code").getValue())) {
-//                                                            Toast.makeText(getActivity(), "이미 등록된 친구입니다.", Toast.LENGTH_SHORT).show();
-//                                                            isExist = false;
-//                                                            break;
-//                                                        }
-//                                                    }
-//                                                    if (isExist) {
-//                                                        my_friends.put("code", document.getId());
-//                                                        FirebaseDatabase.getInstance().getReference().child("my_friends").child(user_id).push().setValue(my_friends);
-//                                                        Toast.makeText(getActivity(), "추가되었습니다.", Toast.LENGTH_SHORT).show();
-//                                                    }
-//                                                }
-//                                                @Override
-//                                                public void onCancelled(DatabaseError databaseError) {
-//                                                }
-//                                            });
-//                                        }
-//                                    } else { Toast.makeText(getActivity(), "없는 코드입니다.", Toast.LENGTH_SHORT).show(); }
-//                                }
-//                            });
-//                        }else{Toast.makeText(getActivity(), "코드를 입력해주세요..", Toast.LENGTH_SHORT).show();}
                     }
                 });
                 dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -317,29 +194,6 @@ public class FriendsList extends Fragment implements View.OnClickListener{
 
         return rootView;
     }
-
-    private ArrayList<MyFriendList> review(){
-
-        ArrayList<MyFriendList> reviewlist = new ArrayList<>();
-//        Log.d("1", String.valueOf(reviewlist));
-//        drMF.get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-//            @Override
-//            public void onSuccess(DataSnapshot dataSnapshot) {
-//                for(DataSnapshot dss : dataSnapshot.getChildren()){
-//                    if(!dss.getKey().equals("id")){
-//
-//                        MyFriendList MyFriendList = drUser.child((String) dss.child("code").getValue()).get().getResult().getValue(MyFriendList.class);
-//                        MyFriendList.setUid((String) dss.child("code").getValue());
-//                        reviewlist.add(MyFriendList);
-//                    }
-//                }
-//            }
-//        });
-        Log.d("2", String.valueOf(reviewlist));
-        return reviewlist;
-    }
-
-
     private void search(String str) {
         ArrayList<MyFriendList> myList = new ArrayList<>();
         for (MyFriendList object : arrayList) {
@@ -350,12 +204,6 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         FriendAdapter adapterClass = new FriendAdapter(myList, getContext());
         recyclerView.setAdapter(adapterClass); // 리사이클러뷰에 어댑터 연결
     }
-//
-//    protected void AddNewFriend(String friendUid){
-//        Map<String, Object> AddFriend = new HashMap<>();
-//        AddFriend.put(friendUid, friendUid);
-//        databaseReference1.updateChildren(AddFriend);
-//    }
 
     @Override
     public void onClick(View view) {
