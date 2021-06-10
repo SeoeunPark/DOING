@@ -6,6 +6,8 @@ public class MyFriendList {
     private String ing;
     private int level;
     private String name;
+    private boolean postOnOff;
+    private String uid;
 
     public String getAbout() {
         return about;
@@ -46,4 +48,18 @@ public class MyFriendList {
     public void setName(String name) {
         this.name = name;
     }
+
+    public boolean getOnoff() {
+        return postOnOff;
+    }
+
+    public void setOnoff(boolean postOnOff) {
+        this.postOnOff = postOnOff;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) { this.uid = uid; }
 }

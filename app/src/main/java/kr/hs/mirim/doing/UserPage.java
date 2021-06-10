@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,8 +22,10 @@ public class UserPage extends Fragment {
     private TextView nickname;
     private TextView nickname_nim;
     private TextView I_doing;
+    private ImageView edit_pofile;
+    private ImageView send_post;
     private Switch text_onoff_direct;
-    private ImageButton edit_pofile;
+    private Button message;
     private String title;
     private int page;
 
@@ -50,14 +53,30 @@ public class UserPage extends Fragment {
         nickname = (TextView)rootView.findViewById(R.id.nickname);
         nickname_nim = (TextView)rootView.findViewById(R.id.nickname_nim);
         I_doing = (TextView)rootView.findViewById(R.id.I_doing);
-        text_onoff_direct = (Switch) rootView.findViewById(R.id.switch_onoff_direct);
-        edit_pofile = (ImageButton) rootView.findViewById(R.id.edit_pofile);
+        edit_pofile = (ImageView) rootView.findViewById(R.id.edit_pofile);
+        send_post = (ImageView) rootView.findViewById(R.id.direct);
+        message = (Button)rootView.findViewById(R.id.message);
 
         //프로필수정 화면으로 이동
         edit_pofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent goHome = new Intent(view.getContext(), EditUserPage.class);
+                startActivity(goHome);
+            }
+        });
+
+        send_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goHome = new Intent(view.getContext(), sendPost.class);
+                startActivity(goHome);
+            }
+        });
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goHome = new Intent(view.getContext(), ShowMessage.class);
                 startActivity(goHome);
             }
         });

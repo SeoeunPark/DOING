@@ -105,15 +105,15 @@ public class SignupName extends AppCompatActivity {
         userMap2.put("condition",0);
         userMap2.put("ing","");
         userMap2.put("level",0);
+        userMap2.put("postOnOff",true);
 
-        my_friends.put(userCode, user_id);
 
         db.collection("User").document(user_id).set(userMap).addOnCompleteListener(this, new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     FirebaseDatabase.getInstance().getReference().child("users").child(user_id).setValue(userMap2);
-                    FirebaseDatabase.getInstance().getReference().child("my_friends").child(user_id).push().setValue(my_friends);
+                    FirebaseDatabase.getInstance().getReference().child("my_friends").child(user_id).push();
 
                     Toast.makeText(SignupName.this,"환영~",Toast.LENGTH_SHORT).show();
                     Intent goLogin = new Intent(getApplicationContext(), Signin.class);

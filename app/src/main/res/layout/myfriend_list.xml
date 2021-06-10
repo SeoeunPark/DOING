@@ -4,12 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp"
     app:cardBackgroundColor="#ffffff"
     app:cardCornerRadius="15dp"
-    app:cardElevation="5dp">
-
+    app:cardElevation="5dp"
+    android:layout_margin="5dp">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -20,90 +18,96 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_margin="@dimen/side_margin"
             tools:ignore="UselessParent">
 
+            <!-- 이름, 하는 중 -->
             <ImageView
                 android:id="@+id/profile_img"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/main_circle"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:contentDescription="profile"
+                android:src="@drawable/emotion3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
                 tools:ignore="HardcodedText,RtlHardcoded" />
 
-            <!-- 이름, 하는 중 -->
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="14dp"
                 android:orientation="vertical"
-                android:layout_marginStart="15dp">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintStart_toEndOf="@+id/profile_img"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:textSize="16sp"
+                    android:text="@string/user_name"
                     android:textColor="@color/black"
-                    android:text="@string/user_name" />
+                    android:textSize="@dimen/m_text600"
+                    tools:ignore="SpUsage" />
 
                 <TextView
                     android:id="@+id/user_ing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
+                    android:text="@string/user_ing"
                     android:textColor="@color/black"
-                    android:text="@string/user_ing" />
+                    android:textSize="@dimen/m_text600"
+                    tools:ignore="SpUsage" />
 
             </LinearLayout>
 
-        </LinearLayout>
+            <View
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/busy_1"
+                android:layout_marginRight="@dimen/side_margin600"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="@dimen/side_margin600" />
 
-                <TextView
-                    android:id="@+id/user_about"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:layout_marginTop="12dp"
-                    android:textSize="12sp"
-                    android:textColor="@color/black"
-                    android:text="@string/user_about"
-                    android:padding="5dp"
-                    android:paddingLeft="10dp"
-                    android:background="@drawable/login_edittext_style"
-                    android:paddingStart="10dp"
-                    tools:ignore="RtlSymmetry" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!-- 여기 밑에 주석처리하면 안돌아가더라고? 근데 바쁨정도랑 감정이랑 다 프사에 드러나게 하면
-     여기 밑에 파트는 딱히 필요 없을 거 같아요~ 이미지 완성 전에 확인용으로만 넣어두는게 좋을듯!! -->
-                <TextView
-                    android:id="@+id/user_level"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="바쁨정도 1~3" />
 
-                <TextView
-                    android:id="@+id/user_condition"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="감정1~8" />
 
-<!--                <Button-->
-<!--                    android:id="@+id/user_msg"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:text="쪽지버튼" />-->
+        <!-- 확인용 -->
+        <TextView
+            android:id="@+id/user_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_about" />
+
+        <TextView
+            android:id="@+id/user_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="바쁨정도 1~3" />
+
+        <TextView
+            android:id="@+id/user_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="감정1~8" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

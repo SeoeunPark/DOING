@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- sw600 -->
+    <dimen name="side_margin600">40dp</dimen>
+    <dimen name="padding600">30dp</dimen>
+    <dimen name="title600">44dp</dimen>
+    <dimen name="hint600">20dp</dimen>
+    <dimen name="button600">24dp</dimen>
+    <dimen name="text_btn600">20dp</dimen>
+
+    <dimen name="xl_text600">32dp</dimen>
+    <dimen name="l_text600">28dp</dimen>
+    <dimen name="m_text600">24dp</dimen>
+    <dimen name="s_text600">20dp</dimen>
+
+    <!-- default -->
+    <dimen name="side_margin">16dp</dimen>
+    <dimen name="padding">20dp</dimen>
+    <dimen name="title">32dp</dimen>
+    <dimen name="hint">14dp</dimen>
+    <dimen name="button">16dp</dimen>
+    <dimen name="text_btn">14dp</dimen>
+
+    <dimen name="xl_text">24dp</dimen>
+    <dimen name="l_text">20dp</dimen>
+    <dimen name="m_text">16dp</dimen>
+    <dimen name="s_text">14dp</dimen>
+
     <dimen name="nickname">28dp</dimen>
     <dimen name="main_default">21dp</dimen>
 </resources>
