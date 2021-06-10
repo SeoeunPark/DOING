@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/side_margin600"
+    android:padding="@dimen/padding">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_friends_text"
+        android:textSize="@dimen/l_text"
+
+        android:textColor="@color/black"
+        tools:ignore="SpUsage"
+        android:layout_marginBottom="@dimen/side_margin"/>
+
+    <EditText
+        android:id="@+id/inputname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorMain"
+        android:hint="@string/add_friends_text"
+        android:textSize="@dimen/hint"
+        android:textColor="@color/black"
+        tools:ignore="SpUsage,UnusedAttribute" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/padding">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/esc"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_btn"
+            android:layout_gravity="right"
+            android:layout_marginRight="32dp"
+            tools:ignore="RtlHardcoded,SpUsage" />
+
+        <TextView
+            android:id="@+id/okButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok"
+            android:textColor="@color/colorMain"
+            android:textSize="@dimen/text_btn"
+            android:layout_gravity="right"
+            android:layout_marginLeft="@dimen/side_margin"
+            tools:ignore="RtlHardcoded,SpUsage" />
+
+    </LinearLayout>
+
+</LinearLayout>

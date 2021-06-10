@@ -41,12 +41,13 @@
                 tools:ignore="HardcodedText,RtlHardcoded" />
 
             <LinearLayout
+                android:id="@+id/linearLayout2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toEndOf="@+id/profile_img"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -71,26 +72,29 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/busy_1"
+                android:layout_marginRight="@dimen/side_margin600"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout2"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="@dimen/side_margin600" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
+        <!-- 확인용 -->
         <TextView
             android:id="@+id/user_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/side_margin"
-            android:layout_marginRight="@dimen/side_margin"
-            android:layout_marginBottom="@dimen/side_margin"
-            android:textSize="@dimen/s_text600"
-            android:textColor="@color/gray"
-            android:text="@string/user_about"
-            android:padding="10dp"
-            android:paddingLeft="@dimen/padding"
-            android:background="@drawable/login_edittext_style"
-            android:paddingStart="20dp"
-            tools:ignore="RtlSymmetry,SpUsage" />
+            android:text="@string/user_about" />
 
-        <!-- 여기 밑에 주석처리하면 안돌아가더라고? 근데 바쁨정도랑 감정이랑 다 프사에 드러나게 하면
-             여기 밑에 파트는 딱히 필요 없을 거 같아요~ 이미지 완성 전에 확인용으로만 넣어두는게 좋을듯!! -->
         <TextView
             android:id="@+id/user_level"
             android:layout_width="wrap_content"
