@@ -132,7 +132,7 @@ public class UserPage extends Fragment {
 
                                 break;
                             case 7:
-                                circleMenu.setMainMenu(Color.parseColor("#8a9eb5"),R.drawable.face2,R.drawable.ic_baseline_close_24);
+                                circleMenu.setMainMenu(Color.parseColor("#8a9eb5"),R.drawable.face8,R.drawable.ic_baseline_close_24);
 
                                 break;
                         }
