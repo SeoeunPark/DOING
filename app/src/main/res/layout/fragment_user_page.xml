@@ -10,6 +10,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/side_margin600"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="@dimen/side_margin600"
         tools:context=".MainActivity">
 
         <ImageView
@@ -166,7 +169,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/showColor"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"

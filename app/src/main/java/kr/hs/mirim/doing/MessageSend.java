@@ -9,11 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +34,7 @@ import java.util.HashMap;
 public class MessageSend extends Fragment {
     private FirebaseUser currentUser;
     private FirebaseAuth auth;
+    private ArrayAdapter<MyMessageList> adapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -67,6 +70,7 @@ public class MessageSend extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("생명주기 테스트 입니다.", "onCreate");
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -79,39 +83,55 @@ public class MessageSend extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_message_send, container, false);
 
-        ListView slistview = (ListView) v.findViewById(R.id.sendPost);
-        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
-        HashMap<String, String> item = new HashMap<String, String>();
+//        SimpleAdapter adapter = new SimpleAdapter(getContext(), list, android.R.layout.simple_list_item_2, new String[]{"receiver", "title"}, new int[] {android.R.id.text1, android.R.id.text2});
+//        ListView slistview = (ListView) getView().findViewById(R.id.sendPost);
+//        slistview.setAdapter(adapter);
 
+
+        return v;
+    }
+
+    private ArrayList<HashMap<String,String>> Listview() {
         FirebaseFirestore fs = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String current_uid = FirebaseAuth.getInstance().getUid();
 
-        fs.collection("Post").whereEqualTo("sender", current_uid).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (!task.getResult().isEmpty()) { // 일치값이 있을경우
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        fs.collection("User").document((String) document.getData().get("receiver")).get().addOnCompleteListener(docu -> {
-                            item.put("receiver", "받는 사람" +(String)  docu.getResult().get("name"));
-                            item.put("title", "제목 : "+(String) document.getData().get("gist"));
-                        });
-                        list.add(item);
-                        item.clear();
-                    }
-                    SimpleAdapter adapter = new SimpleAdapter(getActivity(), list, android.R.layout.simple_list_item_2, new String[]{"receiver", "title"}, new int[] {android.R.id.text1, android.R.id.text2});
-                    slistview.setAdapter(adapter);
-                }else{ //일치값이 없을경우
-                    Toast.makeText(getActivity(),"뭐냐 쪽지 없음", Toast.LENGTH_SHORT).show();
-                }
-                SimpleAdapter adapter = new SimpleAdapter(getActivity(), list, android.R.layout.simple_list_item_2, new String[]{"receiver", "title"}, new int[] {android.R.id.text1, android.R.id.text2});
-                slistview.setAdapter(adapter);
+        ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+        HashMap<String, String> item = new HashMap<String, String>();
 
+        fs.collection("Post").whereEqualTo("sender", current_uid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                ArrayList<MyMessageList> myMessages = new ArrayList<>();
+                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                    MyMessageList m = document.toObject(MyMessageList.class);
+                    myMessages.add(m);
+
+                }
+                adapter.clear();
+                adapter.addAll(myMessages);
             }
         });
-        return v;
-    }
+        return null;
 
+
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        fs.collection("User").document((String) document.getData().get("receiver")).get().addOnCompleteListener(docu -> {
+//                            item.put("receiver", "받는 사람" +(String)  docu.getResult().get("name"));
+//                            item.put("title", "제목 : "+(String) document.getData().get("gist"));
+//                            list.add(item);
+//                            item.clear();
+//
+//                        });
+//                    }
+//
+//                }else{ //일치값이 없을경우
+//                    Toast.makeText(getActivity(),"뭐냐 쪽지 없음", Toast.LENGTH_SHORT).show();
+//                }
+
+        //}
+        //});
+    }
 
 }

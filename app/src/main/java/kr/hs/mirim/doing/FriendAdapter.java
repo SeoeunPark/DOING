@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -70,16 +71,14 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         dia_user_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbr.orderByChild("code").equalTo(String.valueOf(arrayList.get(holder.getAdapterPosition()).getUid())).addListenerForSingleValueEvent(new ValueEventListener() {
+                Log.d("와 갑자기 안돼",arrayList.get(holder.getAdapterPosition()).getUid());
+                dbr.orderByChild("code").equalTo(String.valueOf(arrayList.get(holder.getAdapterPosition()).getUid())).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dss: snapshot.getChildren()) {
-                            dss.getRef().removeValue();
-                            Toast.makeText(context, "삭제 버튼 실행됨", Toast.LENGTH_SHORT).show();
+                    public void onSuccess(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot dsDel: dataSnapshot.getChildren()) {
+                            dsDel.getRef().removeValue();
+                            myDialog.dismiss();
                         }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
                     }
                 });
             }
