@@ -1,11 +1,14 @@
 package kr.hs.mirim.doing;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -22,6 +25,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.android.material.slider.Slider;
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
 
@@ -38,7 +42,9 @@ public class UserPage extends Fragment {
     private Switch text_onoff_direct;
     private Button message;
     private String title;
+    private Slider busy;
     private CircleMenu circleMenu;
+    private ImageView showColor;
 
     private int page;
 
@@ -69,7 +75,27 @@ public class UserPage extends Fragment {
         send_post = (ImageView) rootView.findViewById(R.id.direct);
         message = (Button)rootView.findViewById(R.id.message);
         circleMenu = rootView.findViewById(R.id.profile_circle);
+        showColor = rootView.findViewById(R.id.showColor);
+        busy = rootView.findViewById(R.id.busy);
 
+        //slider바 값이 바뀔 때
+        busy.addOnChangeListener(new Slider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+                if(value==0){
+                    showColor.setColorFilter(Color.GREEN);
+                    //여유로울 때
+                }else if (value==1){
+                    showColor.setColorFilter(Color.YELLOW);
+                    //바쁠 때
+                }else{
+                    showColor.setColorFilter(Color.RED);
+                    //매우 바쁠 때
+                }
+            }
+        });
+
+        //개인 기분 바뀔 때
         circleMenu.setMainMenu(Color.parseColor("#ffad76"),R.drawable.face1,R.drawable.ic_baseline_close_24)
                 .addSubMenu(Color.parseColor("#ffad76"),R.drawable.face1)
                 .addSubMenu(Color.parseColor("#ffd392"),R.drawable.face2)
