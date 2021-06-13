@@ -153,6 +153,7 @@ public class UserPage extends Fragment {
                     }
                 });
 
+
         //프로필수정 화면으로 이동
         edit_pofile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,6 +179,7 @@ public class UserPage extends Fragment {
         });
 
 
+
         return rootView;
     }
 
@@ -198,4 +200,5 @@ public class UserPage extends Fragment {
     }
 
 }
+
 
