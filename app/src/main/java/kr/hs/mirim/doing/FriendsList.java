@@ -43,7 +43,6 @@ import java.util.HashMap;
 public class FriendsList extends Fragment implements View.OnClickListener{
     private String title;
     private int page;
-    private TextView logout;
     private String key2;
     private FirebaseAuth auth;
     private TextView add_friend;
@@ -179,18 +178,6 @@ public class FriendsList extends Fragment implements View.OnClickListener{
 
         // Inflate the layout for this fragment
         auth = FirebaseAuth.getInstance();
-        logout = (TextView) rootView.findViewById(R.id.logout_btn);
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                auth.getInstance().signOut();
-                startActivity(new Intent(getActivity(), Signin.class));
-                getActivity().finish();
-            }
-        });
-
-
         return rootView;
     }
     private void search(String str) {

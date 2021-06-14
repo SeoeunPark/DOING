@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +24,20 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.android.material.slider.Slider;
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
+import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,6 +55,14 @@ public class UserPage extends Fragment {
     private Slider busy;
     private CircleMenu circleMenu;
     private ImageView showColor;
+    private TextView about;
+
+    private FirebaseAuth auth;
+    private String user_id = null;
+    private DatabaseReference mDatabase;
+
+    String[] conditionColor;
+    int[] conditionFace;
 
     private int page;
 
@@ -77,75 +95,68 @@ public class UserPage extends Fragment {
         circleMenu = rootView.findViewById(R.id.profile_circle);
         showColor = rootView.findViewById(R.id.showColor);
         busy = rootView.findViewById(R.id.busy);
+        about = rootView.findViewById(R.id.about);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+        user_id = user.getUid();
+
+
+        
+
+
+        conditionColor = new String[]{"#ffad76", "#ffd392", "#ffb8f2", "#cccccc", "#baa9ff", "#a6c8ff", "#ff8d8d", "#8a9eb5"};
+        conditionFace = new int[]{R.drawable.face1, R.drawable.face2, R.drawable.face3, R.drawable.face4, R.drawable.face5, R.drawable.face6, R.drawable.face7, R.drawable.face8};
+
+        circleMenu.setMainMenu(Color.parseColor(conditionColor[3]),conditionFace[3],R.drawable.ic_baseline_close_24);
+        circleMenu.addSubMenu(Color.parseColor(conditionColor[0]),R.drawable.face1)
+                .addSubMenu(Color.parseColor(conditionColor[1]),R.drawable.face2)
+                .addSubMenu(Color.parseColor(conditionColor[2]),R.drawable.face3)
+                .addSubMenu(Color.parseColor(conditionColor[3]),R.drawable.face4)
+                .addSubMenu(Color.parseColor(conditionColor[4]),R.drawable.face5)
+                .addSubMenu(Color.parseColor(conditionColor[5]),R.drawable.face6)
+                .addSubMenu(Color.parseColor(conditionColor[6]),R.drawable.face7)
+                .addSubMenu(Color.parseColor(conditionColor[7]),R.drawable.face8);
 
         //slider바 값이 바뀔 때
         busy.addOnChangeListener(new Slider.OnChangeListener() {
             @Override
             public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
                 if(value==0){
-                    showColor.setColorFilter(Color.GREEN);
+                    showColor.setColorFilter(Color.parseColor("#62FF2A"));
+                    setUserData((int)value,"level");
                     //여유로울 때
                 }else if (value==1){
-                    showColor.setColorFilter(Color.YELLOW);
+                    showColor.setColorFilter(Color.parseColor("#FFE32A"));
+                    setUserData((int)value,"level");
                     //바쁠 때
                 }else{
-                    showColor.setColorFilter(Color.RED);
+                    showColor.setColorFilter(Color.parseColor("#FF4D2A"));
+                    setUserData((int)value,"level");
                     //매우 바쁠 때
                 }
             }
         });
+        circleMenu.setOnMenuSelectedListener(new OnMenuSelectedListener() {
+            @Override
+            public void onMenuSelected(int index) {
+                circleMenu.setMainMenu(Color.parseColor(conditionColor[index]),conditionFace[index],R.drawable.ic_baseline_close_24);
+                setUserData(index+1,"condition");
+            }
+        });
 
-        //개인 기분 바뀔 때
-        circleMenu.setMainMenu(Color.parseColor("#ffad76"),R.drawable.face1,R.drawable.ic_baseline_close_24)
-                .addSubMenu(Color.parseColor("#ffad76"),R.drawable.face1)
-                .addSubMenu(Color.parseColor("#ffd392"),R.drawable.face2)
-                .addSubMenu(Color.parseColor("#ffb8f2"),R.drawable.face3)
-                .addSubMenu(Color.parseColor("#cccccc"),R.drawable.face4)
-                .addSubMenu(Color.parseColor("#baa9ff"),R.drawable.face5)
-                .addSubMenu(Color.parseColor("#a6c8ff"),R.drawable.face6)
-                .addSubMenu(Color.parseColor("#ff8d8d"),R.drawable.face7)
-                .addSubMenu(Color.parseColor("#8a9eb5"),R.drawable.face8)
-                .setOnMenuSelectedListener(new OnMenuSelectedListener() {
-                    @Override
-                    public void onMenuSelected(int index) {
-                        switch (index){
-                            case 0:
-                                circleMenu.setMainMenu(Color.parseColor("#ffad76"),R.drawable.face1,R.drawable.ic_baseline_close_24);
-                                setCondition(index+1);
-                                break;
-                            case 1:
-                                circleMenu.setMainMenu(Color.parseColor("#ffd392"),R.drawable.face2,R.drawable.ic_baseline_close_24);
-                                setCondition(index+1);
-                                break;
-                            case 2:
-                                circleMenu.setMainMenu(Color.parseColor("#ffb8f2"),R.drawable.face3,R.drawable.ic_baseline_close_24);
-                                setCondition(index+1);
-
-                                break;
-                            case 3:
-                                circleMenu.setMainMenu(Color.parseColor("#cccccc"),R.drawable.face4,R.drawable.ic_baseline_close_24);
-                                setCondition(index+1);
-                                break;
-                            case 4:
-                                circleMenu.setMainMenu(Color.parseColor("#baa9ff"),R.drawable.face5,R.drawable.ic_baseline_close_24);
-                                setCondition(index+1);
-                                break;
-                            case 5:
-                                circleMenu.setMainMenu(Color.parseColor("#a6c8ff"),R.drawable.face6,R.drawable.ic_baseline_close_24);
-                                setCondition(index+1);
-                                break;
-                            case 6:
-                                circleMenu.setMainMenu(Color.parseColor("#ff8d8d"),R.drawable.face7,R.drawable.ic_baseline_close_24);
-                                setCondition(index+1);
-                                break;
-                            case 7:
-                                circleMenu.setMainMenu(Color.parseColor("#8a9eb5"),R.drawable.face8,R.drawable.ic_baseline_close_24);
-                                setCondition(index+1);
-                                break;
-                        }
-                    }
-                });
-
+        mDatabase.child("users").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
+                Log.d("test", userInfo.getCondition()+"");
+                I_doing.setText(userInfo.getIng());
+                about.setText(userInfo.getAbout());
+                nickname.setText(userInfo.getName());
+                busy.setValue(userInfo.getLevel());
+            }
+        });
 
         //프로필수정 화면으로 이동
         edit_pofile.setOnClickListener(new View.OnClickListener() {
@@ -176,17 +187,26 @@ public class UserPage extends Fragment {
         return rootView;
     }
 
-    private FirebaseAuth auth;
-    private String user_id = null;
+    @Override
+    public void onStart() {
+        super.onStart();
+        mDatabase.child("users").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
+                Log.d("test", userInfo.getCondition()+"");
+                I_doing.setText(userInfo.getIng());
+                about.setText(userInfo.getAbout());
+                nickname.setText(userInfo.getName());
+                busy.setValue(userInfo.getLevel());
+            }
+        });
+    }
 
-    private void setCondition(int n){
-        auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
-        user_id = user.getUid();
-
+    private void setUserData(int n, String key){
         Map<String, Object> conditionUpdates = new HashMap<>();
-        conditionUpdates.put("/users/" + user_id+"/condition", n);
-        FirebaseDatabase.getInstance().getReference().updateChildren(conditionUpdates);
+        conditionUpdates.put("/users/" + user_id+"/"+key, n);
+        mDatabase.updateChildren(conditionUpdates);
     }
 
     public UserPage() {
