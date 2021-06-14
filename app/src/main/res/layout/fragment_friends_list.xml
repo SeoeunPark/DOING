@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/friend"
+    android:background="@drawable/main"
     tools:context=".FriendsList">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -16,7 +16,7 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             app:queryHint="검색어를 입력하세요."
             android:layout_marginTop="@dimen/side_margin"
             android:layout_marginLeft="@dimen/side_margin600"
@@ -40,8 +40,7 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/Add_friend"

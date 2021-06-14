@@ -7,13 +7,14 @@
     android:background="@color/white"
     tools:context=".sendPost">
 
+
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/side_margin600"
+        android:layout_marginTop="124dp"
         android:layout_marginRight="@dimen/side_margin600"
-        android:layout_marginTop="@dimen/padding600"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,39 +23,40 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/m_text600"
             android:text="TO."
+            android:textSize="@dimen/m_text600"
             tools:ignore="SpUsage" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/m_text600"
             android:paddingStart="@dimen/padding"
-            android:textStyle="bold"
-            android:text="@string/name"
             android:paddingLeft="@dimen/padding"
+            android:text="@string/name"
+            android:textSize="@dimen/m_text600"
+            android:textStyle="bold"
             tools:ignore="SpUsage" />
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/side_margin600"
         android:layout_marginRight="@dimen/side_margin600"
-        android:layout_marginTop="100dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintVertical_bias="0.071">
 
         <Spinner
             android:id="@+id/spinner"
             style="@style/spinner_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/login_edittext_style"/>
+            android:background="@drawable/login_edittext_style" />
 
         <EditText
             android:id="@+id/sendContents"
@@ -62,29 +64,28 @@
             android:layout_height="160dp"
             android:layout_marginTop="@dimen/side_margin600"
             android:background="@drawable/message_edit"
-            android:textSize="@dimen/s_text600"
-            android:padding="@dimen/padding600"
-            android:textCursorDrawable="@color/colorMain"
-            android:textColor="@color/black"
             android:hint="쪽지 입력란"
+            android:padding="@dimen/padding600"
+            android:textColor="@color/black"
             android:textColorHint="@color/gray"
+            android:textCursorDrawable="@color/colorMain"
+            android:textSize="@dimen/s_text600"
             tools:ignore="RtlHardcoded,RtlSymmetry,SpUsage" />
 
         <Button
             android:id="@+id/sendBtn"
-            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/side_margin600"
-            android:paddingTop="@dimen/button600"
-            android:paddingBottom="@dimen/button600"
+            android:background="@drawable/login_button_style"
             android:paddingLeft="80dp"
+            android:paddingTop="@dimen/button600"
             android:paddingRight="80dp"
+            android:paddingBottom="@dimen/button600"
             android:text="보내기"
             android:textColor="@color/white"
-            android:textSize="@dimen/button600"
-            android:background="@drawable/login_button_style"
-             />
+            android:textSize="@dimen/button600" />
 
     </LinearLayout>
 
