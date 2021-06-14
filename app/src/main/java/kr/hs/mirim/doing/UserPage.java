@@ -37,6 +37,8 @@ import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,6 +55,7 @@ public class UserPage extends Fragment {
     private Slider busy;
     private CircleMenu circleMenu;
     private ImageView showColor;
+    private TextView about;
 
     private FirebaseAuth auth;
     private String user_id = null;
@@ -92,6 +95,7 @@ public class UserPage extends Fragment {
         circleMenu = rootView.findViewById(R.id.profile_circle);
         showColor = rootView.findViewById(R.id.showColor);
         busy = rootView.findViewById(R.id.busy);
+        about = rootView.findViewById(R.id.about);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
@@ -162,16 +166,17 @@ public class UserPage extends Fragment {
 //                });
 
 
-//        mDatabase.child("users").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
-//                Log.d("test", userInfo.getCondition()+"");
-//
-//                busy.setValue(userInfo.getLevel());
-//
-//            }
-//        });
+        mDatabase.child("users").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
+                Log.d("test", userInfo.getCondition()+"");
+                I_doing.setText(userInfo.getIng());
+                about.setText(userInfo.getAbout());
+                nickname.setText(userInfo.getName());
+                busy.setValue(userInfo.getLevel());
+            }
+        });
 
         //프로필수정 화면으로 이동
         edit_pofile.setOnClickListener(new View.OnClickListener() {
