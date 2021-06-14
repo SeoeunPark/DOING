@@ -165,12 +165,8 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
             this.user_name = itemView.findViewById(R.id.user_name);
-            this.user_about = itemView.findViewById(R.id.user_about);
             this.user_img = itemView.findViewById(R.id.profile_img);
             this.user_ing = itemView.findViewById(R.id.user_ing);
-            this.user_level = itemView.findViewById(R.id.user_level);
-            this.user_condition = itemView.findViewById(R.id.user_condition);
-
         }
 
     }
