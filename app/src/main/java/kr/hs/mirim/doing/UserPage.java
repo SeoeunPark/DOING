@@ -124,15 +124,15 @@ public class UserPage extends Fragment {
             @Override
             public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
                 if(value==0){
-                    showColor.setColorFilter(Color.GREEN);
+                    showColor.setColorFilter(Color.parseColor("#62FF2A"));
                     setUserData((int)value,"level");
                     //여유로울 때
                 }else if (value==1){
-                    showColor.setColorFilter(Color.YELLOW);
+                    showColor.setColorFilter(Color.parseColor("#FFE32A"));
                     setUserData((int)value,"level");
                     //바쁠 때
                 }else{
-                    showColor.setColorFilter(Color.RED);
+                    showColor.setColorFilter(Color.parseColor("#FF4D2A"));
                     setUserData((int)value,"level");
                     //매우 바쁠 때
                 }
@@ -145,26 +145,6 @@ public class UserPage extends Fragment {
                 setUserData(index+1,"condition");
             }
         });
-
-
-        //개인 기분 바뀔 때
-//        circleMenu.setMainMenu(Color.parseColor(conditionColor[0]),R.drawable.face1,R.drawable.ic_baseline_close_24)
-//                .addSubMenu(Color.parseColor(conditionColor[0]),R.drawable.face1)
-//                .addSubMenu(Color.parseColor(conditionColor[1]),R.drawable.face2)
-//                .addSubMenu(Color.parseColor(conditionColor[2]),R.drawable.face3)
-//                .addSubMenu(Color.parseColor(conditionColor[3]),R.drawable.face4)
-//                .addSubMenu(Color.parseColor(conditionColor[4]),R.drawable.face5)
-//                .addSubMenu(Color.parseColor(conditionColor[5]),R.drawable.face6)
-//                .addSubMenu(Color.parseColor(conditionColor[6]),R.drawable.face7)
-//                .addSubMenu(Color.parseColor(conditionColor[7]),R.drawable.face8)
-//                .setOnMenuSelectedListener(new OnMenuSelectedListener() {
-//                    @Override
-//                    public void onMenuSelected(int index) {
-//                        circleMenu.setMainMenu(Color.parseColor(conditionColor[index]),conditionFace[index],R.drawable.ic_baseline_close_24);
-//                        setUserData(index+1,"condition");
-//                    }
-//                });
-
 
         mDatabase.child("users").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
