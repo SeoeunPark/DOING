@@ -89,10 +89,12 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
             @Override
             public void onClick(View view) {
                 ImageView dia_user_img = (ImageView)myDialog.findViewById(R.id.dia_user_img);
+                ImageView dia_busy_img = (ImageView)myDialog.findViewById(R.id.dia_busy_img);
                 TextView dia_user_name = (TextView)myDialog.findViewById(R.id.dia_user_name);
                 TextView dia_user_doing = (TextView)myDialog.findViewById(R.id.dia_user_doing);
                 TextView dia_user_about = (TextView)myDialog.findViewById(R.id.dia_user_about);
                 int dia_condition_num = arrayList.get(holder.getAdapterPosition()).getCondition();
+                int dia_level_num = arrayList.get(holder.getAdapterPosition()).getLevel();
                 if(dia_condition_num==1){
                     dia_user_img.setImageResource(R.drawable.emotion1);
                 }else if(dia_condition_num==2){
@@ -110,9 +112,18 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
                 }else{
                     dia_user_img.setImageResource(R.drawable.emotion8);
                 }
-                dia_user_doing.setText(arrayList.get(holder.getAdapterPosition()).getIng());
-                dia_user_name.setText(arrayList.get(holder.getAdapterPosition()).getName());
-                dia_user_about.setText(arrayList.get(holder.getAdapterPosition()).getAbout());
+
+                if(dia_level_num==0){
+                    dia_busy_img.setColorFilter(Color.parseColor("#62FF2A"));
+                }else if(dia_level_num==1){
+                    dia_busy_img.setColorFilter(Color.parseColor("#FFE32A"));
+                }else{
+                    dia_busy_img.setColorFilter(Color.parseColor("#FF4D2A"));
+                }
+
+                dia_user_doing.setText(arrayList.get(holder.getAdapterPosition()).getIng()+"중이에요");
+                dia_user_name.setText(arrayList.get(holder.getAdapterPosition()).getName()+"님은");
+                dia_user_about.setText("\""+arrayList.get(holder.getAdapterPosition()).getAbout()+"\"");
                 //삭제 버튼 클릭 시
                 myDialog.show();
                 myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -124,7 +135,9 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+        int level_num = arrayList.get(position).getLevel();
         condition_num = arrayList.get(position).getCondition();
+        //표정
         if(condition_num==1){
             holder.user_img.setImageResource(R.drawable.emotion1);
         }else if(condition_num==2){
@@ -142,8 +155,16 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         }else{
             holder.user_img.setImageResource(R.drawable.emotion8);
         }
-        holder.user_name.setText(arrayList.get(position).getName());
-        holder.user_ing.setText(arrayList.get(position).getIng());
+        //level
+        if(level_num==0){
+            holder.user_busy.setColorFilter(Color.parseColor("#62FF2A"));
+        }else if(level_num==1){
+            holder.user_busy.setColorFilter(Color.parseColor("#FFE32A"));
+        }else{
+            holder.user_busy.setColorFilter(Color.parseColor("#FF4D2A"));
+        }
+        holder.user_name.setText(arrayList.get(position).getName()+"님은");
+        holder.user_ing.setText(arrayList.get(position).getIng()+"중이에요");
         }
 
     @Override
@@ -155,12 +176,14 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         TextView user_name;
         TextView user_ing;
         ImageView user_img;
+        ImageView user_busy;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
             this.user_name = itemView.findViewById(R.id.user_name);
             this.user_img = itemView.findViewById(R.id.profile_img);
             this.user_ing = itemView.findViewById(R.id.user_ing);
+            this.user_busy = itemView.findViewById(R.id.user_busy);
         }
 
     }
