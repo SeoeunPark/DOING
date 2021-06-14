@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -78,7 +79,9 @@ public class EditUserPage extends AppCompatActivity {
             public void onClick(View view) {
                 setUserData(edit_nickname.getText().toString(),"name");
                 setUserData(edit_about.getText().toString(),"about");
-                finish();
+                ActivityCompat.finishAffinity(EditUserPage.this);
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
             }
         });
 

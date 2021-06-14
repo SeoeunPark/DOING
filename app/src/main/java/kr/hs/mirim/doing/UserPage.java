@@ -187,6 +187,22 @@ public class UserPage extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mDatabase.child("users").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
+                Log.d("test", userInfo.getCondition()+"");
+                I_doing.setText(userInfo.getIng());
+                about.setText(userInfo.getAbout());
+                nickname.setText(userInfo.getName());
+                busy.setValue(userInfo.getLevel());
+            }
+        });
+    }
+
     private void setUserData(int n, String key){
         Map<String, Object> conditionUpdates = new HashMap<>();
         conditionUpdates.put("/users/" + user_id+"/"+key, n);
