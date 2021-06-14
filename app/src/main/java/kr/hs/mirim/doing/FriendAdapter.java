@@ -143,10 +143,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
             holder.user_img.setImageResource(R.drawable.emotion8);
         }
         holder.user_name.setText(arrayList.get(position).getName());
-        holder.user_about.setText(arrayList.get(position).getAbout());
         holder.user_ing.setText(arrayList.get(position).getIng());
-        holder.user_level.setText(String.valueOf(arrayList.get(position).getLevel()));
-        holder.user_condition.setText(String.valueOf(arrayList.get(position).getCondition()));
         }
 
     @Override
@@ -156,10 +153,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
         TextView user_name;
-        TextView user_about;
         TextView user_ing;
-        TextView user_level;
-        TextView user_condition;
         ImageView user_img;
 
         public CustomViewHolder(@NonNull View itemView) {
