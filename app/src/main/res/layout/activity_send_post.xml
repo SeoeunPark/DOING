@@ -4,30 +4,87 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".sendPost">
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/side_margin600"
+        android:layout_marginRight="@dimen/side_margin600"
+        android:layout_marginTop="@dimen/padding600"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/m_text600"
+            android:text="TO."
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/m_text600"
+            android:paddingStart="@dimen/padding"
+            android:textStyle="bold"
+            android:text="@string/name"
+            android:paddingLeft="@dimen/padding"
+            tools:ignore="SpUsage" />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TO. "/>
+        android:layout_marginLeft="@dimen/side_margin600"
+        android:layout_marginRight="@dimen/side_margin600"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <Spinner
             android:id="@+id/spinner"
+            style="@style/spinner_style"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/login_edittext_style"/>
+
         <EditText
             android:id="@+id/sendContents"
-            android:hint="쪽지 입력란"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="160dp"
+            android:layout_marginTop="@dimen/side_margin600"
+            android:background="@drawable/message_edit"
+            android:textSize="@dimen/s_text600"
+            android:padding="@dimen/padding600"
+            android:textCursorDrawable="@color/colorMain"
+            android:textColor="@color/black"
+            android:hint="쪽지 입력란"
+            android:textColorHint="@color/gray"
+            tools:ignore="RtlHardcoded,RtlSymmetry,SpUsage" />
+
         <Button
             android:id="@+id/sendBtn"
-            android:layout_width="200dp"
-            android:layout_height="50dp"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/side_margin600"
+            android:paddingTop="@dimen/button600"
+            android:paddingBottom="@dimen/button600"
+            android:paddingLeft="80dp"
+            android:paddingRight="80dp"
+            android:text="보내기"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button600"
+            android:background="@drawable/login_button_style"
+             />
 
     </LinearLayout>
 

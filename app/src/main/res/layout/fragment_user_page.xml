@@ -4,14 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserPage">
-
-    <ImageView
-        android:layout_width="1200dp"
-        android:layout_height="800dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="-420dp"
-        android:src="@drawable/main_circle" />
+    tools:context=".UserPage"
+    android:background="@drawable/main">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,6 +19,8 @@
             android:id="@+id/direct"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="@dimen/side_margin600"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/direct_icon"
@@ -44,6 +40,8 @@
             android:id="@+id/edit_pofile"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="@dimen/side_margin600"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/user_icon"
@@ -54,10 +52,10 @@
             android:id="@+id/linear_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="140dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -65,8 +63,9 @@
                 android:id="@+id/nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/side_margin600"
                 android:text="이름"
+                android:textColor="@color/white"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
@@ -74,8 +73,8 @@
                 android:id="@+id/nickname_nim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
                 android:text="@string/nim"
+                android:textColor="@color/white"
                 android:textSize="32sp" />
 
         </LinearLayout>
@@ -90,12 +89,13 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linear_nickname"
-            app:layout_constraintVertical_bias="0.05">
+            app:layout_constraintVertical_bias="0.04">
 
             <EditText
                 android:id="@+id/I_doing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/side_margin600"
                 android:textColor="@color/white"
                 android:text="@string/default_doing"
                 android:textSize="36sp"
@@ -133,75 +133,87 @@
             app:srcCompat="@drawable/emotion1" />
         -->
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/side_margin600"
+            android:layout_marginRight="@dimen/side_margin600"
+            android:background="@drawable/login_edittext_style"
+            android:padding="18dp"
+            android:paddingStart="25dp"
+            android:paddingLeft="20dp"
+            android:text="상태메세지"
+            android:textColor="@color/colorMain"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/now_doing"
+            app:layout_constraintVertical_bias="0.04"
+            tools:ignore="MissingConstraints,RtlSymmetry,SpUsage" />
+
         <com.hitomi.cmlibrary.CircleMenu
             android:id="@+id/profile_circle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_marginTop="50dp"
+            android:scaleX="3.5"
+            android:scaleY="3.5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:scaleX="3.5"
-            android:scaleY="3.5"
-            app:layout_constraintVertical_bias="0.40" />
+            app:layout_constraintVertical_bias="0.55" />
+
 
         <ImageView
             android:id="@+id/showColor"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_margin="0dp"
-            app:srcCompat="@drawable/busy_1"
+            android:layout_margin="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/profile_circle"
             app:layout_constraintEnd_toEndOf="@+id/profile_circle"
-            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintHorizontal_bias="0.59"
             app:layout_constraintStart_toStartOf="@+id/profile_circle"
             app:layout_constraintTop_toTopOf="@+id/profile_circle"
-            app:layout_constraintVertical_bias="0.9" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/login_edittext_style_shadow"
-            android:padding="20dp"
-            android:gravity="center_horizontal"
-            android:text="상태메세지"
-            android:textColor="@color/black"
-            android:textSize="28sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/profile_circle"
-            app:layout_constraintVertical_bias="0.3"
-            tools:layout_editor_absoluteX="60dp"
-            tools:ignore="MissingConstraints,SpUsage" />
+            app:layout_constraintVertical_bias="0.94"
+            app:srcCompat="@drawable/busy_1" />
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/side_margin600"
+            android:layout_marginTop="200dp"
             android:text="@string/busy"
             android:textColor="@color/black"
             android:textSize="28sp"
-            app:layout_constraintBottom_toTopOf="@+id/busy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_circle"
-            app:layout_constraintVertical_bias="0.9"
-            tools:layout_editor_absoluteX="0dp"
             tools:ignore="SpUsage" />
 
         <com.google.android.material.slider.Slider
             android:id="@+id/busy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="192dp"
+            android:layout_marginRight="@dimen/side_margin600"
+            android:layout_marginLeft="@dimen/side_margin600"
             android:stepSize="1"
             android:value="1.0"
             android:valueFrom="0"
             android:valueTo="2"
             app:haloColor="@color/colorControlHighlight"
             app:labelBehavior="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.4"
             app:thumbColor="@color/white"
             app:thumbRadius="@dimen/l_text"
             app:tickColor="@color/white"
@@ -211,15 +223,18 @@
             tools:ignore="MissingConstraints" />
 
         <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/side_margin600"
+            android:layout_marginRight="@dimen/side_margin600"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/busy"
-            app:layout_constraintVertical_bias="0.152">
+            app:layout_constraintVertical_bias="0.1">
 
             <TextView
                 android:layout_width="wrap_content"
