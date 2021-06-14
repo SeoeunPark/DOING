@@ -20,6 +20,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
+                app:tabTextAppearance="@style/tab_text"
+                android:paddingTop="@dimen/padding600"
                 app:tabGravity="fill"
                 app:tabMode="fixed"
                 app:tabSelectedTextColor="#ffffff"

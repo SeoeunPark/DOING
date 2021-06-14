@@ -9,7 +9,7 @@
         android:id="@+id/edit_profile_circle"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:background="@drawable/main_circle"
+        android:background="@drawable/white_storke"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
