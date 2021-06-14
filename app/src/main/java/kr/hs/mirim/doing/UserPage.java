@@ -98,6 +98,10 @@ public class UserPage extends Fragment {
         FirebaseUser user = auth.getCurrentUser();
         user_id = user.getUid();
 
+
+        
+
+
         conditionColor = new String[]{"#ffad76", "#ffd392", "#ffb8f2", "#cccccc", "#baa9ff", "#a6c8ff", "#ff8d8d", "#8a9eb5"};
         conditionFace = new int[]{R.drawable.face1, R.drawable.face2, R.drawable.face3, R.drawable.face4, R.drawable.face5, R.drawable.face6, R.drawable.face7, R.drawable.face8};
 
@@ -158,17 +162,16 @@ public class UserPage extends Fragment {
 //                });
 
 
-
-        mDatabase.child("users").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
-                Log.d("test", userInfo.getCondition()+"");
-
-                busy.setValue(userInfo.getLevel());
-
-            }
-        });
+//        mDatabase.child("users").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
+//                Log.d("test", userInfo.getCondition()+"");
+//
+//                busy.setValue(userInfo.getLevel());
+//
+//            }
+//        });
 
         //프로필수정 화면으로 이동
         edit_pofile.setOnClickListener(new View.OnClickListener() {
