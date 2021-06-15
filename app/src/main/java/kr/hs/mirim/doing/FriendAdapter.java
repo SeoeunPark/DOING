@@ -162,8 +162,8 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         }else{
             holder.user_busy.setColorFilter(Color.parseColor("#FF4D2A"));
         }
-        holder.user_name.setText(arrayList.get(position).getName()+"님은");
-        holder.user_ing.setText(arrayList.get(position).getIng()+"중이에요");
+        holder.user_name.setText(arrayList.get(position).getName());
+        holder.user_ing.setText(arrayList.get(position).getIng());
         }
 
     @Override
