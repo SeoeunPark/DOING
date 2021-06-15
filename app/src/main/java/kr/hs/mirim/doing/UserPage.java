@@ -12,6 +12,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,7 +90,7 @@ public class UserPage extends Fragment {
         ViewGroup rootView =(ViewGroup) inflater.inflate(R.layout.fragment_user_page, container, false);
         nickname = (TextView)rootView.findViewById(R.id.nickname);
         nickname_nim = (TextView)rootView.findViewById(R.id.nickname_nim);
-        I_doing = (TextView)rootView.findViewById(R.id.I_doing);
+        I_doing = (EditText)rootView.findViewById(R.id.I_doing);
         edit_pofile = (ImageView) rootView.findViewById(R.id.edit_pofile);
         send_post = (ImageView) rootView.findViewById(R.id.direct);
         message = (Button)rootView.findViewById(R.id.message);
@@ -118,6 +120,8 @@ public class UserPage extends Fragment {
                 .addSubMenu(Color.parseColor(conditionColor[5]),R.drawable.face6)
                 .addSubMenu(Color.parseColor(conditionColor[6]),R.drawable.face7)
                 .addSubMenu(Color.parseColor(conditionColor[7]),R.drawable.face8);
+
+
 
         //slider바 값이 바뀔 때
         busy.addOnChangeListener(new Slider.OnChangeListener() {
@@ -155,6 +159,7 @@ public class UserPage extends Fragment {
                 about.setText(userInfo.getAbout());
                 nickname.setText(userInfo.getName());
                 busy.setValue(userInfo.getLevel());
+                circleMenu.setMainMenu(Color.parseColor(conditionColor[userInfo.getCondition()-1]),conditionFace[userInfo.getCondition()-1],R.drawable.ic_baseline_close_24);
             }
         });
 
@@ -182,6 +187,25 @@ public class UserPage extends Fragment {
             }
         });
 
+        I_doing.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String newtext = I_doing.getText().toString();
+                Log.d("new", newtext);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String newtext = I_doing.getText().toString();
+                Log.d("finish", newtext);
+                setUserData(newtext,"ing");
+            }
+        });
+
 
 
         return rootView;
@@ -194,16 +218,16 @@ public class UserPage extends Fragment {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
-                Log.d("test", userInfo.getCondition()+"");
                 I_doing.setText(userInfo.getIng());
                 about.setText(userInfo.getAbout());
                 nickname.setText(userInfo.getName());
                 busy.setValue(userInfo.getLevel());
+                circleMenu.setMainMenu(Color.parseColor(conditionColor[userInfo.getCondition()-1]),conditionFace[userInfo.getCondition()-1],R.drawable.ic_baseline_close_24);
             }
         });
     }
 
-    private void setUserData(int n, String key){
+    private void setUserData(Object n, String key){
         Map<String, Object> conditionUpdates = new HashMap<>();
         conditionUpdates.put("/users/" + user_id+"/"+key, n);
         mDatabase.updateChildren(conditionUpdates);
