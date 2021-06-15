@@ -27,9 +27,10 @@
     </style>
 
     <style name="spinner_style" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
-        <item name="android:textSize">@dimen/s_text600</item>
+        <item name="android:textSize">@dimen/m_text600</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:padding">@dimen/padding</item>
-        <item name="paddingStart">18dp</item>
+        <item name="android:paddingTop">@dimen/padding</item>
+        <item name="android:paddingBottom">@dimen/padding</item>
+        <item name="paddingStart">34dp</item>
     </style>
 </resources>

@@ -9,17 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".ShowMessage"></activity>
-        <activity android:name=".EditUserPage" />
-        <activity android:name=".sendPost" />
+        <activity android:name=".ShowMessage" />
+        <activity android:name=".EditUserPage"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".sendPost"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".PostList" />
-        <activity android:name=".SignupEmail" />
-        <activity android:name=".SignupName" />
+        <activity android:name=".SignupEmail"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".SignupName"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".MainActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".Signup" />
-        <activity android:name=".Signin">
+        <activity android:name=".Signup"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".Signin"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
