@@ -131,14 +131,20 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         add_friend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
-                dialog.setTitle("친구코드를 입력해주세요");
-                final EditText inputname = new EditText(getActivity());
-                inputname.setInputType(InputType.TYPE_CLASS_TEXT);
-                dialog.setView(inputname);
-                dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                View dialogView = getLayoutInflater().inflate(R.layout.add_friends_dialog, null);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(view.getContext());
+//                dialog.setTitle("친구코드를 입력해주세요");
+//                final EditText inputname = new EditText(getActivity());
+//                inputname.setInputType(InputType.TYPE_CLASS_TEXT);
+                dialog.setView(dialogView);
+                final AlertDialog alertDialog = dialog.create();
+                alertDialog.show();
+                TextView ok_btn = dialogView.findViewById(R.id.okButton);
+                TextView cancel_btn = dialogView.findViewById(R.id.cancelButton);
+                EditText inputname = dialogView.findViewById(R.id.inputname);
+                ok_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                    public void onClick(View v) {
                         String username = inputname.getText().toString();
                         if (!TextUtils.isEmpty(username)) {
                             db.collection("User").whereEqualTo("user_code", username).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -164,15 +170,15 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                                 }
                             });
                         }else { Toast.makeText(getActivity(), "코드를 입력해주세요.", Toast.LENGTH_SHORT).show();}
+                        alertDialog.dismiss();
                     }
                 });
-                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                cancel_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
                     }
                 });
-                dialog.show();
             }
         });
 
