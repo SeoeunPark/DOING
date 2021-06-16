@@ -10,6 +10,18 @@ public class MyMessageList {
     private String sender;
     private TimeZone time;
 
+    private MyMessageList(){
+
+    }
+    private MyMessageList(String content, boolean read, String gist, String receiver, String sender, TimeZone time){
+        this.content = content;
+        this.read = read;
+        this.gist = gist;
+        this.receiver = receiver;
+        this.sender = sender;
+        this.time = time;
+    }
+
     public String getContent() {
         return content;
     }

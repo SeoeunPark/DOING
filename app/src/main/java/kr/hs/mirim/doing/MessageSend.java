@@ -4,11 +4,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -20,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -35,6 +38,7 @@ public class MessageSend extends Fragment {
     private FirebaseUser currentUser;
     private FirebaseAuth auth;
     private ArrayAdapter<MyMessageList> adapter;
+    private RecyclerView sendRv;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,50 +74,51 @@ public class MessageSend extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("생명주기 테스트 입니다.", "onCreate");
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
-    //내가 모르는 fragment 생명주기에 의해 화면을 껐다가 다시켜야지만 데이터가 생겨남
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_message_send, container, false);
+        sendRv = v.findViewById(R.id.sendRv);
+        FirebaseFirestore fs = FirebaseFirestore.getInstance();
 
-//        SimpleAdapter adapter = new SimpleAdapter(getContext(), list, android.R.layout.simple_list_item_2, new String[]{"receiver", "title"}, new int[] {android.R.id.text1, android.R.id.text2});
-//        ListView slistview = (ListView) getView().findViewById(R.id.sendPost);
-//        slistview.setAdapter(adapter);
+        Query query = fs.collection("Post");
+//        FirestoreRecyclerOptions
+//        sendRv
+
 
 
         return v;
     }
 
-    private ArrayList<HashMap<String,String>> Listview() {
-        FirebaseFirestore fs = FirebaseFirestore.getInstance();
-        auth = FirebaseAuth.getInstance();
-        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String current_uid = FirebaseAuth.getInstance().getUid();
-
-        ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
-        HashMap<String, String> item = new HashMap<String, String>();
-
-        fs.collection("Post").whereEqualTo("sender", current_uid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                ArrayList<MyMessageList> myMessages = new ArrayList<>();
-                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                    MyMessageList m = document.toObject(MyMessageList.class);
-                    myMessages.add(m);
-
-                }
-                adapter.clear();
-                adapter.addAll(myMessages);
-            }
-        });
-        return null;
+//    private ArrayList<HashMap<String,String>> Listview() {
+//        FirebaseFirestore fs = FirebaseFirestore.getInstance();
+//        auth = FirebaseAuth.getInstance();
+//        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+//        String current_uid = FirebaseAuth.getInstance().getUid();
+//
+//        ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+//        HashMap<String, String> item = new HashMap<String, String>();
+//
+//        fs.collection("Post").whereEqualTo("sender", current_uid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//            @Override
+//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                ArrayList<MyMessageList> myMessages = new ArrayList<>();
+//                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+//                    MyMessageList m = document.toObject(MyMessageList.class);
+//                    myMessages.add(m);
+//
+//                }
+//                adapter.clear();
+//                adapter.addAll(myMessages);
+//            }
+//        });
+//        return null;
 
 
 //                    for (QueryDocumentSnapshot document : task.getResult()) {
@@ -132,6 +137,6 @@ public class MessageSend extends Fragment {
 
         //}
         //});
-    }
+
 
 }

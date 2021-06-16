@@ -33,6 +33,8 @@ public class sendPost extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_post);
 
+        Intent intent = getIntent();
+        String sendUid = intent.getStringExtra("uid");
         auth = FirebaseAuth.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String current_uid = FirebaseAuth.getInstance().getUid();
@@ -42,11 +44,13 @@ public class sendPost extends AppCompatActivity {
         Button sendBtn = findViewById(R.id.sendBtn);
         EditText contentEt = findViewById(R.id.sendContents);
         Spinner spn = findViewById(R.id.spinner);
+        TextView toName = findViewById(R.id.toName);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,customString);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn.setAdapter(adapter);
         spn.setSelection(0);
+        toName.setText(intent.getStringExtra("name"));
 
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +59,7 @@ public class sendPost extends AppCompatActivity {
                 if(content.equals("")){
                     Toast.makeText(sendPost.this,"내용을 입력해주세요",Toast.LENGTH_SHORT).show();
                 }else {
-                    uploadPost(content, "보내는 사람",spn.getSelectedItem().toString());
+                    uploadPost(content, sendUid ,spn.getSelectedItem().toString());
                 }
             }
         });
@@ -83,10 +87,8 @@ public class sendPost extends AppCompatActivity {
 
         db.collection("Post").document().set(postMap).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                finish();
                 Toast.makeText(sendPost.this, "쪽지를 전송했습니다", Toast.LENGTH_SHORT).show();
-                Intent gotoPostList = new Intent(getApplicationContext(), PostList.class);
-                startActivity(gotoPostList);
+                finish();
                 return;
             }else{
                 String error = task.getException().getMessage();

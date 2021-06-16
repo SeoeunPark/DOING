@@ -64,10 +64,20 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         user_id = user.getUid();
         dbr = FirebaseDatabase.getInstance().getReference("my_friends").child(user_id);
         Button dia_user_delete = (Button)myDialog.findViewById(R.id.dia_user_delete);
+        Button dia_user_message = (Button)myDialog.findViewById(R.id.dia_user_message);
 
 
+        dia_user_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, sendPost.class);
+                intent.putExtra("uid",arrayList.get(holder.getAdapterPosition()).getUid());
+                intent.putExtra("name", arrayList.get(holder.getAdapterPosition()).getName());
+                context.startActivity(intent);
+            }
+        });
 
-        //아라야 삭제버튼 눌렀을 때 삭제되는 거 넣어주랍!! -> 응!!
+
         dia_user_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,8 +173,8 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         }else{
             holder.user_busy.setColorFilter(Color.parseColor("#FF4D2A"));
         }
-        holder.user_name.setText(arrayList.get(position).getName()+"님은");
-        holder.user_ing.setText(arrayList.get(position).getIng()+"중이에요");
+        holder.user_name.setText(arrayList.get(position).getName());
+        holder.user_ing.setText(arrayList.get(position).getIng());
         }
 
     @Override
