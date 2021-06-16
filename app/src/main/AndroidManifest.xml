@@ -14,7 +14,6 @@
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".sendPost"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".PostList" />
         <activity android:name=".SignupEmail"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".SignupName"
