@@ -4,80 +4,42 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MessageSend#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MessageSend extends Fragment {
     private FirebaseUser currentUser;
     private FirebaseAuth auth;
-    private ArrayAdapter<MyMessageList> adapter;
+    FirestoreRecyclerAdapter adapter;
     private RecyclerView sendRv;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public MessageSend() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MessageSend.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MessageSend newInstance(String param1, String param2) {
-        MessageSend fragment = new MessageSend();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
@@ -85,58 +47,55 @@ public class MessageSend extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_message_send, container, false);
         sendRv = v.findViewById(R.id.sendRv);
-        FirebaseFirestore fs = FirebaseFirestore.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String current_uid = FirebaseAuth.getInstance().getUid();
 
-        Query query = fs.collection("Post");
-//        FirestoreRecyclerOptions
-//        sendRv
+        Query query = FirebaseFirestore.getInstance().collection("Post").whereEqualTo("sender",current_uid);
+        FirestoreRecyclerOptions<MyMessageList> op = new FirestoreRecyclerOptions.Builder<MyMessageList>()
+                .setQuery(query, MyMessageList.class)
+                .build();
 
+        adapter = new FirestoreRecyclerAdapter<MyMessageList, MessageViewHolder>(op) {
+            @NonNull
+            @Override
+            public MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mymessage_list, parent,false);
+                return new MessageViewHolder(view);
+            }
 
+            @Override
+            protected void onBindViewHolder(@NonNull MessageViewHolder holder, int position, @NonNull MyMessageList model) {
+                holder.list_name.setText(model.getReceiver());
+                holder.list_gist.setText(model.getGist());
+            }
+        };
 
+        sendRv.setHasFixedSize(true);
+        sendRv.setLayoutManager(new LinearLayoutManager(getContext()));
+        sendRv.setAdapter(adapter);
         return v;
     }
+    private class MessageViewHolder extends RecyclerView.ViewHolder {
+        private TextView list_name;
+        private TextView list_gist;
+        public MessageViewHolder(@NonNull View itemView){
+            super(itemView);
 
-//    private ArrayList<HashMap<String,String>> Listview() {
-//        FirebaseFirestore fs = FirebaseFirestore.getInstance();
-//        auth = FirebaseAuth.getInstance();
-//        currentUser = FirebaseAuth.getInstance().getCurrentUser();
-//        String current_uid = FirebaseAuth.getInstance().getUid();
-//
-//        ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
-//        HashMap<String, String> item = new HashMap<String, String>();
-//
-//        fs.collection("Post").whereEqualTo("sender", current_uid).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//            @Override
-//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                ArrayList<MyMessageList> myMessages = new ArrayList<>();
-//                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-//                    MyMessageList m = document.toObject(MyMessageList.class);
-//                    myMessages.add(m);
-//
-//                }
-//                adapter.clear();
-//                adapter.addAll(myMessages);
-//            }
-//        });
-//        return null;
+            list_name = itemView.findViewById(R.id.name);
+            list_gist = itemView.findViewById(R.id.gist);
+        }
+    }
 
+    @Override
+    public void onStop(){
+        super.onStop();
+        adapter.stopListening();
+    }
 
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        fs.collection("User").document((String) document.getData().get("receiver")).get().addOnCompleteListener(docu -> {
-//                            item.put("receiver", "받는 사람" +(String)  docu.getResult().get("name"));
-//                            item.put("title", "제목 : "+(String) document.getData().get("gist"));
-//                            list.add(item);
-//                            item.clear();
-//
-//                        });
-//                    }
-//
-//                }else{ //일치값이 없을경우
-//                    Toast.makeText(getActivity(),"뭐냐 쪽지 없음", Toast.LENGTH_SHORT).show();
-//                }
-
-        //}
-        //});
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
 
 }

@@ -78,7 +78,7 @@ public class MessageReceive extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_message_receive, container, false);
 
-        ListView rlistview = (ListView) v.findViewById(R.id.receivePost);
+//        ListView rlistview = (ListView) v.findViewById(R.id.receivePost);
         ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
         HashMap<String, String> item = new HashMap<>();
 
@@ -100,7 +100,7 @@ public class MessageReceive extends Fragment {
                         item.clear();
                     }
                     SimpleAdapter adapter = new SimpleAdapter(getActivity(), list, android.R.layout.simple_list_item_2, new String[]{"sender", "title"}, new int[] {android.R.id.text1, android.R.id.text2});
-                    rlistview.setAdapter(adapter);
+//                    rlistview.setAdapter(adapter);
                 }else{ //일치값이 없을경우
                     Toast.makeText(getActivity(),"뭐냐 쪽지 없음", Toast.LENGTH_SHORT).show();
                 }
