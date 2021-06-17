@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,8 +49,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EditUserPage extends AppCompatActivity {
-    private TextView edit_nickname;
-    private TextView edit_about;
+    private LinearLayout edit_nickname;
+    private LinearLayout edit_about;
     private Button edit_save;
     private TextView logout_btn;
     private DatabaseReference mDatabase;
