@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/side_margin600"
         android:layout_marginTop="224dp"
-        android:text="개인정보 수정"
+        android:text="설정"
         android:textColor="@color/colorMain"
         android:textSize="@dimen/title600"
         android:fontFamily="@font/cafe24surround"
@@ -29,7 +30,6 @@
         android:layout_marginRight="@dimen/side_margin600"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.362"
@@ -38,33 +38,62 @@
         app:layout_constraintVertical_bias="0.25">
 
         <TextView
-            android:id="@+id/edit_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/side_margin"
-            android:layout_marginRight="@dimen/side_margin"
-            android:background="@drawable/text_button"
-            android:padding="@dimen/padding600"
-            android:fontFamily="@font/cafe24ssurroundair"
-            android:text="이름 변경하기"
+            android:text="개인정보 변경"
             android:textColor="@color/black"
-            android:textCursorDrawable="@color/colorMain"
-            android:textSize="@dimen/l_text600"
+            android:textSize="@dimen/m_text600"
+            android:paddingBottom="@dimen/padding"
+            android:fontFamily="@font/cafe24ssurroundair"
+            android:background="@drawable/botton_line_3"
             tools:ignore="SpUsage" />
 
         <!--글자수 제한두어야 함-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bottom_line_1">
+
+            <TextView
+                android:id="@+id/edit_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/side_margin"
+                android:layout_marginRight="@dimen/side_margin"
+                android:fontFamily="@font/cafe24ssurroundair"
+                android:padding="@dimen/padding600"
+                android:text="이름 변경"
+                android:textColor="@color/black"
+                android:textCursorDrawable="@color/colorMain"
+                android:textSize="@dimen/l_text600"
+                tools:ignore="SpUsage" />
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/edit_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/side_margin"
             android:layout_marginRight="@dimen/side_margin"
-            android:background="@drawable/text_button"
             android:padding="@dimen/padding600"
             android:fontFamily="@font/cafe24ssurroundair"
-            android:text="한 줄 소개 변경하기"
+            android:text="한 줄 소개 변경"
             android:textColor="@color/black"
             android:textSize="@dimen/l_text600"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="내 정보"
+            android:textColor="@color/black"
+            android:textSize="@dimen/m_text600"
+            android:paddingBottom="@dimen/padding"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/cafe24ssurroundair"
+            android:background="@drawable/botton_line_3"
             tools:ignore="SpUsage" />
 
         <LinearLayout
@@ -72,24 +101,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/text_button"
+            android:background="@drawable/bottom_line_1"
             android:padding="@dimen/padding600">
 
-            <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/side_margin"
-            android:layout_marginRight="@dimen/side_margin"
-                android:layout_marginBottom="@dimen/side_margin"
-            android:text="내 친구 코드 복사하기"
-                android:fontFamily="@font/cafe24ssurroundair"
-            android:textColor="@color/black"
-            android:textSize="@dimen/l_text600"
-            tools:ignore="SpUsage" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/side_margin"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="@dimen/side_margin"
+                    android:text="내 친구 코드"
+                    android:fontFamily="@font/cafe24ssurroundair"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/l_text600"
+                    tools:ignore="SpUsage" />
+
+                <Button
+                    android:id="@+id/copy_code_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/link"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/copy_code"
                 android:layout_width="wrap_content"
@@ -99,12 +143,6 @@
                 android:textColor="@color/gray"
                 android:fontFamily="@font/cafe24ssurroundair"
                 android:textSize="@dimen/m_text600" />
-            <Button
-                android:id="@+id/copy_code_btn"
-                android:layout_marginLeft="30dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/link"/>
 
             </LinearLayout>
 
@@ -115,24 +153,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/text_button"
             android:padding="@dimen/padding600">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/side_margin"
-                android:layout_marginRight="@dimen/side_margin"
-                android:layout_marginBottom="@dimen/side_margin"
-                android:text="프로필 링크 복사하기"
-                android:fontFamily="@font/cafe24ssurroundair"
-                android:textColor="@color/black"
-                android:textSize="@dimen/l_text600"
-                tools:ignore="SpUsage" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/side_margin"
+                    android:layout_marginRight="@dimen/side_margin"
+                    android:layout_marginBottom="@dimen/side_margin"
+                    android:text="프로필 링크"
+                    android:fontFamily="@font/cafe24ssurroundair"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/l_text600"
+                    tools:ignore="SpUsage" />
+
+                <Button
+                    android:id="@+id/copy_link_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/link"/>
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/copy_link"
                 android:layout_width="wrap_content"
@@ -141,48 +188,26 @@
                 android:layout_marginLeft="@dimen/side_margin"
                 android:textColor="@color/gray"
                 android:fontFamily="@font/cafe24ssurroundair"
-                android:textSize="18dp" />
-
-            <Button
-                android:id="@+id/copy_link_btn"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/link"/>
-            </LinearLayout>
+                android:textSize="@dimen/s_text600" />
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/logout_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/side_margin"
-            android:layout_marginRight="@dimen/side_margin"
-            android:padding="@dimen/padding600"
-            android:text="로그아웃"
-            android:textColor="@color/black"
-            android:fontFamily="@font/cafe24ssurroundair"
-            android:textSize="@dimen/l_text600"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linear_nickname"
-            app:layout_constraintVertical_bias="0.35"
-            tools:ignore="SpUsage" />
-<!--
-        <Button
-            android:id="@+id/edit_save"
-            android:layout_width="200dp"
-            android:layout_height="70dp"
-            android:layout_margin="50dp"
-            android:background="@drawable/login_button_style"
-            android:text="저장"
-            android:textColor="@color/white"
-            android:textSize="@dimen/button600"
-            tools:ignore="RtlSymmetry,SpUsage" />
-    -->
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/logout_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cafe24ssurroundair"
+        android:padding="@dimen/side_margin600"
+        android:text="로그아웃"
+        android:textColor="@color/white"
+        android:background="@color/colorMain"
+        android:textSize="@dimen/l_text600"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linear_nickname"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="SpUsage" />
 </androidx.constraintlayout.widget.ConstraintLayout>
