@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -88,8 +89,8 @@ public class MessageSend extends Fragment {
         FirebaseFirestore fs = FirebaseFirestore.getInstance();
 
         Query query = fs.collection("Post");
-//        FirestoreRecyclerOptions
-//        sendRv
+
+
 
 
 
