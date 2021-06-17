@@ -9,16 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".EditName"></activity>
-        <activity android:name=".EditAbout"></activity>
-        <activity android:name=".ShowMessage" />
+        <activity android:name=".EditName"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".EditAbout"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ShowMessage"/>
         <activity
             android:name=".EditUserPage"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".sendPost"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".PostList" />
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".PostList"/>
         <activity
             android:name=".SignupEmail"
             android:windowSoftInputMode="adjustPan" />
