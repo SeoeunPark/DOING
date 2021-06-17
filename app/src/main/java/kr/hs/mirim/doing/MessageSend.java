@@ -65,7 +65,7 @@ public class MessageSend extends Fragment {
 
             @Override
             protected void onBindViewHolder(@NonNull MessageViewHolder holder, int position, @NonNull MyMessageList model) {
-                holder.list_name.setText(model.getReceiver());
+                holder.list_name.setText("to. "+model.getSender_name());
                 holder.list_gist.setText(model.getGist());
             }
         };
@@ -80,7 +80,6 @@ public class MessageSend extends Fragment {
         private TextView list_gist;
         public MessageViewHolder(@NonNull View itemView){
             super(itemView);
-
             list_name = itemView.findViewById(R.id.name);
             list_gist = itemView.findViewById(R.id.gist);
         }
