@@ -133,9 +133,6 @@ public class FriendsList extends Fragment implements View.OnClickListener{
             public void onClick(View view) {
                 View dialogView = getLayoutInflater().inflate(R.layout.add_friends_dialog, null);
                 AlertDialog.Builder dialog = new AlertDialog.Builder(view.getContext());
-//                dialog.setTitle("친구코드를 입력해주세요");
-//                final EditText inputname = new EditText(getActivity());
-//                inputname.setInputType(InputType.TYPE_CLASS_TEXT);
                 dialog.setView(dialogView);
                 final AlertDialog alertDialog = dialog.create();
                 alertDialog.show();
