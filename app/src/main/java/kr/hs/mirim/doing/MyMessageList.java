@@ -8,12 +8,12 @@ public class MyMessageList {
     private String gist;
     private String receiver;
     private String sender;
-    private TimeZone time;
+    private String time;
 
     private MyMessageList(){
 
     }
-    private MyMessageList(String content, boolean read, String gist, String receiver, String sender, TimeZone time){
+    private MyMessageList(String content, boolean read, String gist, String receiver, String sender, String time){
         this.content = content;
         this.read = read;
         this.gist = gist;
@@ -62,11 +62,11 @@ public class MyMessageList {
         this.sender = sender;
     }
 
-    public TimeZone getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(TimeZone time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }
