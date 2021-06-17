@@ -74,6 +74,7 @@
             android:hint="이름 변경하기"
             android:fontFamily="@font/cafe24ssurroundair"
             android:importantForAutofill="no"
+            android:maxLength="20"
             android:inputType="textEmailAddress"
             android:paddingStart="@dimen/padding600"
             android:textColor="@color/black"

@@ -27,6 +27,7 @@
         android:backgroundTint="@color/colorMain"
         android:hint="@string/add_friends_text"
         android:textSize="@dimen/hint"
+        android:maxLength="8"
         android:textStyle="bold"
         android:fontFamily="@font/cafe24ssurroundair"
         android:textColor="@color/black"
