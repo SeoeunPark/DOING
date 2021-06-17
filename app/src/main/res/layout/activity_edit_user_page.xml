@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".EditUserPage">
 
     <TextView
@@ -11,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/side_margin600"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="224dp"
         android:text="개인정보 수정"
         android:textColor="@color/colorMain"
         android:textSize="@dimen/title600"
@@ -23,44 +24,75 @@
         android:id="@+id/linear_nickname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginLeft="@dimen/side_margin600"
+        android:layout_marginRight="@dimen/side_margin600"
         android:gravity="center_horizontal"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.362"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.25">
 
-        <EditText
+        <TextView
             android:id="@+id/edit_nickname"
-            android:layout_width="400dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/side_margin"
-            android:backgroundTint="@color/colorMain"
-            android:gravity="center_horizontal"
-            android:hint="이름 변경하기"
-            android:padding="@dimen/padding"
-            android:textAlignment="center"
+            android:layout_marginLeft="@dimen/side_margin"
+            android:layout_marginRight="@dimen/side_margin"
+            android:background="@drawable/text_button"
+            android:padding="@dimen/padding600"
+            android:text="이름 변경하기"
             android:textColor="@color/black"
             android:textCursorDrawable="@color/colorMain"
             android:textSize="@dimen/l_text600"
             tools:ignore="SpUsage" />
 
         <!--글자수 제한두어야 함-->
-        <EditText
+        <TextView
             android:id="@+id/edit_about"
-            android:layout_width="400dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/side_margin"
-            android:backgroundTint="@color/colorMain"
-            android:gravity="center_horizontal"
-            android:hint="한줄 소개 변경하기"
-            android:padding="@dimen/padding"
-            android:textAlignment="center"
-            android:textCursorDrawable="@color/colorMain"
+            android:layout_marginLeft="@dimen/side_margin"
+            android:layout_marginRight="@dimen/side_margin"
+            android:background="@drawable/text_button"
+            android:padding="@dimen/padding600"
+            android:text="한 줄 소개 변경하기"
+            android:textColor="@color/black"
             android:textSize="@dimen/l_text600"
             tools:ignore="SpUsage" />
 
+        <TextView
+            android:id="@+id/edit_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/side_margin"
+            android:layout_marginRight="@dimen/side_margin"
+            android:padding="@dimen/padding600"
+            android:text="친구 코드 변경하기"
+            android:background="@drawable/text_button"
+            android:textColor="@color/black"
+            android:textSize="@dimen/l_text600"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:id="@+id/logout_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/side_margin"
+            android:layout_marginRight="@dimen/side_margin"
+            android:padding="@dimen/padding600"
+            android:text="로그아웃"
+            android:textColor="@color/black"
+            android:textSize="@dimen/l_text600"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linear_nickname"
+            app:layout_constraintVertical_bias="0.35"
+            tools:ignore="SpUsage" />
+<!--
         <Button
             android:id="@+id/edit_save"
             android:layout_width="200dp"
@@ -71,21 +103,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/button600"
             tools:ignore="RtlSymmetry,SpUsage" />
+    -->
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/logout_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding600"
-        android:text="로그아웃"
-        android:textColor="@color/colorMain"
-        android:textSize="@dimen/m_text600"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linear_nickname"
-        app:layout_constraintVertical_bias="0.35"
-        tools:ignore="SpUsage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
