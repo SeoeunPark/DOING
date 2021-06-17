@@ -41,8 +41,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EditUserPage extends AppCompatActivity {
-    private EditText edit_nickname;
-    private EditText edit_about;
+    private TextView edit_nickname;
+    private TextView edit_about;
     private Button edit_save;
     private TextView logout_btn;
     private DatabaseReference mDatabase;
@@ -62,26 +62,41 @@ public class EditUserPage extends AppCompatActivity {
         user_id = user.getUid();
         edit_nickname = findViewById(R.id.edit_nickname);
         edit_about = findViewById(R.id.edit_about);
-        edit_save = findViewById(R.id.edit_save);
+//        edit_save = findViewById(R.id.edit_save);
         logout_btn = findViewById(R.id.logout_btn);
 
-        mDatabase.child("users").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//        mDatabase.child("my_friends").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
+//                edit_about.setText(userInfo.getAbout());
+//                edit_nickname.setText(userInfo.getName());
+//            }
+//        });
+
+//        edit_save.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                setUserData(edit_nickname.getText().toString(),"name");
+//                setUserData(edit_about.getText().toString(),"about");
+//                ActivityCompat.finishAffinity(EditUserPage.this);
+//                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//
+//            }
+//        });
+//
+
+        edit_nickname.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
-                edit_about.setText(userInfo.getAbout());
-                edit_nickname.setText(userInfo.getName());
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), EditName.class));
             }
         });
 
-        edit_save.setOnClickListener(new View.OnClickListener() {
+        edit_about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setUserData(edit_nickname.getText().toString(),"name");
-                setUserData(edit_about.getText().toString(),"about");
-                ActivityCompat.finishAffinity(EditUserPage.this);
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
+                startActivity(new Intent(getApplicationContext(), EditAbout.class));
             }
         });
 
@@ -93,11 +108,11 @@ public class EditUserPage extends AppCompatActivity {
                 finish();
             }
         });
-
-    }
-    private void setUserData(String n, String key){
-        Map<String, Object> conditionUpdates = new HashMap<>();
-        conditionUpdates.put("/users/" + user_id+"/"+key, n);
-        mDatabase.updateChildren(conditionUpdates);
+//
+//    private void setUserData(String n, String key){
+//        Map<String, Object> conditionUpdates = new HashMap<>();
+//        conditionUpdates.put("/users/" + user_id+"/"+key, n);
+//        mDatabase.updateChildren(conditionUpdates);
+//    }
     }
 }

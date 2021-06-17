@@ -56,7 +56,6 @@ public class Signin extends AppCompatActivity {
                                 user_email = currentUser.getEmail();
                                 if(currentUser != null && currentUser.isEmailVerified()){
                                     Toast.makeText(Signin.this,"환영합니다 :)",Toast.LENGTH_SHORT).show();
-
                                     //홈으로 이동
                                     Intent goHome = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(goHome);
@@ -64,11 +63,9 @@ public class Signin extends AppCompatActivity {
                                 }else {
                                     Toast.makeText(Signin.this,"메일 링크를 확인해주세요",Toast.LENGTH_SHORT).show();
                                 }
-
                             }else {
                                 String error = task.getException().getMessage();
                                 Toast.makeText(Signin.this,"error :"+error,Toast.LENGTH_SHORT).show();
-
                             }
                         }
                     });
@@ -83,7 +80,7 @@ public class Signin extends AppCompatActivity {
         go_signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Signup.class);
+                Intent intent = new Intent(getApplicationContext(), SignupEmail.class);
                 startActivity(intent);
             }
         });
