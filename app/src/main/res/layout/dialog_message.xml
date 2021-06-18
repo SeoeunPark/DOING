@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="left|center_vertical"
     android:orientation="vertical"
+    android:background="@drawable/message_dialog_backgrond"
     android:padding="16dp">
 
     <TextView

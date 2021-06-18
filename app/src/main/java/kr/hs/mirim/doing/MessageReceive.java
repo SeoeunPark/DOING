@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,13 +43,8 @@ public class MessageReceive extends Fragment {
     private FirebaseAuth auth;
     FirestoreRecyclerAdapter adapter;
     private RecyclerView receiveRv;
-    private ArrayList<MyMessageList> arrayList;
-    private Context context;
+    private View view;
 
-    public MessageReceive(ArrayList<MyMessageList> arrayList, Context context) {
-        this.arrayList = arrayList;
-        this.context = context;
-    }
     public MessageReceive() {
     }
 
@@ -75,11 +71,22 @@ public class MessageReceive extends Fragment {
             @NonNull
             @Override
             public MessageReceive.MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mymessage_list, parent,false);
-                final MessageReceive.MessageViewHolder holder = new MessageReceive.MessageViewHolder(view);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mymessage_list, parent,false);
                 auth = FirebaseAuth.getInstance();
-                FirebaseUser user = auth.getCurrentUser();
-                Dialog myDialog = new Dialog(parent.getContext());
+
+                return new MessageReceive.MessageViewHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull MessageReceive.MessageViewHolder holder, int position, @NonNull MyMessageList model) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                holder.list_name.setText("from. "+model.getReceiver_name());
+                holder.list_gist.setText(model.getGist());
+                if(!model.isRead()){
+                    holder.background.setBackgroundColor(getContext().getResources().getColor(R.color.message));
+                }
+
+                Dialog myDialog = new Dialog(getContext());
                 myDialog.setContentView(R.layout.dialog_message);
 
                 view.setOnClickListener(new View.OnClickListener() {
@@ -90,27 +97,24 @@ public class MessageReceive extends Fragment {
                         TextView message_time = (TextView)myDialog.findViewById(R.id.message_time);
                         TextView message_contents = (TextView)myDialog.findViewById(R.id.message_contents);
 
-                        message_gist.setText(arrayList.get(holder.getAdapterPosition()).getGist());
-                        message_name.setText("from. "+arrayList.get(holder.getAdapterPosition()).getSender_name());
-                        message_time.setText(arrayList.get(holder.getAdapterPosition()).getTime());
-                        message_contents.setText(arrayList.get(holder.getAdapterPosition()).getContent());
+                        message_gist.setText(model.getGist());
+                        message_name.setText(model.getSender_name());
+                        message_time.setText(model.getTime());
+                        message_contents.setText(model.getContent());
 
                         myDialog.show();
                         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        db.collection("Post").whereEqualTo("sender",model.getSender()).whereEqualTo("receiver",model.getReceiver()).whereEqualTo("time",model.getTime()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                for(QueryDocumentSnapshot q : queryDocumentSnapshots){
+                                    model.setRead(true);
+                                    db.collection("Post").document(q.getId()).set(model);
+                                }
+                            }
+                        });
                     }
                 });
-
-
-                return new MessageReceive.MessageViewHolder(view);
-            }
-
-            @Override
-            protected void onBindViewHolder(@NonNull MessageReceive.MessageViewHolder holder, int position, @NonNull MyMessageList model) {
-                holder.list_name.setText("from. "+model.getReceiver_name());
-                holder.list_gist.setText(model.getGist());
-                if(!model.isRead()){
-                    holder.background.setBackgroundColor(getContext().getResources().getColor(R.color.message));
-                }
             }
         };
         receiveRv.setHasFixedSize(true);
