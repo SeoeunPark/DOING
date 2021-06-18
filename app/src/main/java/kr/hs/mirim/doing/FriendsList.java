@@ -6,7 +6,9 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.constraintlayout.solver.widgets.Helper;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,28 +19,35 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class FriendsList extends Fragment implements View.OnClickListener{
     private String title;
@@ -133,6 +142,9 @@ public class FriendsList extends Fragment implements View.OnClickListener{
             public void onClick(View view) {
                 View dialogView = getLayoutInflater().inflate(R.layout.add_friends_dialog, null);
                 AlertDialog.Builder dialog = new AlertDialog.Builder(view.getContext());
+//                dialog.setTitle("친구코드를 입력해주세요");
+//                final EditText inputname = new EditText(getActivity());
+//                inputname.setInputType(InputType.TYPE_CLASS_TEXT);
                 dialog.setView(dialogView);
                 final AlertDialog alertDialog = dialog.create();
                 alertDialog.show();

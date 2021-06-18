@@ -1,112 +1,152 @@
 package kr.hs.mirim.doing;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MessageReceive#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MessageReceive extends Fragment {
     private FirebaseUser currentUser;
     private FirebaseAuth auth;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    FirestoreRecyclerAdapter adapter;
+    private RecyclerView receiveRv;
+    private View view;
 
     public MessageReceive() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MessageReceive.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MessageReceive newInstance(String param1, String param2) {
-        MessageReceive fragment = new MessageReceive();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_message_receive, container, false);
-
-        ListView rlistview = (ListView) v.findViewById(R.id.receivePost);
-        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
-        HashMap<String, String> item = new HashMap<>();
-
-        FirebaseFirestore fs = FirebaseFirestore.getInstance();
-        auth = FirebaseAuth.getInstance();
+        receiveRv = v.findViewById(R.id.receiveRv);
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String current_uid = FirebaseAuth.getInstance().getUid();
 
-        fs.collection("Post").whereEqualTo("receiver", current_uid).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        Query query = FirebaseFirestore.getInstance().collection("Post").whereEqualTo("receiver",current_uid);
+        FirestoreRecyclerOptions<MyMessageList> op = new FirestoreRecyclerOptions.Builder<MyMessageList>()
+                .setQuery(query, MyMessageList.class)
+                .build();
+
+        adapter = new FirestoreRecyclerAdapter<MyMessageList, MessageReceive.MessageViewHolder>(op) {
+            @NonNull
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (!task.getResult().isEmpty()) { // 일치값이 있을경우
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        fs.collection("User").document((String) document.getData().get("sender")).get().addOnCompleteListener( docu -> {
-                            item.put("sender", "보낸 사람 : "+(String) docu.getResult().get("name"));
-                        });
-                        item.put("title", "제목 : "+(String) document.getData().get("gist"));
-                        list.add(item);
-                        item.clear();
-                    }
-                    SimpleAdapter adapter = new SimpleAdapter(getActivity(), list, android.R.layout.simple_list_item_2, new String[]{"sender", "title"}, new int[] {android.R.id.text1, android.R.id.text2});
-                    rlistview.setAdapter(adapter);
-                }else{ //일치값이 없을경우
-                    Toast.makeText(getActivity(),"뭐냐 쪽지 없음", Toast.LENGTH_SHORT).show();
-                }
+            public MessageReceive.MessageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.mymessage_list, parent,false);
+                auth = FirebaseAuth.getInstance();
+
+                return new MessageReceive.MessageViewHolder(view);
             }
-        });
+
+            @Override
+            protected void onBindViewHolder(@NonNull MessageReceive.MessageViewHolder holder, int position, @NonNull MyMessageList model) {
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                holder.list_name.setText("from. "+model.getReceiver_name());
+                holder.list_gist.setText(model.getGist());
+                if(!model.isRead()){
+                    holder.background.setBackgroundColor(getContext().getResources().getColor(R.color.message));
+                }
+
+                Dialog myDialog = new Dialog(getContext());
+                myDialog.setContentView(R.layout.dialog_message);
+
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        TextView message_gist = (TextView)myDialog.findViewById(R.id.message_gist);
+                        TextView message_name = (TextView)myDialog.findViewById(R.id.message_name);
+                        TextView message_time = (TextView)myDialog.findViewById(R.id.message_time);
+                        TextView message_contents = (TextView)myDialog.findViewById(R.id.message_contents);
+
+                        message_gist.setText(model.getGist());
+                        message_name.setText(model.getSender_name());
+                        message_time.setText(model.getTime());
+                        message_contents.setText(model.getContent());
+
+                        myDialog.show();
+                        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        db.collection("Post").whereEqualTo("sender",model.getSender()).whereEqualTo("receiver",model.getReceiver()).whereEqualTo("time",model.getTime()).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                for(QueryDocumentSnapshot q : queryDocumentSnapshots){
+                                    model.setRead(true);
+                                    db.collection("Post").document(q.getId()).set(model);
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+        };
+        receiveRv.setHasFixedSize(true);
+        receiveRv.setLayoutManager(new LinearLayoutManager(getContext()));
+        receiveRv.setAdapter(adapter);
 
         return v;
+    }
+
+    private class MessageViewHolder extends RecyclerView.ViewHolder {
+        private TextView list_name;
+        private TextView list_gist;
+        private ConstraintLayout background;
+        public MessageViewHolder(@NonNull View itemView){
+            super(itemView);
+
+            list_name = itemView.findViewById(R.id.name);
+            list_gist = itemView.findViewById(R.id.gist);
+            background = itemView.findViewById(R.id.back);
+        }
+    }
+
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        adapter.stopListening();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
     }
 }
