@@ -101,9 +101,9 @@ public class SignupName extends AppCompatActivity {
         userMap.put("user_code", userCode);
 
         userMap2.put("name",name);
-        userMap2.put("about","");
+        userMap2.put("about","상태메세지를 설정해주세요");
         userMap2.put("condition",0);
-        userMap2.put("ing","");
+        userMap2.put("ing","무엇을 하고 있나요?");
         userMap2.put("level",0);
         userMap2.put("postOnOff",true);
 

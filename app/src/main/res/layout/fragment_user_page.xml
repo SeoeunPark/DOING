@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/side_margin600"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="@dimen/side_margin600"
         tools:context=".MainActivity">
 
@@ -44,7 +43,7 @@
             android:id="@+id/linear_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="120dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -55,7 +54,7 @@
                 android:id="@+id/nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/side_margin600"
+                android:layout_marginLeft="@dimen/side_margin"
                 android:text="    "
                 android:fontFamily="@font/cafe24surround"
                 android:textColor="@color/white"
@@ -90,7 +89,7 @@
                 android:id="@+id/I_doing"
                 android:layout_width="400dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/side_margin600"
+                android:layout_marginLeft="@dimen/side_margin"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/white"
                 android:cursorVisible="false"
@@ -135,28 +134,58 @@
             app:srcCompat="@drawable/emotion1" />
         -->
 
-        <TextView
-            android:id="@+id/about"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/side_margin600"
-            android:layout_marginRight="@dimen/side_margin600"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/login_edittext_style"
-            android:padding="18dp"
-            android:paddingStart="25dp"
-            android:paddingLeft="20dp"
-            android:text="상태메세지"
-            android:fontFamily="@font/cafe24ssurroundair"
-            android:textColor="@color/colorMain"
-            android:textSize="26sp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/now_doing"
-            app:layout_constraintVertical_bias="0.04"
-            tools:ignore="MissingConstraints,RtlSymmetry,SpUsage" />
+            app:layout_constraintVertical_bias="0.03">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="한 줄 소개"
+                android:textColor="@color/white"
+                android:textSize="@dimen/m_text600"
+                android:fontFamily="@font/cafe24ssurroundair"
+                android:layout_marginLeft="@dimen/side_margin600"
+                tools:ignore="SpUsage" />
+
+            <TextView
+                android:id="@+id/about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/side_margin"
+                android:layout_marginRight="@dimen/side_margin"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/login_edittext_style"
+                android:padding="18dp"
+                android:paddingStart="25dp"
+                android:paddingLeft="20dp"
+                android:text="상태메세지"
+                android:fontFamily="@font/cafe24ssurroundair"
+                android:textColor="@color/colorMain"
+                android:textSize="26sp"
+                tools:ignore="MissingConstraints,RtlSymmetry,SpUsage" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="현재 감정을 설정해보세요"
+            android:fontFamily="@font/cafe24ssurroundair"
+            android:textSize="@dimen/m_text600"
+            android:textColor="@color/black"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.45"
+            tools:ignore="SpUsage" />
 
         <com.hitomi.cmlibrary.CircleMenu
             android:id="@+id/profile_circle"

@@ -103,9 +103,6 @@ public class UserPage extends Fragment {
         user_id = user.getUid();
 
 
-        
-
-
         conditionColor = new String[]{"#ffad76", "#ffd392", "#ffb8f2", "#cccccc", "#baa9ff", "#a6c8ff", "#ff8d8d", "#8a9eb5"};
         conditionFace = new int[]{R.drawable.face1, R.drawable.face2, R.drawable.face3, R.drawable.face4, R.drawable.face5, R.drawable.face6, R.drawable.face7, R.drawable.face8};
 
@@ -118,8 +115,6 @@ public class UserPage extends Fragment {
                 .addSubMenu(Color.parseColor(conditionColor[5]),R.drawable.face6)
                 .addSubMenu(Color.parseColor(conditionColor[6]),R.drawable.face7)
                 .addSubMenu(Color.parseColor(conditionColor[7]),R.drawable.face8);
-
-
 
         //slider바 값이 바뀔 때
         busy.addOnChangeListener(new Slider.OnChangeListener() {
