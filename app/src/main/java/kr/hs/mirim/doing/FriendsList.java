@@ -1,6 +1,9 @@
 package kr.hs.mirim.doing;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +58,7 @@ public class FriendsList extends Fragment implements View.OnClickListener{
     private FirebaseDatabase database;
     private DatabaseReference drUser;
     private DatabaseReference drMF;
+    private Dialog add_dialog; // 커스텀 다이얼로그
     private int sort =0;
     private int alfriend = 0;
 
@@ -91,6 +96,10 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         user_id = user.getUid();
+
+        add_dialog = new Dialog(getActivity());
+        add_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE); // 타이틀 제거
+        add_dialog.setContentView(R.layout.add_friends_dialog);
 
         database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
         drMF = database.getReference("my_friends").child(user_id); // 현재 유저 친구리스트db
@@ -144,17 +153,11 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         add_friend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                View dialogView = getLayoutInflater().inflate(R.layout.add_friends_dialog, null);
-                AlertDialog.Builder dialog = new AlertDialog.Builder(view.getContext());
-//                dialog.setTitle("친구코드를 입력해주세요");
-//                final EditText inputname = new EditText(getActivity());
-//                inputname.setInputType(InputType.TYPE_CLASS_TEXT);
-                dialog.setView(dialogView);
-                final AlertDialog alertDialog = dialog.create();
-                alertDialog.show();
-                TextView ok_btn = dialogView.findViewById(R.id.okButton);
-                TextView cancel_btn = dialogView.findViewById(R.id.cancelButton);
-                EditText inputname = dialogView.findViewById(R.id.inputname);
+                add_dialog.show();
+                add_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                TextView ok_btn = add_dialog.findViewById(R.id.okButton);
+                TextView cancel_btn = add_dialog.findViewById(R.id.cancelButton);
+                EditText inputname = add_dialog.findViewById(R.id.inputname);
                 ok_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -183,13 +186,13 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                                 }
                             });
                         }else { Toast.makeText(getActivity(), "코드를 입력해주세요.", Toast.LENGTH_SHORT).show();}
-                        alertDialog.dismiss();
+                        add_dialog.dismiss();
                     }
                 });
                 cancel_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        alertDialog.dismiss();
+                        add_dialog.dismiss();
                     }
                 });
             }
