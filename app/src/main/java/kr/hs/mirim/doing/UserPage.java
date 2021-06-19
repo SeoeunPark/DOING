@@ -156,7 +156,7 @@ public class UserPage extends Fragment {
                 about.setText(userInfo.getAbout());
                 nickname.setText(userInfo.getName());
                 busy.setValue(userInfo.getLevel());
-                circleMenu.setMainMenu(Color.parseColor(conditionColor[userInfo.getCondition()-1]),conditionFace[userInfo.getCondition()-1],R.drawable.ic_baseline_close_24);
+//                circleMenu.setMainMenu(Color.parseColor(conditionColor[userInfo.getCondition()-1]),conditionFace[userInfo.getCondition()-1],R.drawable.ic_baseline_close_24);
             }
         });
 
@@ -225,21 +225,21 @@ public class UserPage extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mDatabase.child("users").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
-                I_doing.setText(userInfo.getIng());
-                about.setText(userInfo.getAbout());
-                nickname.setText(userInfo.getName());
-                busy.setValue(userInfo.getLevel());
-                circleMenu.setMainMenu(Color.parseColor(conditionColor[userInfo.getCondition()-1]),conditionFace[userInfo.getCondition()-1],R.drawable.ic_baseline_close_24);
-            }
-        });
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        mDatabase.child("users").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
+//                I_doing.setText(userInfo.getIng());
+//                about.setText(userInfo.getAbout());
+//                nickname.setText(userInfo.getName());
+//                busy.setValue(userInfo.getLevel());
+//                circleMenu.setMainMenu(Color.parseColor(conditionColor[userInfo.getCondition()-1]),conditionFace[userInfo.getCondition()-1],R.drawable.ic_baseline_close_24);
+//            }
+//        });
+//    }
 
     private void setUserData(Object n, String key){
         Map<String, Object> conditionUpdates = new HashMap<>();

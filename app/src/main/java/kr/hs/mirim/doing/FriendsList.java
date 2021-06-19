@@ -1,53 +1,42 @@
 package kr.hs.mirim.doing;
 
-import android.content.Intent;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
-import androidx.constraintlayout.solver.widgets.Helper;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
 
 public class FriendsList extends Fragment implements View.OnClickListener{
     private String title;
@@ -56,9 +45,8 @@ public class FriendsList extends Fragment implements View.OnClickListener{
     private FirebaseAuth auth;
     private TextView add_friend;
     private String user_id = null;
-
+    private TextView sort_friend;
     private SearchView searchView;
-
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -66,7 +54,7 @@ public class FriendsList extends Fragment implements View.OnClickListener{
     private FirebaseDatabase database;
     private DatabaseReference drUser;
     private DatabaseReference drMF;
-
+    private int sort =0;
     private int alfriend = 0;
 
     //인디케이터 만들기
@@ -93,6 +81,7 @@ public class FriendsList extends Fragment implements View.OnClickListener{
 
         add_friend = (TextView) rootView.findViewById(R.id.Add_friend);
         searchView = rootView.findViewById(R.id.searchView);
+        sort_friend = rootView.findViewById(R.id.Sort_friend);
         //recyclerview
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true); // 리사이클러뷰 기존성능 강화
@@ -135,8 +124,23 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                 }
             });
         }
-
-        //친구 추가하기
+        sort_friend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (sort == 0) {
+                    sort_friend.setText("바쁨 순");
+                    sort += 1;
+                    Collections.sort(arrayList, new Ascending());
+                    adapter.notifyDataSetChanged();
+                } else if (sort == 1) {
+                    sort_friend.setText("여유로운 순");
+                    Collections.sort(arrayList, new Descending());
+                    adapter.notifyDataSetChanged();
+                    sort = 0;
+                }
+            }
+        });
+//친구 추가하기
         add_friend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -229,6 +233,7 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                                 MyFriendList.setUid((String) dss.child("code").getValue());
                                 arrayList.add(MyFriendList);
                                 adapter = new FriendAdapter(arrayList, getContext());
+                                Collections.sort(arrayList, new Ascending());
                                 adapter.notifyDataSetChanged();
                                 recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                             }
@@ -242,4 +247,6 @@ public class FriendsList extends Fragment implements View.OnClickListener{
             }
         });
     }
+
+
 }

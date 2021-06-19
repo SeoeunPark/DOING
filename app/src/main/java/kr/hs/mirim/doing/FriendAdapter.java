@@ -247,4 +247,9 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
             }
         });
     }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
 }
