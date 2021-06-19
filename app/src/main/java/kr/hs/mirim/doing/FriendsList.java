@@ -233,7 +233,7 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                                 MyFriendList.setUid((String) dss.child("code").getValue());
                                 arrayList.add(MyFriendList);
                                 adapter = new FriendAdapter(arrayList, getContext());
-                                Collections.sort(arrayList, new Ascending());
+                                Collections.sort(arrayList, new Descending());
                                 adapter.notifyDataSetChanged();
                                 recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                             }
