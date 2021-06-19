@@ -3,50 +3,30 @@ package kr.hs.mirim.doing;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
-import android.os.Bundle;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import android.text.InputType;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.firestore.auth.User;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class EditUserPage extends AppCompatActivity {
     private LinearLayout edit_nickname;
@@ -62,6 +42,7 @@ public class EditUserPage extends AppCompatActivity {
     private Button copy_link_btn;
     private FirebaseDatabase database;
     private DatabaseReference drMF;
+    Dialog logout_dialog;
 
 
     @Override
@@ -80,6 +61,9 @@ public class EditUserPage extends AppCompatActivity {
         copy_link_btn  = findViewById(R.id.copy_link_btn);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        logout_dialog = new Dialog(EditUserPage.this);
+        logout_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        logout_dialog.setContentView(R.layout.logout_dialog);
 
         copy_link.setText("https://doing.emirim.kr/?id="+user_id);
 
@@ -137,8 +121,32 @@ public class EditUserPage extends AppCompatActivity {
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                logout();
+            }
+        });
+    }
+
+    public void logout(){
+        logout_dialog.show(); // 다이얼로그 띄우기
+        logout_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); // 투명 배경
+
+        // 아니오 버튼
+        TextView noBtn = logout_dialog.findViewById(R.id.cancelButton);
+        noBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 원하는 기능 구현
+                logout_dialog.dismiss(); // 다이얼로그 닫기
+            }
+        });
+        // 네 버튼
+        logout_dialog.findViewById(R.id.okButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 원하는 기능 구현
                 auth.getInstance().signOut();
                 startActivity(new Intent(getApplicationContext(), Signin.class));
+                logout_dialog.dismiss(); // 다이얼로그 닫기
                 finish();
             }
         });

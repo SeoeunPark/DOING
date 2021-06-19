@@ -12,6 +12,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -57,10 +58,13 @@ public class UserPage extends Fragment {
     private CircleMenu circleMenu;
     private ImageView showColor;
     private TextView about;
+    private long lastTimeBackPressed;
 
     private FirebaseAuth auth;
     private String user_id = null;
     private DatabaseReference mDatabase;
+    private long mLastClickTime = 0;
+    private long mLastClickTime_a = 0;
 
     String[] conditionColor;
     int[] conditionFace;
@@ -153,6 +157,30 @@ public class UserPage extends Fragment {
                 nickname.setText(userInfo.getName());
                 busy.setValue(userInfo.getLevel());
                 circleMenu.setMainMenu(Color.parseColor(conditionColor[userInfo.getCondition()-1]),conditionFace[userInfo.getCondition()-1],R.drawable.ic_baseline_close_24);
+            }
+        });
+
+        nickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                        Intent goName = new Intent(view.getContext(), EditName.class);
+                        startActivity(goName);
+                        return;
+                    }
+                    mLastClickTime = SystemClock.elapsedRealtime();
+                }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime_a < 1000){
+                    Intent goAbout = new Intent(view.getContext(), EditAbout.class);
+                    startActivity(goAbout);
+                    return;
+                }
+                mLastClickTime_a = SystemClock.elapsedRealtime();
             }
         });
 
