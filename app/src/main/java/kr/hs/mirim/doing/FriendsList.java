@@ -162,6 +162,7 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                     @Override
                     public void onClick(View v) {
                         String username = inputname.getText().toString();
+                        inputname.setText("");
                         if (!TextUtils.isEmpty(username)) {
                             db.collection("User").whereEqualTo("user_code", username).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
@@ -224,9 +225,6 @@ public class FriendsList extends Fragment implements View.OnClickListener{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 arrayList.clear();
-                adapter = new FriendAdapter(arrayList, getContext());
-                adapter.notifyDataSetChanged();
-                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                 for(DataSnapshot dss : snapshot.getChildren()){
                     if(!dss.getKey().equals("id")){
                         drUser.child((String) dss.child("code").getValue()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
