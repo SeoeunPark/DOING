@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".MessageReceive">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/receiveRv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/receivePost"/>
-
+        android:layout_height="match_parent" />
 </FrameLayout>

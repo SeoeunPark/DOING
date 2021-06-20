@@ -50,9 +50,8 @@ public class UserPage extends Fragment {
     private TextView nickname_nim;
     private TextView I_doing;
     private ImageView edit_pofile;
-    private ImageView send_post;
     private Switch text_onoff_direct;
-    private Button message;
+    private ImageView message;
     private String title;
     private Slider busy;
     private CircleMenu circleMenu;
@@ -92,8 +91,7 @@ public class UserPage extends Fragment {
         nickname_nim = (TextView)rootView.findViewById(R.id.nickname_nim);
         I_doing = (EditText)rootView.findViewById(R.id.I_doing);
         edit_pofile = (ImageView) rootView.findViewById(R.id.edit_pofile);
-        send_post = (ImageView) rootView.findViewById(R.id.direct);
-        message = (Button)rootView.findViewById(R.id.message);
+        message = rootView.findViewById(R.id.message);
         circleMenu = rootView.findViewById(R.id.profile_circle);
         showColor = rootView.findViewById(R.id.showColor);
         busy = rootView.findViewById(R.id.busy);
@@ -167,13 +165,6 @@ public class UserPage extends Fragment {
             }
         });
 
-        send_post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goHome = new Intent(view.getContext(), sendPost.class);
-                startActivity(goHome);
-            }
-        });
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
