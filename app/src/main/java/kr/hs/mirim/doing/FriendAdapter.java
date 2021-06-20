@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,8 +45,8 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         private FirebaseAuth auth;
         private String user_id = null;
         private DatabaseReference dbr;
-        //어댑터에서 액티비티 액션을 가져올 때 context가 필요한데 어댑터에는 context가 없다.
-        //선택한 액티비티에 대한 context를 가져올 때 필요하다.
+        Dialog delete_fr_dialog;
+
 
         public FriendAdapter(ArrayList<MyFriendList> arrayList, Context context) {
             this.arrayList = arrayList;
@@ -66,6 +67,10 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         Button dia_user_delete = (Button)myDialog.findViewById(R.id.dia_user_delete);
         Button dia_user_message = (Button)myDialog.findViewById(R.id.dia_user_message);
 
+        //친구 삭제
+        delete_fr_dialog = new Dialog(parent.getContext());
+        delete_fr_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        delete_fr_dialog.setContentView(R.layout.deletefriend_dialog);
 
         dia_user_message.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,14 +86,32 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         dia_user_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("와 갑자기 안돼",arrayList.get(holder.getAdapterPosition()).getUid());
-                dbr.orderByChild("code").equalTo(String.valueOf(arrayList.get(holder.getAdapterPosition()).getUid())).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                myDialog.dismiss();
+                delete_fr_dialog.show(); // 다이얼로그 띄우기
+                delete_fr_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); // 투명 배경
+                // 아니오 버튼
+                TextView noBtn = delete_fr_dialog.findViewById(R.id.cancelButton);
+                noBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onSuccess(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot dsDel: dataSnapshot.getChildren()) {
-                            dsDel.getRef().removeValue();
-                            myDialog.dismiss();
-                        }
+                    public void onClick(View view) {
+                        // 원하는 기능 구현
+                        delete_fr_dialog.dismiss(); // 다이얼로그 닫기
+                    }
+                });
+                // 네 버튼
+                delete_fr_dialog.findViewById(R.id.okButton).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // 원하는 기능 구현
+                        dbr.orderByChild("code").equalTo(String.valueOf(arrayList.get(holder.getAdapterPosition()).getUid())).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                            @Override
+                            public void onSuccess(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot dsDel: dataSnapshot.getChildren()) {
+                                    dsDel.getRef().removeValue();
+                                }
+                            }
+                        });
+                        delete_fr_dialog.dismiss(); // 다이얼로그 닫기
                     }
                 });
             }
@@ -201,4 +224,33 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         void onItemClick(MyFriendList MyFriendList);
     }
     public void setOnItemClickListener(OnItemClickListener listener) { this.listener = listener;  }
+
+    public void deleteFriend(){
+        delete_fr_dialog.show(); // 다이얼로그 띄우기
+        delete_fr_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT)); // 투명 배경
+
+        // 아니오 버튼
+        TextView noBtn = delete_fr_dialog.findViewById(R.id.cancelButton);
+        noBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 원하는 기능 구현
+                delete_fr_dialog.dismiss(); // 다이얼로그 닫기
+            }
+        });
+        // 네 버튼
+        delete_fr_dialog.findViewById(R.id.okButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 원하는 기능 구현
+
+                delete_fr_dialog.dismiss(); // 다이얼로그 닫기
+            }
+        });
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
 }

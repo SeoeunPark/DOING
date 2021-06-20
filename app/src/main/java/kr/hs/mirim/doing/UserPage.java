@@ -12,6 +12,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -50,18 +51,20 @@ public class UserPage extends Fragment {
     private TextView nickname_nim;
     private TextView I_doing;
     private ImageView edit_pofile;
-    private ImageView send_post;
     private Switch text_onoff_direct;
-    private Button message;
+    private ImageView message;
     private String title;
     private Slider busy;
     private CircleMenu circleMenu;
     private ImageView showColor;
     private TextView about;
+    private long lastTimeBackPressed;
 
     private FirebaseAuth auth;
     private String user_id = null;
     private DatabaseReference mDatabase;
+    private long mLastClickTime = 0;
+    private long mLastClickTime_a = 0;
 
     String[] conditionColor;
     int[] conditionFace;
@@ -92,8 +95,7 @@ public class UserPage extends Fragment {
         nickname_nim = (TextView)rootView.findViewById(R.id.nickname_nim);
         I_doing = (EditText)rootView.findViewById(R.id.I_doing);
         edit_pofile = (ImageView) rootView.findViewById(R.id.edit_pofile);
-        send_post = (ImageView) rootView.findViewById(R.id.direct);
-        message = (Button)rootView.findViewById(R.id.message);
+        message = rootView.findViewById(R.id.message);
         circleMenu = rootView.findViewById(R.id.profile_circle);
         showColor = rootView.findViewById(R.id.showColor);
         busy = rootView.findViewById(R.id.busy);
@@ -103,9 +105,6 @@ public class UserPage extends Fragment {
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
         user_id = user.getUid();
-
-
-        
 
 
         conditionColor = new String[]{"#ffad76", "#ffd392", "#ffb8f2", "#cccccc", "#baa9ff", "#a6c8ff", "#ff8d8d", "#8a9eb5"};
@@ -120,8 +119,6 @@ public class UserPage extends Fragment {
                 .addSubMenu(Color.parseColor(conditionColor[5]),R.drawable.face6)
                 .addSubMenu(Color.parseColor(conditionColor[6]),R.drawable.face7)
                 .addSubMenu(Color.parseColor(conditionColor[7]),R.drawable.face8);
-
-
 
         //slider바 값이 바뀔 때
         busy.addOnChangeListener(new Slider.OnChangeListener() {
@@ -159,7 +156,31 @@ public class UserPage extends Fragment {
                 about.setText(userInfo.getAbout());
                 nickname.setText(userInfo.getName());
                 busy.setValue(userInfo.getLevel());
-                circleMenu.setMainMenu(Color.parseColor(conditionColor[userInfo.getCondition()-1]),conditionFace[userInfo.getCondition()-1],R.drawable.ic_baseline_close_24);
+//                circleMenu.setMainMenu(Color.parseColor(conditionColor[userInfo.getCondition()-1]),conditionFace[userInfo.getCondition()-1],R.drawable.ic_baseline_close_24);
+            }
+        });
+
+        nickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                        Intent goName = new Intent(view.getContext(), EditName.class);
+                        startActivity(goName);
+                        return;
+                    }
+                    mLastClickTime = SystemClock.elapsedRealtime();
+                }
+        });
+
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime_a < 1000){
+                    Intent goAbout = new Intent(view.getContext(), EditAbout.class);
+                    startActivity(goAbout);
+                    return;
+                }
+                mLastClickTime_a = SystemClock.elapsedRealtime();
             }
         });
 
@@ -172,13 +193,6 @@ public class UserPage extends Fragment {
             }
         });
 
-        send_post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goHome = new Intent(view.getContext(), sendPost.class);
-                startActivity(goHome);
-            }
-        });
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -211,21 +225,21 @@ public class UserPage extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mDatabase.child("users").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
-                I_doing.setText(userInfo.getIng());
-                about.setText(userInfo.getAbout());
-                nickname.setText(userInfo.getName());
-                busy.setValue(userInfo.getLevel());
-                circleMenu.setMainMenu(Color.parseColor(conditionColor[userInfo.getCondition()-1]),conditionFace[userInfo.getCondition()-1],R.drawable.ic_baseline_close_24);
-            }
-        });
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        mDatabase.child("users").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
+//                I_doing.setText(userInfo.getIng());
+//                about.setText(userInfo.getAbout());
+//                nickname.setText(userInfo.getName());
+//                busy.setValue(userInfo.getLevel());
+//                circleMenu.setMainMenu(Color.parseColor(conditionColor[userInfo.getCondition()-1]),conditionFace[userInfo.getCondition()-1],R.drawable.ic_baseline_close_24);
+//            }
+//        });
+//    }
 
     private void setUserData(Object n, String key){
         Map<String, Object> conditionUpdates = new HashMap<>();

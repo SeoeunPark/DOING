@@ -1,6 +1,8 @@
 package kr.hs.mirim.doing;
 
-public class MyFriendList {
+import java.util.ArrayList;
+
+public class MyFriendList{
     private String about;
     private int condition;
     private String ing;

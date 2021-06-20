@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="400dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="left|center_vertical"
+    android:orientation="vertical"
+    android:background="@drawable/message_dialog_backgrond"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/message_gist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="제목"
+        android:fontFamily="@font/cafe24surround"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/message_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message_gist"
+        android:text="사용자 이름"
+        android:fontFamily="@font/cafe24ssurroundair"
+        android:textColor="@color/black"
+        android:textSize="23sp" />
+    <TextView
+        android:id="@+id/message_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message_name"
+        android:text="날짜"
+        android:fontFamily="@font/cafe24ssurroundair"
+        android:textColor="@color/black"
+        android:textSize="23sp" />
+    <TextView
+        android:id="@+id/message_contents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message_time"
+        android:text="내용"
+        android:fontFamily="@font/cafe24ssurroundair"
+        android:textColor="@color/black"
+        android:textSize="23sp" />
+
+
+
+
+
+
+</RelativeLayout>
