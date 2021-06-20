@@ -233,14 +233,18 @@ public class UserPage extends Fragment {
         });
 
 
-        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+
+
         edit_doing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                I_doing.setTextIsSelectable(true);
 //                I_doing.performClick();
 //                I_doing.setSelectAllOnFocus(true);
-//                imm.showSoftInput(I_doing, InputMethodManager.SHOW_IMPLICIT);
+//                I_doing.setSelection(I_doing.getText().length());
+//                InputMethodManager inputMMg = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
+//                inputMMg.showSoftInput(I_doing, InputMethodManager.SHOW_IMPLICIT);
+
             }
         });
 

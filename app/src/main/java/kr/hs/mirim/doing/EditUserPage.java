@@ -9,6 +9,7 @@ import android.content.ClipboardManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.view.View;
@@ -104,6 +105,16 @@ public class EditUserPage extends AppCompatActivity {
                 Toast.makeText(EditUserPage.this, "링크가 복사되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
+
+        copy_link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(copy_link.getText().toString()));
+                startActivity(browserIntent);
+            }
+        });
+
+
         edit_nickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
