@@ -14,42 +14,48 @@
         android:layout_marginRight="@dimen/side_margin600"
         tools:context=".MainActivity">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/direct"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="40dp"
-            android:orientation="horizontal"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/direct_icon"
+            tools:srcCompat="@drawable/direct_icon"
+            tools:ignore="ContentDescription"  />
+        <Button
+            android:id="@+id/message"
+            android:layout_width="50dp"
+            android:layout_marginLeft="100dp"
+            android:layout_height="50dp"
+            android:background="#898989"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="리스트 버튼"/>
 
-            <ImageView
-                android:id="@+id/direct"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:srcCompat="@drawable/direct_icon"
-                tools:ignore="ContentDescription"
-                tools:srcCompat="@drawable/direct_icon" />
+        <ImageView
+            android:id="@+id/help"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toStartOf="@+id/edit_pofile"
+            app:layout_constraintHorizontal_bias="0.96"
+            app:layout_constraintStart_toEndOf="@+id/direct"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/question_mark"
+            tools:srcCompat="@drawable/question_mark" />
 
-            <Button
-                android:id="@+id/message"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="100dp"
-                android:background="#898989"
-                android:text="리스트 버튼"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/edit_pofile"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                app:srcCompat="@drawable/user_icon"
-                tools:ignore="ContentDescription"
-                tools:srcCompat="@drawable/user_icon" />
-
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/edit_pofile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/user_icon"
+            tools:srcCompat="@drawable/user_icon"
+            tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:id="@+id/linear_nickname"
@@ -104,13 +110,15 @@
                 android:layout_marginLeft="@dimen/side_margin"
                 android:layout_marginTop="10dp"
                 android:textColor="@color/white"
-                android:cursorVisible="false"
+                android:backgroundTint="@color/white"
+                android:textCursorDrawable="@color/white"
                 android:text=""
                 android:maxLines="1"
                 android:maxLength="10"
                 android:fontFamily="@font/cafe24surround"
                 android:textSize="36sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="UnusedAttribute" />
 
             <TextView
                 android:layout_width="wrap_content"

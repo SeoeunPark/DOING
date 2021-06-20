@@ -1,8 +1,8 @@
 package kr.hs.mirim.doing;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,24 +10,24 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 public class sendPost extends AppCompatActivity {
     String[] customString = new String[5];
 
     private FirebaseUser currentUser;
     private FirebaseAuth auth;
+    kr.hs.mirim.doing.ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +36,9 @@ public class sendPost extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String current_uid = FirebaseAuth.getInstance().getUid();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progressDialog.setCancelable(false);
 
         customString = new String[]{"기본", "긴급사항입니다!", "면담원해요", "놀자", "전화주세요"};
 
@@ -52,7 +55,9 @@ public class sendPost extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String content = contentEt.getText().toString().trim();
+                progressDialog.show();
                 if(content.equals("")){
+                    progressDialog.dismiss();
                     Toast.makeText(sendPost.this,"내용을 입력해주세요",Toast.LENGTH_SHORT).show();
                 }else {
                     uploadPost(content, "보내는 사람",spn.getSelectedItem().toString());
@@ -84,6 +89,7 @@ public class sendPost extends AppCompatActivity {
         db.collection("Post").document().set(postMap).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 finish();
+                progressDialog.dismiss();
                 Toast.makeText(sendPost.this, "쪽지를 전송했습니다", Toast.LENGTH_SHORT).show();
                 Intent gotoPostList = new Intent(getApplicationContext(), PostList.class);
                 startActivity(gotoPostList);
