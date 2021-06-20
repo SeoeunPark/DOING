@@ -87,6 +87,7 @@
 
             <EditText
                 android:id="@+id/I_doing"
+                android:selectAllOnFocus="false"
                 android:layout_width="400dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/side_margin"

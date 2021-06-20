@@ -158,6 +158,7 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                 TextView ok_btn = add_dialog.findViewById(R.id.okButton);
                 TextView cancel_btn = add_dialog.findViewById(R.id.cancelButton);
                 EditText inputname = add_dialog.findViewById(R.id.inputname);
+                inputname.setText("");
                 ok_btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

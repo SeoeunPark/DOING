@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -45,11 +47,13 @@ import org.w3c.dom.Text;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 public class UserPage extends Fragment {
     private ImageView profile;
     private TextView nickname;
     private TextView nickname_nim;
-    private TextView I_doing;
+    private EditText I_doing;
     private ImageView edit_pofile;
     private Switch text_onoff_direct;
     private ImageView message;
@@ -69,6 +73,9 @@ public class UserPage extends Fragment {
     String[] conditionColor;
     int[] conditionFace;
 
+    private String shared = "condition";
+    private int select = 0;
+
     private int page;
 
     //인디케이터 만들기
@@ -86,6 +93,9 @@ public class UserPage extends Fragment {
         super.onCreate(savedInstanceState);
         page = getArguments().getInt("someInt",0);
         title = getArguments().getString("someTitle");
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(shared, 0);
+        select = sharedPreferences.getInt("key",0);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,6 +110,7 @@ public class UserPage extends Fragment {
         showColor = rootView.findViewById(R.id.showColor);
         busy = rootView.findViewById(R.id.busy);
         about = rootView.findViewById(R.id.about);
+        ImageView edit_doing = rootView.findViewById(R.id.edit_doing);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
@@ -110,7 +121,7 @@ public class UserPage extends Fragment {
         conditionColor = new String[]{"#ffad76", "#ffd392", "#ffb8f2", "#cccccc", "#baa9ff", "#a6c8ff", "#ff8d8d", "#8a9eb5"};
         conditionFace = new int[]{R.drawable.face1, R.drawable.face2, R.drawable.face3, R.drawable.face4, R.drawable.face5, R.drawable.face6, R.drawable.face7, R.drawable.face8};
 
-        circleMenu.setMainMenu(Color.parseColor(conditionColor[3]),conditionFace[3],R.drawable.ic_baseline_close_24);
+        circleMenu.setMainMenu(Color.parseColor(conditionColor[select]),conditionFace[select],R.drawable.ic_baseline_close_24);
         circleMenu.addSubMenu(Color.parseColor(conditionColor[0]),R.drawable.face1)
                 .addSubMenu(Color.parseColor(conditionColor[1]),R.drawable.face2)
                 .addSubMenu(Color.parseColor(conditionColor[2]),R.drawable.face3)
@@ -144,6 +155,7 @@ public class UserPage extends Fragment {
             public void onMenuSelected(int index) {
                 circleMenu.setMainMenu(Color.parseColor(conditionColor[index]),conditionFace[index],R.drawable.ic_baseline_close_24);
                 setUserData(index+1,"condition");
+                select = index;
             }
         });
 
@@ -221,6 +233,18 @@ public class UserPage extends Fragment {
         });
 
 
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
+        edit_doing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                I_doing.setTextIsSelectable(true);
+//                I_doing.performClick();
+//                I_doing.setSelectAllOnFocus(true);
+//                imm.showSoftInput(I_doing, InputMethodManager.SHOW_IMPLICIT);
+            }
+        });
+
+
 
         return rootView;
     }
@@ -250,6 +274,16 @@ public class UserPage extends Fragment {
     public UserPage() {
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(shared, 0);
+        SharedPreferences.Editor editor  = sharedPreferences.edit();
+        editor.putInt("key", select);
+        editor.commit();
+
+    }
 }
 
 
