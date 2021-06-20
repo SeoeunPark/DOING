@@ -73,7 +73,7 @@
             <ImageView
                 android:layout_width="46dp"
                 android:layout_height="46dp"
-                android:layout_marginLeft="370dp"
+                android:layout_marginLeft="400dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/side_margin600"
                 android:src="@drawable/arrow"
@@ -102,7 +102,7 @@
             <ImageView
                 android:layout_width="46dp"
                 android:layout_height="46dp"
-                android:layout_marginLeft="301dp"
+                android:layout_marginLeft="330dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/side_margin600"
                 android:src="@drawable/arrow"
@@ -257,7 +257,7 @@
         android:background="@drawable/login_button_style"
         android:fontFamily="@font/cafe24ssurroundair"
         android:gravity="center_horizontal"
-        android:padding="@dimen/padding600"
+        android:padding="@dimen/padding"
         android:text="로그아웃"
         android:textColor="@color/white"
         android:textSize="@dimen/l_text600"

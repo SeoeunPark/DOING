@@ -33,7 +33,7 @@
             android:layout_marginTop="40dp"
             app:layout_constraintEnd_toStartOf="@+id/edit_pofile"
             app:layout_constraintHorizontal_bias="0.96"
-            app:layout_constraintStart_toEndOf="@+id/direct"
+            app:layout_constraintStart_toEndOf="@+id/message"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/question_mark"
             tools:srcCompat="@drawable/question_mark" />
