@@ -62,7 +62,7 @@ public class MessageReceive extends Fragment {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String current_uid = FirebaseAuth.getInstance().getUid();
 
-        Query query = FirebaseFirestore.getInstance().collection("Post").whereEqualTo("receiver",current_uid);
+        Query query = FirebaseFirestore.getInstance().collection("Post").whereEqualTo("receiver",current_uid).orderBy("time", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<MyMessageList> op = new FirestoreRecyclerOptions.Builder<MyMessageList>()
                 .setQuery(query, MyMessageList.class)
                 .build();
@@ -80,8 +80,10 @@ public class MessageReceive extends Fragment {
             @Override
             protected void onBindViewHolder(@NonNull MessageReceive.MessageViewHolder holder, int position, @NonNull MyMessageList model) {
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                holder.list_name.setText("from. "+model.getReceiver_name());
+                holder.list_name.setText("From. "+model.getReceiver_name());
                 holder.list_gist.setText(model.getGist());
+                holder.list_contents.setText(model.getContent());
+                holder.list_time.setText(model.getTime());
                 if(!model.isRead()){
                     holder.background.setBackgroundColor(getContext().getResources().getColor(R.color.message));
                 }
@@ -98,7 +100,7 @@ public class MessageReceive extends Fragment {
                         TextView message_contents = (TextView)myDialog.findViewById(R.id.message_contents);
 
                         message_gist.setText(model.getGist());
-                        message_name.setText(model.getSender_name());
+                        message_name.setText("From. "+model.getSender_name());
                         message_time.setText(model.getTime());
                         message_contents.setText(model.getContent());
 
@@ -127,12 +129,16 @@ public class MessageReceive extends Fragment {
     private class MessageViewHolder extends RecyclerView.ViewHolder {
         private TextView list_name;
         private TextView list_gist;
+        private TextView list_contents;
+        private TextView list_time;
         private ConstraintLayout background;
         public MessageViewHolder(@NonNull View itemView){
             super(itemView);
 
             list_name = itemView.findViewById(R.id.name);
             list_gist = itemView.findViewById(R.id.gist);
+            list_contents = itemView.findViewById(R.id.contents);
+            list_time = itemView.findViewById(R.id.time);
             background = itemView.findViewById(R.id.back);
         }
     }

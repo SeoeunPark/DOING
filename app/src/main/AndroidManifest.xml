@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="kr.hs.mirim.doing">
 
     <application
@@ -20,7 +21,8 @@
         <activity
             android:name=".sendPost"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".PostList"/>
+        <activity android:name=".PostList"
+            tools:ignore="MissingClass" />
         <activity
             android:name=".SignupEmail"
             android:windowSoftInputMode="adjustPan" />

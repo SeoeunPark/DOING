@@ -105,7 +105,6 @@ public class EditUserPage extends AppCompatActivity {
                 Toast.makeText(EditUserPage.this, "링크가 복사되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
-
         copy_link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,8 +112,6 @@ public class EditUserPage extends AppCompatActivity {
                 startActivity(browserIntent);
             }
         });
-
-
         edit_nickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

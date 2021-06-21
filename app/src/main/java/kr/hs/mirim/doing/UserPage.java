@@ -47,13 +47,11 @@ import org.w3c.dom.Text;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.content.Context.INPUT_METHOD_SERVICE;
-
 public class UserPage extends Fragment {
     private ImageView profile;
     private TextView nickname;
     private TextView nickname_nim;
-    private EditText I_doing;
+    private TextView I_doing;
     private ImageView edit_pofile;
     private Switch text_onoff_direct;
     private ImageView message;
@@ -175,13 +173,13 @@ public class UserPage extends Fragment {
         nickname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-                        Intent goName = new Intent(view.getContext(), EditName.class);
-                        startActivity(goName);
-                        return;
-                    }
-                    mLastClickTime = SystemClock.elapsedRealtime();
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    Intent goName = new Intent(view.getContext(), EditName.class);
+                    startActivity(goName);
+                    return;
                 }
+                mLastClickTime = SystemClock.elapsedRealtime();
+            }
         });
 
         about.setOnClickListener(new View.OnClickListener() {
@@ -281,7 +279,6 @@ public class UserPage extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
         SharedPreferences sharedPreferences = getContext().getSharedPreferences(shared, 0);
         SharedPreferences.Editor editor  = sharedPreferences.edit();
         editor.putInt("key", select);
@@ -289,5 +286,3 @@ public class UserPage extends Fragment {
 
     }
 }
-
-
