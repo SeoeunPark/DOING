@@ -125,6 +125,7 @@
             android:background="@drawable/botton_line_3"
             tools:ignore="SpUsage" />
 
+
         <LinearLayout
             android:id="@+id/copy_my_code"
             android:layout_width="match_parent"
