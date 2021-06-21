@@ -47,7 +47,6 @@ public class EditAbout extends AppCompatActivity {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
 //                edit_about.setText(userInfo.getAbout());
-                edit_about.setText(userInfo.getAbout());
                 now_about.setText(userInfo.getAbout());
             }
         });
