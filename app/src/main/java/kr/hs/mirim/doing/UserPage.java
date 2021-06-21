@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +61,7 @@ public class UserPage extends Fragment {
     private CircleMenu circleMenu;
     private ImageView showColor;
     private TextView about;
+    private LinearLayout about_click;
     private long lastTimeBackPressed;
 
     private FirebaseAuth auth;
@@ -108,7 +110,7 @@ public class UserPage extends Fragment {
         showColor = rootView.findViewById(R.id.showColor);
         busy = rootView.findViewById(R.id.busy);
         about = rootView.findViewById(R.id.about);
-        ImageView edit_doing = rootView.findViewById(R.id.edit_doing);
+        about_click = rootView.findViewById(R.id.about_click);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
@@ -229,43 +231,9 @@ public class UserPage extends Fragment {
                 setUserData(newtext,"ing");
             }
         });
-
-
-
-
-        edit_doing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                I_doing.setTextIsSelectable(true);
-//                I_doing.performClick();
-//                I_doing.setSelectAllOnFocus(true);
-//                I_doing.setSelection(I_doing.getText().length());
-//                InputMethodManager inputMMg = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
-//                inputMMg.showSoftInput(I_doing, InputMethodManager.SHOW_IMPLICIT);
-
-            }
-        });
-
-
-
         return rootView;
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        mDatabase.child("users").child(user_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
-//                I_doing.setText(userInfo.getIng());
-//                about.setText(userInfo.getAbout());
-//                nickname.setText(userInfo.getName());
-//                busy.setValue(userInfo.getLevel());
-//                circleMenu.setMainMenu(Color.parseColor(conditionColor[userInfo.getCondition()-1]),conditionFace[userInfo.getCondition()-1],R.drawable.ic_baseline_close_24);
-//            }
-//        });
-//    }
 
     private void setUserData(Object n, String key){
         Map<String, Object> conditionUpdates = new HashMap<>();

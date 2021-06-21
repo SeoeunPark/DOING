@@ -22,8 +22,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/direct_icon"
-            tools:srcCompat="@drawable/direct_icon"
-            tools:ignore="ContentDescription"  />
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@drawable/direct_icon" />
 
 
         <ImageView
@@ -46,8 +46,8 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/user_icon"
-            tools:srcCompat="@drawable/user_icon"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@drawable/user_icon" />
 
         <LinearLayout
             android:id="@+id/linear_nickname"
@@ -65,8 +65,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/side_margin"
-                android:text="    "
                 android:fontFamily="@font/cafe24surround"
+                android:text="    "
                 android:textColor="@color/white"
                 android:textSize="32sp"
                 android:textStyle="bold" />
@@ -76,8 +76,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="@string/nim"
                 android:fontFamily="@font/cafe24ssurroundair"
+                android:text="@string/nim"
                 android:textColor="@color/white"
                 android:textSize="32sp" />
 
@@ -101,13 +101,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/side_margin"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/white"
                 android:backgroundTint="@color/white"
-                android:textCursorDrawable="@color/white"
-                android:text=""
-                android:maxLines="1"
-                android:maxLength="10"
                 android:fontFamily="@font/cafe24surround"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:text=""
+                android:textColor="@color/white"
+                android:textCursorDrawable="@color/white"
                 android:textSize="36sp"
                 android:textStyle="bold"
                 tools:ignore="UnusedAttribute" />
@@ -115,21 +115,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/cafe24ssurroundair"
                 android:text="@string/ing"
                 android:textColor="@color/white"
                 android:textSize="36sp"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/cafe24ssurroundair"
                 tools:ignore="RtlHardcoded" />
-
-            <!-- 이거 저장버튼으로 써 -->
-            <ImageView
-                android:id="@+id/edit_doing"
-                android:layout_width="50dp"
-                android:layout_marginTop="10dp"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/edit_icon" />
 
         </LinearLayout>
 
@@ -147,6 +139,7 @@
         -->
 
         <LinearLayout
+            android:id="@+id/about_click"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -159,11 +152,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/side_margin600"
+                android:fontFamily="@font/cafe24ssurroundair"
                 android:text="한 줄 소개"
                 android:textColor="@color/white"
                 android:textSize="@dimen/m_text600"
-                android:fontFamily="@font/cafe24ssurroundair"
-                android:layout_marginLeft="@dimen/side_margin600"
                 tools:ignore="SpUsage" />
 
             <TextView
@@ -171,14 +164,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/side_margin"
-                android:layout_marginRight="@dimen/side_margin"
                 android:layout_marginTop="5dp"
+                android:layout_marginRight="@dimen/side_margin"
                 android:background="@drawable/login_edittext_style"
+                android:fontFamily="@font/cafe24ssurroundair"
                 android:padding="18dp"
                 android:paddingStart="25dp"
                 android:paddingLeft="20dp"
                 android:text="상태메세지"
-                android:fontFamily="@font/cafe24ssurroundair"
                 android:textColor="@color/colorMain"
                 android:textSize="26sp"
                 tools:ignore="MissingConstraints,RtlSymmetry,SpUsage" />
@@ -187,11 +180,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="현재 감정을 설정해보세요"
             android:fontFamily="@font/cafe24ssurroundair"
-            android:textSize="@dimen/m_text600"
-            android:textColor="@color/black"
             android:gravity="center_horizontal"
+            android:text="현재 감정을 설정해보세요"
+            android:textColor="@color/black"
+            android:textSize="@dimen/m_text600"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -233,8 +226,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/side_margin600"
             android:layout_marginTop="110dp"
-            android:text="@string/busy"
             android:fontFamily="@font/cafe24ssurroundair"
+            android:text="@string/busy"
             android:textColor="@color/black"
             android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -247,8 +240,8 @@
             android:id="@+id/busy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/side_margin600"
             android:layout_marginLeft="@dimen/side_margin600"
+            android:layout_marginRight="@dimen/side_margin600"
             android:stepSize="1"
             android:value="0.0"
             android:valueFrom="0"
@@ -286,10 +279,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/cafe24ssurroundair"
                 android:text="@string/busy_1"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/s_text600"
-                android:fontFamily="@font/cafe24ssurroundair"
                 tools:ignore="SpUsage" />
 
             <View
@@ -300,10 +293,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/cafe24ssurroundair"
                 android:text="@string/busy_2"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/s_text600"
-                android:fontFamily="@font/cafe24ssurroundair"
                 tools:ignore="SpUsage" />
 
             <View
@@ -314,8 +307,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/busy_3"
                 android:fontFamily="@font/cafe24ssurroundair"
+                android:text="@string/busy_3"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/s_text600"
                 tools:ignore="SpUsage" />

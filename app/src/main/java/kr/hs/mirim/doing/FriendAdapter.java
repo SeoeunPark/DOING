@@ -79,6 +79,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
                 intent.putExtra("uid",arrayList.get(holder.getAdapterPosition()).getUid());
                 intent.putExtra("name", arrayList.get(holder.getAdapterPosition()).getName());
                 context.startActivity(intent);
+                myDialog.dismiss();
             }
         });
 
