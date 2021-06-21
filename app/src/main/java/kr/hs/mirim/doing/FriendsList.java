@@ -169,19 +169,23 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     if (!task.getResult().isEmpty()) { // 입력한 코드의 사용자가 있을경우
                                         for (QueryDocumentSnapshot document : task.getResult()) {
-                                            drMF.orderByChild("code").equalTo(document.getId()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                                                @Override
-                                                public void onSuccess(DataSnapshot dataSnapshot) {
-                                                    if (!dataSnapshot.exists()) { // 사용자의 친구리스트에 없을경우
-                                                        HashMap<String, String> my_friends = new HashMap<>();
-                                                        my_friends.put("code", document.getId());
-                                                        FirebaseDatabase.getInstance().getReference().child("my_friends").child(user_id).push().setValue(my_friends);
-                                                        Toast.makeText(getActivity(), "추가되었습니다.", Toast.LENGTH_SHORT).show();
-                                                    }else{
-                                                        Toast.makeText(getActivity(), "이미 등록된 친구입니다.", Toast.LENGTH_SHORT).show();
+                                            if(document.getId().equals(user_id)){
+                                                Toast.makeText(getActivity(), "자신은 추가할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                                            }else{
+                                                drMF.orderByChild("code").equalTo(document.getId()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                                    @Override
+                                                    public void onSuccess(DataSnapshot dataSnapshot) {
+                                                        if (!dataSnapshot.exists()) { // 사용자의 친구리스트에 없을경우
+                                                            HashMap<String, String> my_friends = new HashMap<>();
+                                                            my_friends.put("code", document.getId());
+                                                            FirebaseDatabase.getInstance().getReference().child("my_friends").child(user_id).push().setValue(my_friends);
+                                                            Toast.makeText(getActivity(), "추가되었습니다.", Toast.LENGTH_SHORT).show();
+                                                        }else{
+                                                            Toast.makeText(getActivity(), "이미 등록된 친구입니다.", Toast.LENGTH_SHORT).show();
+                                                        }
                                                     }
-                                                }
-                                            });
+                                                });
+                                            }
                                         }
                                     }else { Toast.makeText(getActivity(), "없는 코드입니다.", Toast.LENGTH_SHORT).show();}
                                 }
