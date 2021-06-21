@@ -73,10 +73,11 @@
             <ImageView
                 android:layout_width="46dp"
                 android:layout_height="46dp"
-                android:layout_marginLeft="370dp"
+                android:layout_marginLeft="400dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/side_margin600"
-                android:src="@drawable/arrow" />
+                android:src="@drawable/arrow"
+                tools:ignore="RtlHardcoded" />
 
         </LinearLayout>
 
@@ -101,10 +102,11 @@
             <ImageView
                 android:layout_width="46dp"
                 android:layout_height="46dp"
-                android:layout_marginLeft="301dp"
+                android:layout_marginLeft="330dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/side_margin600"
-                android:src="@drawable/arrow" />
+                android:src="@drawable/arrow"
+                tools:ignore="RtlHardcoded" />
 
         </LinearLayout>
 
@@ -146,7 +148,7 @@
                     android:fontFamily="@font/cafe24ssurroundair"
                     android:textColor="@color/black"
                     android:textSize="@dimen/l_text600"
-                    tools:ignore="SpUsage" />
+                    tools:ignore="RtlHardcoded,SpUsage" />
 
                 <Button
                     android:id="@+id/copy_code_btn"
@@ -155,6 +157,17 @@
                     android:background="@drawable/link"/>
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="친구에게 나의 코드를 공유해보세요."
+                android:paddingLeft="15dp"
+                android:paddingBottom="15dp"
+                android:fontFamily="@font/cafe24ssurroundair"
+                android:textColor="@color/black"
+                android:textSize="@dimen/s_text600"
+                tools:ignore="RtlHardcoded,RtlSymmetry,SpUsage" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -169,7 +182,8 @@
                 android:layout_marginLeft="@dimen/side_margin"
                 android:textColor="@color/gray"
                 android:fontFamily="@font/cafe24ssurroundair"
-                android:textSize="@dimen/m_text600" />
+                android:textSize="@dimen/m_text600"
+                tools:ignore="RtlHardcoded,SpUsage" />
 
             </LinearLayout>
 
@@ -208,14 +222,28 @@
             </LinearLayout>
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="나의 상태를 링크로 공유해보세요. 친구가 앱을 깔지 않아도 링크로 확인할 수 있어요."
+                android:lineSpacingExtra="8dp"
+                android:paddingLeft="15dp"
+                android:paddingBottom="15dp"
+                android:fontFamily="@font/cafe24ssurroundair"
+                android:textColor="@color/black"
+                android:textSize="@dimen/s_text600"
+                tools:ignore="SpUsage" />
+
+            <TextView
                 android:id="@+id/copy_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="링크"
+                android:lineSpacingExtra="10dp"
                 android:layout_marginLeft="@dimen/side_margin"
                 android:textColor="@color/gray"
                 android:fontFamily="@font/cafe24ssurroundair"
-                android:textSize="@dimen/s_text600" />
+                android:textSize="@dimen/m_text600"
+                tools:ignore="RtlHardcoded,SpUsage" />
 
         </LinearLayout>
 
@@ -223,19 +251,22 @@
 
     <TextView
         android:id="@+id/logout_btn"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/side_margin600"
+        android:background="@drawable/login_button_style"
         android:fontFamily="@font/cafe24ssurroundair"
-        android:padding="@dimen/side_margin600"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/padding"
         android:text="로그아웃"
         android:textColor="@color/white"
-        android:background="@color/colorMain"
         android:textSize="@dimen/l_text600"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linear_nickname"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.35"
         tools:ignore="SpUsage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,47 +7,49 @@
     android:layout_gravity="left|center_vertical"
     android:orientation="vertical"
     android:background="@drawable/message_dialog_backgrond"
-    android:padding="16dp">
+    android:padding="@dimen/padding600">
+
+    <TextView
+        android:id="@+id/message_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사용자 이름"
+        android:fontFamily="@font/cafe24ssurroundair"
+        android:textColor="@color/black"
+        android:textSize="@dimen/l_text" />
 
     <TextView
         android:id="@+id/message_gist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/message_name"
         android:text="제목"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/cafe24surround"
         android:textColor="@color/black"
-        android:textSize="20sp" />
-    <TextView
-        android:id="@+id/message_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/message_gist"
-        android:text="사용자 이름"
-        android:fontFamily="@font/cafe24ssurroundair"
-        android:textColor="@color/black"
-        android:textSize="23sp" />
-    <TextView
-        android:id="@+id/message_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/message_name"
-        android:text="날짜"
-        android:fontFamily="@font/cafe24ssurroundair"
-        android:textColor="@color/black"
-        android:textSize="23sp" />
+        android:textSize="@dimen/m_text600" />
+
     <TextView
         android:id="@+id/message_contents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/message_time"
+        android:layout_below="@+id/message_gist"
         android:text="내용"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/cafe24ssurroundair"
         android:textColor="@color/black"
-        android:textSize="23sp" />
+        android:textSize="@dimen/m_text600" />
 
-
-
-
-
+    <TextView
+        android:id="@+id/message_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/message_contents"
+        android:text="날짜"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/cafe24ssurroundair"
+        android:textColor="@color/black"
+        android:textSize="@dimen/s_text600"
+        tools:ignore="SpUsage" />
 
 </RelativeLayout>

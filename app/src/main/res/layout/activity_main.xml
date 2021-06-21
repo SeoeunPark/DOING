@@ -29,9 +29,9 @@
         android:layout_weight="1"
         android:background="#99ffffff"
         app:ci_drawable="@drawable/orange_radius"
-        app:ci_height="8dp"
-        app:ci_margin="6dp"
-        app:ci_width="8dp"
+        app:ci_height="12dp"
+        app:ci_margin="10dp"
+        app:ci_width="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
