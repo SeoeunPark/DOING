@@ -1,18 +1,20 @@
 package kr.hs.mirim.doing;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,10 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 public class sendPost extends AppCompatActivity {
     String[] customString = new String[5];
@@ -35,6 +35,7 @@ public class sendPost extends AppCompatActivity {
 
     private FirebaseUser currentUser;
     private FirebaseAuth auth;
+    kr.hs.mirim.doing.ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,9 @@ public class sendPost extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String current_uid = FirebaseAuth.getInstance().getUid();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progressDialog.setCancelable(false);
 
         customString = new String[]{"기본", "긴급사항입니다!", "면담원해요", "놀자", "전화주세요"};
 
@@ -64,7 +68,9 @@ public class sendPost extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String content = contentEt.getText().toString().trim();
+                progressDialog.show();
                 if(content.equals("")){
+                    progressDialog.dismiss();
                     Toast.makeText(sendPost.this,"내용을 입력해주세요",Toast.LENGTH_SHORT).show();
                 }else {
                     uploadPost(content, sendUid ,spn.getSelectedItem().toString());

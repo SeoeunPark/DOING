@@ -26,6 +26,7 @@
 
     <style name="tab_text" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">@dimen/m_text600</item>
+        <item name="fontFamily">@font/cafe24ssurroundair</item>
     </style>
 
     <style name="spinner_style" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
@@ -34,5 +35,6 @@
         <item name="android:paddingTop">@dimen/padding</item>
         <item name="android:paddingBottom">@dimen/padding</item>
         <item name="paddingStart">34dp</item>
+        <item name="fontFamily">@font/cafe24ssurroundair</item>
     </style>
 </resources>

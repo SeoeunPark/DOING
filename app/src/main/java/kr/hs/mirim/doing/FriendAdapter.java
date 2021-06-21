@@ -117,6 +117,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
             }
         });
 
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
