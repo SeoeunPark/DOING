@@ -253,4 +253,13 @@ public class UserPage extends Fragment {
         editor.commit();
 
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences(shared, 0);
+        SharedPreferences.Editor editor  = sharedPreferences.edit();
+        editor.putInt("key", select);
+        editor.commit();
+    }
 }
