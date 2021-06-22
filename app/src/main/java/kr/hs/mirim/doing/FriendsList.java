@@ -111,9 +111,9 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         drUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                /*for(DataSnapshot dss : snapshot.getChildren()){
-                    if()
-                }*/
+                for(DataSnapshot dss : snapshot.getChildren()){
+//                    if()
+                }
             }
 
             @Override
@@ -139,6 +139,7 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                                     Collections.sort(arrayList, new Descending());
                                     adapter.notifyDataSetChanged();
                                     recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
+                                    Log.d("어레이 리스트", String.valueOf(arrayList));
                                 }
                             }
                         });

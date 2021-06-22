@@ -88,7 +88,7 @@ public class sendPost extends AppCompatActivity {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Date dt = new Date();
-        SimpleDateFormat full_sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm a");
+        SimpleDateFormat full_sdf = new SimpleDateFormat("yyyy-MM-dd a hh:mm");
 
 
         mDatabase.child("users").child(current_uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
