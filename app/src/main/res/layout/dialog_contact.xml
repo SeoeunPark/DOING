@@ -43,7 +43,7 @@
             android:text="한줄소개"
             android:fontFamily="@font/cafe24surround"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="17sp" />
 
         <Button
             android:id="@+id/dia_user_message"
