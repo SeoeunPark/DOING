@@ -16,12 +16,17 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <ImageView
         android:id="@+id/logo_img"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_marginTop="220dp"
+        android:layout_gravity="center"
         android:src="@drawable/logo"
         android:contentDescription="@string/logo_img"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,6 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/progressbar" />
 
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:id="@+id/login_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,9 +51,11 @@
             android:id="@+id/signin_email"
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:layout_marginTop="80dp"
             android:background="@drawable/login_edittext_style_shadow"
             android:hint="@string/email"
             android:importantForAutofill="no"
+            android:fontFamily="@font/cafe24ssurroundair"
             android:inputType="textEmailAddress"
             android:paddingStart="@dimen/padding600"
             android:textColor="@color/black"
@@ -60,11 +68,12 @@
             android:id="@+id/signin_pass"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/login_edittext_style_shadow"
             android:hint="@string/password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
+            android:fontFamily="@font/cafe24ssurroundair"
             android:paddingStart="@dimen/padding600"
             android:textColor="@color/black"
             android:textColorHint="@color/gray"
@@ -76,11 +85,12 @@
             android:id="@+id/login_btn"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/login_button_style"
             android:text="@string/login"
             android:textColor="@color/white"
             android:textSize="@dimen/button600"
+            android:fontFamily="@font/cafe24surround"
             tools:ignore="SpUsage" />
 
         <TextView
@@ -91,8 +101,43 @@
             android:layout_marginTop="40dp"
             android:text="@string/signup"
             android:textColor="@color/gray"
+            android:fontFamily="@font/cafe24ssurroundair"
             android:textSize="@dimen/text_btn600"
             tools:ignore="SpUsage" />
+    </LinearLayout>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/demo1"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/login_demo_style"
+            android:text="로그인 데모계정 1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/cafe24ssurroundair"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/demo2"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/login_demo_style"
+            android:text="로그인 데모계정 2"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/cafe24ssurroundair"
+            android:textSize="20sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </LinearLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat

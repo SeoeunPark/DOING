@@ -46,7 +46,6 @@ public class EditName extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 MyFriendList userInfo = task.getResult().getValue(MyFriendList.class);
-                edit_name.setText(userInfo.getName());
                 now_name.setText(userInfo.getName());
             }
         });

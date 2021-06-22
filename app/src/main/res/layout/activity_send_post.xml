@@ -15,6 +15,7 @@
         android:layout_marginTop="220dp"
         android:text="쪽지 보내기"
         android:textColor="@color/colorMain"
+        android:fontFamily="@font/cafe24surround"
         android:textSize="@dimen/title600"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,6 +38,7 @@
             android:layout_height="wrap_content"
             android:text="TO."
             android:textSize="@dimen/m_text600"
+            android:fontFamily="@font/cafe24surround"
             tools:ignore="SpUsage" />
 
         <TextView
@@ -47,7 +49,7 @@
             android:paddingLeft="@dimen/padding"
             android:text="@string/name"
             android:textSize="@dimen/m_text600"
-            android:textStyle="bold"
+            android:fontFamily="@font/cafe24surround"
             tools:ignore="SpUsage" />
 
     </LinearLayout>
@@ -67,6 +69,7 @@
         <Spinner
             android:id="@+id/spinner"
             style="@style/spinner_style"
+            android:fontFamily="@font/cafe24ssurroundair"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/login_edittext_style" />
@@ -74,7 +77,7 @@
         <EditText
             android:id="@+id/sendContents"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="240dp"
             android:layout_marginTop="@dimen/side_margin600"
             android:background="@drawable/message_edit"
             android:hint="쪽지 입력란"
@@ -91,6 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/side_margin600"
+            android:fontFamily="@font/cafe24ssurroundair"
             android:background="@drawable/login_button_style"
             android:paddingLeft="80dp"
             android:paddingTop="@dimen/button600"
