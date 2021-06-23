@@ -11,6 +11,14 @@ public class MyFriendList{
     private boolean postOnOff;
     private String uid;
 
+    public void MyFriendList(String about, int condition, String ing, int level, String name, String uid){
+        this.about = about;
+        this.condition = condition;
+        this.ing = ing;
+        this.level = level;
+        this.name = name;
+        this.uid = uid;
+    }
     public String getAbout() {
         return about;
     }
@@ -64,4 +72,5 @@ public class MyFriendList{
     }
 
     public void setUid(String uid) { this.uid = uid; }
+
 }

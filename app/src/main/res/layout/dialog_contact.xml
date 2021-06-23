@@ -40,9 +40,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="15dp"
-            android:text="한줄소개"
+            android:text="한 줄 소개"
             android:fontFamily="@font/cafe24surround"
             android:textColor="@color/black"
+            android:gravity="center"
             android:textSize="17sp" />
 
         <Button

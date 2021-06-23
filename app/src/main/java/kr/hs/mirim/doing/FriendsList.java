@@ -41,6 +41,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 public class FriendsList extends Fragment implements View.OnClickListener{
     private String title;
@@ -108,17 +109,38 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
+        //친구의 데이터 변경
+        for(MyFriendList mf : arrayList) {
+            drUser.child(mf.getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot dss : snapshot.getChildren()){
+                        Log.d("뭐가 나오띾", dss.getKey()+" "+dss.getValue());
+//                        mfl = dss.getResult().getValue(MyFriendList.class);
+//                        mf.setAbout(dss.get);
+//                        mf.setAbout(); = dss.getValue(MyFriendList.class);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("firebase", "Error getting data", error.toException());
+                }
+            });
+        }
+
+        //친구 삭제 또는 추가
         drUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dss : snapshot.getChildren()){
-//                    if()
+                for(MyFriendList mf : arrayList) {
+                    //.getUid()
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("firebase", "Error getting data", error.toException());
+
             }
         });
 
@@ -131,7 +153,7 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                         drUser.child((String) dss.child("code").getValue()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if(task.isSuccessful()) {
                                     mfl = task.getResult().getValue(MyFriendList.class);
                                     mfl.setUid((String) dss.child("code").getValue());
                                     arrayList.add(mfl);
@@ -139,7 +161,6 @@ public class FriendsList extends Fragment implements View.OnClickListener{
                                     Collections.sort(arrayList, new Descending());
                                     adapter.notifyDataSetChanged();
                                     recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-                                    Log.d("어레이 리스트", String.valueOf(arrayList));
                                 }
                             }
                         });
