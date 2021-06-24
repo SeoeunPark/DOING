@@ -109,7 +109,7 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-        //친구의 데이터 변경
+
         for(MyFriendList mf : arrayList) {
             drUser.child(mf.getUid()).addValueEventListener(new ValueEventListener() {
                 @Override
@@ -129,13 +129,11 @@ public class FriendsList extends Fragment implements View.OnClickListener{
             });
         }
 
-        //친구 삭제 또는 추가
+        //친구의 데이터 변경
         drUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(MyFriendList mf : arrayList) {
-                    //.getUid()
-                }
+                changeData();
             }
 
             @Override
@@ -144,34 +142,6 @@ public class FriendsList extends Fragment implements View.OnClickListener{
             }
         });
 
-        drMF.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dss : snapshot.getChildren()){
-                    if(!dss.getKey().equals("id")){ //id가 아닐경우
-                        arrayList.clear();
-                        drUser.child((String) dss.child("code").getValue()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                if(task.isSuccessful()) {
-                                    mfl = task.getResult().getValue(MyFriendList.class);
-                                    mfl.setUid((String) dss.child("code").getValue());
-                                    arrayList.add(mfl);
-                                    adapter = new FriendAdapter(arrayList, getContext());
-                                    Collections.sort(arrayList, new Descending());
-                                    adapter.notifyDataSetChanged();
-                                    recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("firebase", "Error getting data", error.toException());
-            }
-        });
 
         if (searchView != null) {
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -275,6 +245,41 @@ public class FriendsList extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
+    }
+
+    private void changeData(){
+        //친구 삭제 또는 추가
+        drMF.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                arrayList.clear();
+                adapter = new FriendAdapter(arrayList, getContext());
+                adapter.notifyDataSetChanged();
+                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
+                for(DataSnapshot dss : snapshot.getChildren()){
+                    if(!dss.getKey().equals("id")){ //id가 아닐경우
+                        drUser.child((String) dss.child("code").getValue()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if(task.isSuccessful()) {
+                                    mfl = task.getResult().getValue(MyFriendList.class);
+                                    mfl.setUid((String) dss.child("code").getValue());
+                                    arrayList.add(mfl);
+                                    adapter = new FriendAdapter(arrayList, getContext());
+                                    Collections.sort(arrayList, new Descending());
+                                    adapter.notifyDataSetChanged();
+                                    recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("firebase", "Error getting data", error.toException());
+            }
+        });
     }
 
 
