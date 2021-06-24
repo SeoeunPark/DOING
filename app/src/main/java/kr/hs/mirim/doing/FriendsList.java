@@ -63,6 +63,7 @@ public class FriendsList extends Fragment implements View.OnClickListener{
     private int sort =0;
     private int alfriend = 0;
     private MyFriendList mfl;
+    private boolean firstClick = true;
 
     //인디케이터 만들기
     // newInstance constructor for creating fragment with arguments
@@ -108,26 +109,6 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         drUser = database.getReference("users"); // 유저db
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
-
-        for(MyFriendList mf : arrayList) {
-            drUser.child(mf.getUid()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for(DataSnapshot dss : snapshot.getChildren()){
-                        Log.d("뭐가 나오띾", dss.getKey()+" "+dss.getValue());
-//                        mfl = dss.getResult().getValue(MyFriendList.class);
-//                        mf.setAbout(dss.get);
-//                        mf.setAbout(); = dss.getValue(MyFriendList.class);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("firebase", "Error getting data", error.toException());
-                }
-            });
-        }
 
         //친구의 데이터 변경
         drUser.addValueEventListener(new ValueEventListener() {
@@ -177,53 +158,63 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         add_friend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                add_dialog.show();
-                add_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                TextView ok_btn = add_dialog.findViewById(R.id.okButton);
-                TextView cancel_btn = add_dialog.findViewById(R.id.cancelButton);
-                EditText inputname = add_dialog.findViewById(R.id.inputname);
-                inputname.setText("");
-                ok_btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String username = inputname.getText().toString();
-                        if (!TextUtils.isEmpty(username)) {
-                            db.collection("User").whereEqualTo("user_code", username).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (!task.getResult().isEmpty()) { // 입력한 코드의 사용자가 있을경우
-                                        for (QueryDocumentSnapshot document : task.getResult()) {
-                                            if(document.getId().equals(user_id)){
-                                                Toast.makeText(getActivity(), "자신은 추가할 수 없습니다.", Toast.LENGTH_SHORT).show();
-                                            }else{
-                                                drMF.orderByChild("code").equalTo(document.getId()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                                                    @Override
-                                                    public void onSuccess(DataSnapshot dataSnapshot) {
-                                                        if (!dataSnapshot.exists()) { // 사용자의 친구리스트에 없을경우
-                                                            HashMap<String, String> my_friends = new HashMap<>();
-                                                            my_friends.put("code", document.getId());
-                                                            FirebaseDatabase.getInstance().getReference().child("my_friends").child(user_id).push().setValue(my_friends);
-                                                            Toast.makeText(getActivity(), "추가되었습니다.", Toast.LENGTH_SHORT).show();
-                                                        }else{
-                                                            Toast.makeText(getActivity(), "이미 등록된 친구입니다.", Toast.LENGTH_SHORT).show();
-                                                        }
+                    add_dialog.show();
+                    add_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    TextView ok_btn = add_dialog.findViewById(R.id.okButton);
+                    TextView cancel_btn = add_dialog.findViewById(R.id.cancelButton);
+                    EditText inputname = add_dialog.findViewById(R.id.inputname);
+                    inputname.setText("");
+                    ok_btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (firstClick) {
+                                firstClick = false;
+                                String username = inputname.getText().toString();
+                                if (!TextUtils.isEmpty(username)) {
+                                    db.collection("User").whereEqualTo("user_code", username).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            if (!task.getResult().isEmpty()) { // 입력한 코드의 사용자가 있을경우
+                                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                                    if(document.getId().equals(user_id)){
+                                                        Toast.makeText(getActivity(), "자신은 추가할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                                                        firstClick = true;
+                                                    }else{
+                                                        drMF.orderByChild("code").equalTo(document.getId()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                                            @Override
+                                                            public void onSuccess(DataSnapshot dataSnapshot) {
+                                                                if (!dataSnapshot.exists()) { // 사용자의 친구리스트에 없을경우
+                                                                    HashMap<String, String> my_friends = new HashMap<>();
+                                                                    my_friends.put("code", document.getId());
+                                                                    FirebaseDatabase.getInstance().getReference().child("my_friends").child(user_id).push().setValue(my_friends);
+                                                                    Toast.makeText(getActivity(), "추가되었습니다.", Toast.LENGTH_SHORT).show();
+                                                                    firstClick = true;
+                                                                }else{
+                                                                    Toast.makeText(getActivity(), "이미 등록된 친구입니다.", Toast.LENGTH_SHORT).show();
+                                                                    firstClick = true;
+                                                                }
+                                                            }
+                                                        });
                                                     }
-                                                });
-                                            }
+                                                }
+                                            }else { Toast.makeText(getActivity(), "없는 코드입니다.", Toast.LENGTH_SHORT).show();}
+                                            firstClick = true;
                                         }
-                                    }else { Toast.makeText(getActivity(), "없는 코드입니다.", Toast.LENGTH_SHORT).show();}
-                                }
-                            });
-                        }else { Toast.makeText(getActivity(), "코드를 입력해주세요.", Toast.LENGTH_SHORT).show();}
-                        add_dialog.dismiss();
-                    }
-                });
-                cancel_btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        add_dialog.dismiss();
-                    }
-                });
+                                    });
+                                }else { Toast.makeText(getActivity(), "코드를 입력해주세요.", Toast.LENGTH_SHORT).show();}
+                                firstClick = true;
+                                add_dialog.dismiss();
+                            }
+
+                        }
+                    });
+                    cancel_btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            add_dialog.dismiss();
+                        }
+                    });
+
             }
         });
 
