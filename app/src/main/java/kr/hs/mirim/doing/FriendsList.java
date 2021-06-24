@@ -109,26 +109,6 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-
-        for(MyFriendList mf : arrayList) {
-            drUser.child(mf.getUid()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for(DataSnapshot dss : snapshot.getChildren()){
-                        Log.d("뭐가 나오띾", dss.getKey()+" "+dss.getValue());
-//                        mfl = dss.getResult().getValue(MyFriendList.class);
-//                        mf.setAbout(dss.get);
-//                        mf.setAbout(); = dss.getValue(MyFriendList.class);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e("firebase", "Error getting data", error.toException());
-                }
-            });
-        }
-
         //친구의 데이터 변경
         drUser.addValueEventListener(new ValueEventListener() {
             @Override
