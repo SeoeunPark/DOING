@@ -243,10 +243,10 @@ public class FriendsList extends Fragment implements View.OnClickListener{
         drMF.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                arrayList.clear();
-                adapter = new FriendAdapter(arrayList, getContext());
-                adapter.notifyDataSetChanged();
-                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
+                arrayList= new ArrayList<>();
+//                adapter = new FriendAdapter(arrayList, getContext());
+//                adapter.notifyDataSetChanged();
+//                recyclerView.setAdapter(adapter); // 리사이클러뷰에 어댑터 연결
                 for(DataSnapshot dss : snapshot.getChildren()){
                     if(!dss.getKey().equals("id")){ //id가 아닐경우
                         drUser.child((String) dss.child("code").getValue()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -272,7 +272,6 @@ public class FriendsList extends Fragment implements View.OnClickListener{
             }
         });
     }
-
 
 
 }

@@ -46,7 +46,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
         private String user_id = null;
         private DatabaseReference dbr;
         Dialog delete_fr_dialog;
-
+        private boolean firstClick = true;
 
         public FriendAdapter(ArrayList<MyFriendList> arrayList, Context context) {
             this.arrayList = arrayList;
@@ -104,15 +104,19 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.CustomView
                     @Override
                     public void onClick(View view) {
                         // 원하는 기능 구현
-                        dbr.orderByChild("code").equalTo(String.valueOf(arrayList.get(holder.getAdapterPosition()).getUid())).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-                            @Override
-                            public void onSuccess(DataSnapshot dataSnapshot) {
-                                for (DataSnapshot dsDel: dataSnapshot.getChildren()) {
-                                    dsDel.getRef().removeValue();
+                        if (firstClick) {
+                            firstClick = false;
+                            dbr.orderByChild("code").equalTo(String.valueOf(arrayList.get(holder.getAdapterPosition()).getUid())).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                @Override
+                                public void onSuccess(DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot dsDel: dataSnapshot.getChildren()) {
+                                        dsDel.getRef().removeValue();
+                                        firstClick = true;
+                                    }
                                 }
-                            }
-                        });
-                        delete_fr_dialog.dismiss(); // 다이얼로그 닫기
+                            });
+                            delete_fr_dialog.dismiss(); // 다이얼로그 닫기
+                        }
                     }
                 });
             }
