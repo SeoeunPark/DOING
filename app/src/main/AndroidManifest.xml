@@ -21,8 +21,6 @@
         <activity
             android:name=".sendPost"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".PostList"
-            tools:ignore="MissingClass" />
         <activity
             android:name=".SignupEmail"
             android:windowSoftInputMode="adjustPan" />
