@@ -62,7 +62,7 @@ public class MessageReceive extends Fragment {
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String current_uid = FirebaseAuth.getInstance().getUid();
 
-        Query query = FirebaseFirestore.getInstance().collection("Post").whereEqualTo("receiver",current_uid).orderBy("time", Query.Direction.DESCENDING);
+        Query query = FirebaseFirestore.getInstance().collection("Post").whereEqualTo("receiver",current_uid).orderBy("read", Query.Direction.ASCENDING).orderBy("time", Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<MyMessageList> op = new FirestoreRecyclerOptions.Builder<MyMessageList>()
                 .setQuery(query, MyMessageList.class)
                 .build();
